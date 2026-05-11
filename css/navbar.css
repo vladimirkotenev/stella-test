@@ -29,20 +29,42 @@
 }
 
 .site-nav__link {
+  position: relative;
   font-family: Poppins, sans-serif;
   color: #FAFAFA;
   font-size: 1rem;
   font-weight: 400;
   text-decoration: none;
-  transition: color 0.4s;
 }
 
-.site-nav__link:hover {
-  color: #F24622;
+.site-nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 6px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='6' viewBox='0 0 20 6'%3E%3Cpath d='M0 3 Q 5 0 10 3 T 20 3' stroke='%23F24622' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: 0 0;
+  background-size: 20px 6px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
 }
 
-.site-nav__link.is-active {
-  color: #F24622;
+.site-nav__link:hover::after,
+.site-nav__link.is-active::after {
+  opacity: 1;
+  animation: wavyLine 0.6s linear infinite;
+}
+
+.site-nav__menu:hover .site-nav__link.is-active:not(:hover)::after {
+  opacity: 0;
+}
+
+@keyframes wavyLine {
+  to { background-position-x: 20px; }
 }
 
 .site-nav__right {
@@ -117,12 +139,12 @@
   display: none;
 }
 
-/* ===== DEBUG: hide all images on index (transparency artifact check) ===== */
-.is-debug-hide-images .main-wrapper img {
-  visibility: hidden !important;
+/* ===== HERO HEADING ANIMATION ===== */
+.section_header26 {
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
-/* ===== HERO HEADING ANIMATION ===== */
 @keyframes heroLineIn {
   from {
     opacity: 0;
@@ -156,6 +178,7 @@
 /* ===== HERO SPACING ===== */
 .hero-title-gap {
   margin-bottom: 40px !important;
+  align-items: center;
 }
 
 .hero-button-gap {
