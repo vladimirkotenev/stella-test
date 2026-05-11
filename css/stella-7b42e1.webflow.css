@@ -318,7 +318,7 @@ figcaption {
 }
 
 .page-wrapper {
-  background-color: #000;
+  background-color: #0e0e0e;
 }
 
 .container-large {
@@ -409,7 +409,7 @@ figcaption {
 
 .main-wrapper {
   z-index: 98;
-  background-color: var(--color-scheme-1--black);
+  background-color: #0e0e0e;
   margin-top: -99px;
   position: static;
   inset: -99px 0% auto;
@@ -1964,9 +1964,6 @@ figcaption {
 
 .section_header26 {
   color: var(--color-scheme-1--text);
-  background-image: url('../images/Group-27436_1.avif');
-  background-position: 50% 0;
-  background-size: cover;
 }
 
 .header26_component {
@@ -2036,7 +2033,7 @@ figcaption {
 }
 
 .body {
-  background-color: var(--color-scheme-1--black);
+  background-color: #0e0e0e;
 }
 
 .number-grid_container {
