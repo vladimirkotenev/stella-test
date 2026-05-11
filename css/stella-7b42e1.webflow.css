@@ -123,8 +123,12 @@
   border-color: #3898ec;
 }
 
+html {
+  background-color: #0e0e0e;
+}
+
 body {
-  background-color: var(--color-scheme-1--background\<deleted\|relume-variable-color-scheme-1-background\>);
+  background-color: #0e0e0e;
   font-family: var(--_typography---font-styles--body);
   color: var(--color-scheme-1--text);
   font-size: 1rem;
@@ -3995,10 +3999,19 @@ figcaption {
 
 .navigation {
   z-index: 9999999;
-  background-color: #ddd0;
-  padding: 12px;
-  position: sticky;
+  background-color: transparent;
+  padding: 40px 12px 12px;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.navigation a,
+.navigation button,
+.navigation .navbar2_menu-button {
+  pointer-events: auto;
 }
 
 .faq13_grid-list {
@@ -4362,10 +4375,10 @@ figcaption {
   }
 
   .navigation {
-    background-color: #ddd0;
+    background-color: transparent;
     width: 100%;
     max-width: none;
-    padding-top: 12px;
+    padding-top: 40px;
     padding-bottom: 12px;
   }
 
@@ -4634,7 +4647,7 @@ figcaption {
 
   .navigation {
     max-width: none;
-    padding-top: 12px;
+    padding-top: 40px;
     padding-bottom: 12px;
   }
 
