@@ -16,6 +16,7 @@
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/stella-7b42e1.webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/navbar.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -25,32 +26,29 @@
   <link href="images/webclip.jpg" rel="apple-touch-icon"
 </head>
 <body class="body">
-  <div data-animation="default" class="navigation w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="90476486-4cf3-b174-7358-2566cb9461b3" role="banner" data-duration="400">
-    <div class="navbar2_container">
-      <a href="index.html" aria-current="page" class="navbar2_logo-link w-nav-brand w--current"><img loading="lazy" src="images/stella-logo.svg" alt="" class="navbar2_logo"></a>
-      <div class="div-block-165">
-        <nav role="navigation" id="w-node-_90476486-4cf3-b174-7358-2566cb9461b8-cb9461b3" class="navbar2_menu is-page-height-tablet w-nav-menu">
-          <a href="about-us.html" class="navbar2_link w-nav-link">About us</a>
-          <a href="index.html" aria-current="page" class="navbar2_link w-nav-link w--current">Solutions</a>
-          <a href="technology.html" class="navbar2_link w-nav-link">Technology</a>
-          <a href="technology-hub.html" class="navbar2_link w-nav-link">Technology Hub</a>
-          <a href="contact-us.html" class="navbar2_link-2 w-nav-link">Contact</a>
-        </nav>
-        <div id="w-node-_90476486-4cf3-b174-7358-2566cb9461c1-cb9461b3" class="navbar2_button-wrapper">
-          <a href="schedule-a-demo.html" class="button is-nav w-button">Schedule a Demo</a>
-          <div class="navbar2_menu-button w-nav-button">
-            <div class="menu-icon2">
-              <div class="menu-icon2_line-top"></div>
-              <div class="menu-icon2_line-middle">
-                <div class="menu-icon2_line-middle-inner"></div>
-              </div>
-              <div class="menu-icon2_line-bottom"></div>
-            </div>
-          </div>
-        </div>
+  <header class="site-nav">
+    <div class="site-nav__inner">
+      <a href="index.html" class="site-nav__logo">
+        <img src="images/stella-logo.svg" alt="Stella">
+      </a>
+      <nav class="site-nav__menu" id="siteNavMenu">
+        <a href="about-us.html" class="site-nav__link">About us</a>
+        <a href="index.html" class="site-nav__link is-active">Solutions</a>
+        <a href="technology.html" class="site-nav__link">Technology</a>
+        <a href="technology-hub.html" class="site-nav__link">Technology Hub</a>
+        <a href="contact-us.html" class="site-nav__link">Contact</a>
+        <a href="schedule-a-demo.html" class="site-nav__cta site-nav__cta--mobile">Schedule a Demo</a>
+      </nav>
+      <div class="site-nav__right">
+        <a href="schedule-a-demo.html" class="site-nav__cta">Schedule a Demo</a>
+        <button class="site-nav__burger" id="siteNavBurger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
-  </div>
+  </header>
   <div class="page-wrapper">
     <div class="global-styles">
       <div class="style-overrides w-embed">
@@ -328,13 +326,13 @@ margin: 0rem !important;
                 <div class="margin-bottom margin-xxlarge">
                   <div class="text-align-center">
                     <div class="max-width-large align-center">
-                      <div class="margin-bottom margin-small hero-title-gap">
+                      <div class="margin-bottom margin-small hero-title-gap" style="margin-bottom: 40px;">
                         <h1 class="header-1">Real-time<br>data &amp; decision<br>platform</h1>
                       </div>
                       <p data-gsap="free.5" class="header-3 is-center">Democratizing data management and<br>automating decision processes</p>
-                      <div class="margin-top margin-medium hero-button-gap">
+                      <div class="margin-top margin-medium hero-button-gap" style="margin-top: 80px;">
                         <div class="button-group is-center">
-                          <a href="schedule-a-demo.html" class="button w-button">Schedule a Demo</a>
+                          <a href="schedule-a-demo.html" class="button site-nav__cta w-button">Schedule a Demo</a>
                         </div>
                       </div>
                     </div>
@@ -980,5 +978,16 @@ layoutTL.from(layoutText.words,{
   <script async="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script async="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script async="" src="https://gfluo.b-cdn.net/v/gfluo-free.min.js"></script>
+  <script>
+    (function () {
+      var burger = document.getElementById('siteNavBurger');
+      var menu = document.getElementById('siteNavMenu');
+      burger.addEventListener('click', function () {
+        var open = menu.classList.toggle('is-open');
+        burger.classList.toggle('is-open', open);
+        burger.setAttribute('aria-expanded', String(open));
+      });
+    })();
+  </script>
 </body>
 </html>
