@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     gsap.to(graphScroll, {
       x: -190,
-      duration: 7,
+      duration: 4.67,
       ease: 'none',
       repeat: -1
     });
