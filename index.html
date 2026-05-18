@@ -22,7 +22,176 @@
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.jpg" rel="apple-touch-icon">
   <style>
+    section.section_header26 { background-color: #fafafa; }
     .section_header26 .header26_component { position: relative; }
+
+    .stella-diagram {
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+      padding: 80px 0;
+      font-family: 'Poppins', sans-serif;
+      color: #0e0e0e;
+    }
+
+    .stella-diagram__grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .stella-diagram__side { display: flex; flex-direction: column; gap: 28px; width: 100%; }
+    .stella-diagram__side--left { align-items: flex-end; text-align: right; }
+    .stella-diagram__side--right { align-items: flex-start; text-align: left; }
+
+    .stella-diagram__heading {
+      width: 100%;
+      font-size: clamp(2.5rem, 6.5vw, 5.5rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin: 0;
+      color: #0e0e0e;
+    }
+
+    .stella-diagram__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 1rem;
+      color: rgba(14, 14, 14, 0.6);
+      font-weight: 400;
+    }
+
+    .stella-diagram__list li { position: relative; }
+    .stella-diagram__side--left .stella-diagram__list li { padding-right: 16px; }
+    .stella-diagram__side--right .stella-diagram__list li { padding-left: 16px; }
+
+    .stella-diagram__side--left .stella-diagram__list li::after,
+    .stella-diagram__side--right .stella-diagram__list li::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #F24622;
+    }
+    .stella-diagram__side--left .stella-diagram__list li::after { right: 0; }
+    .stella-diagram__side--right .stella-diagram__list li::before { left: 0; }
+
+    .stella-diagram__arrow {
+      display: flex;
+      align-items: center;
+      color: #F24622;
+    }
+
+    .stella-diagram__center {
+      position: relative;
+      width: clamp(280px, 32vw, 440px);
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .stella-diagram__ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+
+    .stella-diagram__ring--1 {
+      width: 100%;
+      height: 100%;
+      background: rgba(242, 70, 34, 0.08);
+      box-shadow: 0 18px 50px rgba(242, 70, 34, 0.18), 0 4px 12px rgba(242, 70, 34, 0.1);
+      animation: stella-pulse 4s ease-in-out infinite;
+    }
+    .stella-diagram__ring--2 {
+      width: 72%;
+      height: 72%;
+      background: rgba(242, 70, 34, 0.18);
+      box-shadow: 0 14px 38px rgba(242, 70, 34, 0.28), 0 4px 10px rgba(242, 70, 34, 0.15);
+      animation: stella-pulse 4s ease-in-out infinite;
+      animation-delay: 0.4s;
+    }
+    .stella-diagram__ring--3 {
+      width: 50%;
+      height: 50%;
+      background: rgba(242, 70, 34, 0.35);
+      box-shadow: 0 10px 28px rgba(242, 70, 34, 0.4), 0 3px 8px rgba(242, 70, 34, 0.2);
+      animation: stella-pulse 4s ease-in-out infinite;
+      animation-delay: 0.8s;
+    }
+
+    @keyframes stella-pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.035); }
+    }
+
+    .stella-diagram__core {
+      position: relative;
+      width: 32%;
+      height: 32%;
+      border-radius: 50%;
+      background: #F24622;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      box-shadow: 0 12px 30px rgba(242, 70, 34, 0.45), 0 4px 10px rgba(242, 70, 34, 0.25);
+      animation: stella-core 4s ease-in-out infinite;
+    }
+
+    @keyframes stella-core {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .stella-diagram__core img {
+      width: 65%;
+      height: auto;
+      display: block;
+    }
+
+    @media (max-width: 991px) {
+      .stella-diagram { padding: 48px 0; }
+      .stella-diagram__grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+      .stella-diagram__arrow { display: none; }
+      .stella-diagram__side--left,
+      .stella-diagram__side--right {
+        align-items: center;
+        text-align: center;
+      }
+      .stella-diagram__heading { font-size: clamp(2.2rem, 10vw, 4rem); }
+      .stella-diagram__side--left .stella-diagram__list li { padding-right: 0; padding-left: 16px; }
+      .stella-diagram__side--left .stella-diagram__list li::after { display: none; }
+      .stella-diagram__side--left .stella-diagram__list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #F24622;
+      }
+      .stella-diagram__center { margin: 0 auto; width: 280px; }
+    }
 
     .hero-console-wrap {
       position: absolute;
@@ -130,10 +299,23 @@
 
     .section-numnber .header-number {
       color: #F24622;
+      font-size: clamp(3.5rem, 9vw, 8.5rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .section-numnber .header-number__suffix {
+      display: inline-block;
     }
 
     .section-numnber .paragraph {
       color: #0e0e0e;
+      font-size: 0.95rem;
+      font-weight: 400;
+      text-transform: none;
+      line-height: 150%;
+      letter-spacing: 0;
     }
 
     @media (max-width: 479px) {
@@ -583,19 +765,19 @@ margin: 0rem !important;
             <div class="padding-section-large">
               <div class="number-grid_container">
                 <div class="number_container">
-                  <h2 class="header-number is-center">10M</h2>
+                  <h2 class="header-number is-center"><span class="header-number__val" data-target="10">0</span><span class="header-number__suffix">M</span></h2>
                   <p class="paragraph is-capitalized is-center">Concurrent<br>Data Sources</p>
                 </div>
                 <div class="number_container">
-                  <h2 class="header-number is-center">1M</h2>
+                  <h2 class="header-number is-center"><span class="header-number__val" data-target="1">0</span><span class="header-number__suffix">M</span></h2>
                   <p class="paragraph is-capitalized is-center">data events<br>per second</p>
                 </div>
                 <div class="number_container">
-                  <h2 class="header-number is-center">50K</h2>
+                  <h2 class="header-number is-center"><span class="header-number__val" data-target="50">0</span><span class="header-number__suffix">K</span></h2>
                   <p class="paragraph is-capitalized is-center">Client triggers<br>per second</p>
                 </div>
                 <div class="number_container">
-                  <h2 class="header-number is-center">1BN</h2>
+                  <h2 class="header-number is-center"><span class="header-number__val" data-target="1">0</span><span class="header-number__suffix">BN</span></h2>
                   <p class="paragraph is-capitalized is-center">aggregated<br>events p/s</p>
                 </div>
               </div>
@@ -608,8 +790,43 @@ margin: 0rem !important;
           <div class="container-large is-fullwidth">
             <div class="padding-section-large">
               <div class="header26_component">
-                <div class="header26_image-wrapper">
-                  <div class="div-block-163"></div><img sizes="(max-width: 1815px) 100vw, 1815px" srcset="images/marker-stella_1marker-stella.avif 800w, images/marker-stella_1.avif 1815w" alt="Stella Real-TimeData &amp; Decision Platform" src="images/marker-stella_1.avif" loading="eager" class="header26_image is-mobile"><img sizes="(max-width: 2000px) 100vw, 2000px" srcset="images/67fccd904a368834a7330fb3_schema_big_stella-p-2000-p-500.png 500w, images/67fccd904a368834a7330fb3_schema_big_stella-p-2000-p-800.png 800w, images/67fccd904a368834a7330fb3_schema_big_stella-p-2000.avif 2000w" alt="stella data decision platform" src="images/67fccd904a368834a7330fb3_schema_big_stella-p-2000.avif" loading="eager" class="header26_image">
+                <div class="stella-diagram">
+                  <div class="stella-diagram__grid">
+                    <div class="stella-diagram__side stella-diagram__side--left">
+                      <h3 class="stella-diagram__heading">Connect<br>Your Data</h3>
+                      <ul class="stella-diagram__list">
+                        <li>ERP Systems</li>
+                        <li>IoT</li>
+                        <li>Sensors</li>
+                        <li>Data Systems</li>
+                        <li>Transactions</li>
+                      </ul>
+                    </div>
+                    <div class="stella-diagram__arrow" aria-hidden="true">
+                      <svg width="40" height="12" viewBox="0 0 40 12" fill="none"><path d="M0 6h36m0 0L31 1m5 5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="stella-diagram__center">
+                      <div class="stella-diagram__ring stella-diagram__ring--1" aria-hidden="true"></div>
+                      <div class="stella-diagram__ring stella-diagram__ring--2" aria-hidden="true"></div>
+                      <div class="stella-diagram__ring stella-diagram__ring--3" aria-hidden="true"></div>
+                      <div class="stella-diagram__core">
+                        <img src="images/stella-logo.svg" alt="Stella">
+                      </div>
+                    </div>
+                    <div class="stella-diagram__arrow" aria-hidden="true">
+                      <svg width="40" height="12" viewBox="0 0 40 12" fill="none"><path d="M0 6h36m0 0L31 1m5 5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="stella-diagram__side stella-diagram__side--right">
+                      <h3 class="stella-diagram__heading">Get<br>Decisions</h3>
+                      <ul class="stella-diagram__list">
+                        <li>Increased Efficiency</li>
+                        <li>Better Business Decisions</li>
+                        <li>Fast Reactions</li>
+                        <li>Automation</li>
+                        <li>Problem Prediction</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -712,7 +929,7 @@ margin: 0rem !important;
                       <div class="div-block-162"><img loading="lazy" src="images/Rectangle-485_1.avif" alt="Stella Real-TimeData &amp; Decision Platform" class="image-container">
                         <div class="div-block-164">
                           <p class="header-3">Factory</p>
-                          <p class="paragraph">Ongoing Parameter Control  in CNC. Prevent damage to machinery, reduce repair costs and downtime​.</p>
+                          <p class="paragraph">Ongoing Parameter Control in CNC. Prevent damage to machinery, reduce repair costs and downtime​.</p>
                         </div>
                       </div>
                       <div class="number-grid_container is-7-column">
@@ -722,7 +939,7 @@ margin: 0rem !important;
                         </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
                         <div class="number_container"><img loading="lazy" src="images/integration.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
                           <h4 data-gsap="free.5" class="header-4 is-center">Integration</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Machine data in one  monitoring system.</p>
+                          <p class="paragraph is-capitalized is-center icon-image">Machine data in one monitoring system.</p>
                         </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
                         <div class="number_container"><img loading="lazy" src="images/rules.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
                           <h4 data-gsap="free.5" class="header-4 is-center">Rules</h4>
@@ -750,7 +967,7 @@ margin: 0rem !important;
                         </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
                         <div class="number_container"><img loading="lazy" src="images/integration.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
                           <h4 data-gsap="free.5" class="header-4 is-center">Integration</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Link payment dates to  account balance.</p>
+                          <p class="paragraph is-capitalized is-center icon-image">Link payment dates to account balance.</p>
                         </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
                         <div class="number_container"><img loading="lazy" src="images/rules.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
                           <h4 data-gsap="free.5" class="header-4 is-center">Rules</h4>
@@ -947,7 +1164,7 @@ layoutTL.from(layoutText.words,{
                 <div class="margin-bottom margin-xxlarge no-padding">
                   <div class="text-align-center">
                     <div class="max-width-large align-center">
-                      <h2 class="header-2">Key functionalities <span class="header-2 is-white">Complete Real-Time  Decision Cycle​</span></h2>
+                      <h2 class="header-2">Key functionalities <span class="header-2 is-white">Complete Real-Time Decision Cycle​</span></h2>
                     </div>
                   </div>
                 </div>
@@ -1175,7 +1392,7 @@ layoutTL.from(layoutText.words,{
                           <h1 class="header-2">Real-Time Data <br>&amp; Decision Platform</h1>
                         </div>
                         <div class="margin-bottom margin-small is-left">
-                          <div class="paragraph is-small">Stella Systems <br> (C) 2025</div>
+                          <div class="paragraph is-small">Stella Systems<br> (C) 2025</div>
                         </div>
                       </div>
                     </div>
@@ -1228,16 +1445,52 @@ layoutTL.from(layoutText.words,{
       if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
       gsap.registerPlugin(ScrollTrigger);
 
-      gsap.from('.section-numnber .number_container', {
-        opacity: 0,
-        y: 60,
-        duration: 0.7,
-        ease: 'power3.out',
-        stagger: 0.12,
-        scrollTrigger: {
-          trigger: '.section-numnber',
-          start: 'top 80%',
-          toggleActions: 'play none none none'
+      const numberContainers = document.querySelectorAll('.section-numnber .number_container');
+
+      numberContainers.forEach((container) => {
+        const sufEl = container.querySelector('.header-number__suffix');
+        if (sufEl) gsap.set(sufEl, { opacity: 0, x: -8, scale: 0.7 });
+      });
+
+      ScrollTrigger.create({
+        trigger: '.section-numnber',
+        start: 'top 80%',
+        once: true,
+        onEnter: () => {
+          numberContainers.forEach((container, i) => {
+            const delay = i * 0.12;
+            const valEl = container.querySelector('.header-number__val');
+            const sufEl = container.querySelector('.header-number__suffix');
+            const target = parseInt(valEl.dataset.target, 10);
+
+            gsap.from(container, {
+              opacity: 0,
+              y: 40,
+              duration: 0.6,
+              ease: 'power3.out',
+              delay
+            });
+
+            const counter = { v: 0 };
+            gsap.to(counter, {
+              v: target,
+              duration: 1.7,
+              ease: 'power2.out',
+              delay: delay + 0.15,
+              onUpdate: () => {
+                valEl.textContent = Math.round(counter.v);
+              }
+            });
+
+            gsap.to(sufEl, {
+              opacity: 1,
+              x: 0,
+              scale: 1,
+              duration: 0.5,
+              ease: 'back.out(2.2)',
+              delay: delay + 1.55
+            });
+          });
         }
       });
     });
