@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     { cmd: 'status.check',  val: 'Working'    },
     { cmd: 'status.update', val: 'Updated'    },
     { cmd: 'show.alerts',   val: 'No alerts'  },
-    { cmd: 'add.task',      val: 'Task Added' }
+    { cmd: 'add.task',      val: 'Task added' }
   ];
 
   var lineEls = consoleEl.querySelectorAll('.hero-console__line');
@@ -167,9 +167,91 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  function cubicBezierEase(x1, y1, x2, y2) {
+    function bx(t) { return 3 * (1 - t) * (1 - t) * t * x1 + 3 * (1 - t) * t * t * x2 + t * t * t; }
+    function by(t) { return 3 * (1 - t) * (1 - t) * t * y1 + 3 * (1 - t) * t * t * y2 + t * t * t; }
+    function dbx(t) { return 3 * (1 - t) * (1 - t) * x1 + 6 * (1 - t) * t * (x2 - x1) + 3 * t * t * (1 - x2); }
+    return function (p) {
+      var t = p;
+      for (var i = 0; i < 8; i++) {
+        var diff = bx(t) - p;
+        if (Math.abs(diff) < 1e-4) break;
+        var d = dbx(t);
+        if (Math.abs(d) < 1e-6) break;
+        t -= diff / d;
+      }
+      return by(t);
+    };
+  }
+  var easyEase = cubicBezierEase(0.42, 0, 0.58, 1);
+
+  var actionsEl = document.getElementById('heroActions');
+  var cursorEl = document.getElementById('heroActionsCursor');
+  var actionItems = actionsEl ? actionsEl.querySelectorAll('.hero-actions__item') : [];
+  if (actionsEl && cursorEl && actionItems.length) {
+    var itemPositions = [];
+    for (var ai = 0; ai < actionItems.length; ai++) {
+      var item = actionItems[ai];
+      itemPositions.push({
+        x: 50,
+        y: item.offsetTop + item.offsetHeight / 2 - 4
+      });
+    }
+    var actionsHeight = actionsEl.offsetHeight;
+
+    gsap.set(actionsEl, { autoAlpha: 0, height: 0 });
+    gsap.set(cursorEl, { x: itemPositions[0].x, y: itemPositions[0].y });
+    actionItems[0].classList.add('is-active');
+
+    gsap.timeline({ delay: 0.7 })
+      .set(actionsEl, { autoAlpha: 1 })
+      .to(actionsEl, { height: actionsHeight, duration: 0.5, ease: 'power2.out' });
+
+    var lastActiveIdx = 0;
+    function syncActiveByCursor() {
+      var y = gsap.getProperty(cursorEl, 'y');
+      var foundIdx = -1;
+      for (var i = 0; i < actionItems.length; i++) {
+        var top = actionItems[i].offsetTop;
+        var bottom = top + actionItems[i].offsetHeight;
+        if (y >= top && y < bottom) { foundIdx = i; break; }
+      }
+      if (foundIdx === lastActiveIdx) return;
+      if (lastActiveIdx >= 0) actionItems[lastActiveIdx].classList.remove('is-active');
+      if (foundIdx >= 0) actionItems[foundIdx].classList.add('is-active');
+      lastActiveIdx = foundIdx;
+    }
+
+    var currentIdx = 0;
+    function jumpToRandom() {
+      var nextIdx;
+      do {
+        nextIdx = Math.floor(Math.random() * itemPositions.length);
+      } while (nextIdx === currentIdx);
+
+      var distance = Math.abs(nextIdx - currentIdx);
+      currentIdx = nextIdx;
+
+      var pos = itemPositions[nextIdx];
+      gsap.to(cursorEl, {
+        x: pos.x,
+        y: pos.y,
+        duration: 0.35 + distance * 0.04,
+        ease: easyEase,
+        onUpdate: syncActiveByCursor,
+        onComplete: function () {
+          gsap.delayedCall(0.55 + Math.random() * 0.5, jumpToRandom);
+        }
+      });
+    }
+
+    gsap.delayedCall(1.6, jumpToRandom);
+  }
+
   var consoleWrap = document.getElementById('heroConsoleWrap');
   var graphWrap = document.getElementById('heroGraphWrap');
-  if (consoleWrap || graphWrap) {
+  var actionsWrap = document.getElementById('heroActionsWrap');
+  if (consoleWrap || graphWrap || actionsWrap) {
     var displayedScroll = window.scrollY;
     var lagFactor = 0.15;
 
@@ -180,6 +262,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var transform = 'translate3d(0,' + offset + 'px,0)';
       if (consoleWrap) consoleWrap.style.transform = transform;
       if (graphWrap) graphWrap.style.transform = transform;
+      if (actionsWrap) actionsWrap.style.transform = transform;
     });
   }
 });
