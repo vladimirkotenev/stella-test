@@ -96,22 +96,22 @@ document.addEventListener('DOMContentLoaded', function () {
     loop.set(consoleEl, { height: w.cmd.h });
 
     if (i === 0) {
-      loop.to(consoleEl, { autoAlpha: 1, scale: 1, duration: 0.3, ease: 'power2.out' })
+      loop.to(consoleEl, { autoAlpha: 1, scale: 1, duration: 0.3, ease: 'power3.out' })
           .to(cmd, { duration: 0.3, text: cmdText }, '<')
-          .to(consoleEl, { width: w.cmd.w, duration: 0.3, ease: 'power2.out' }, '<');
+          .to(consoleEl, { width: w.cmd.w, duration: 0.3, ease: 'power3.out' }, '<');
     } else {
       loop.to(cmd, { duration: 0.3, text: cmdText })
-          .to(consoleEl, { width: w.cmd.w, duration: 0.3, ease: 'power2.out' }, '<');
+          .to(consoleEl, { width: w.cmd.w, duration: 0.3, ease: 'power3.out' }, '<');
     }
 
     loop.to(cmd, { duration: 0.25, text: cmdText + '...' }, '+=0.1')
-        .to(consoleEl, { width: w.cmdDots.w, duration: 0.25, ease: 'power2.out' }, '<');
+        .to(consoleEl, { width: w.cmdDots.w, duration: 0.25, ease: 'power3.out' }, '<');
 
     loop.to(cmd, { duration: 0.18, text: cmdText }, '+=0.35')
-        .to(consoleEl, { width: w.cmd.w, duration: 0.18, ease: 'power2.in' }, '<');
+        .to(consoleEl, { width: w.cmd.w, duration: 0.18, ease: 'power3.in' }, '<');
 
     loop.to(val, { duration: 0.28, text: lineData[i].val }, '+=0.05')
-        .to(consoleEl, { width: w.full.w, duration: 0.28, ease: 'power2.out' }, '<');
+        .to(consoleEl, { width: w.full.w, duration: 0.28, ease: 'power3.out' }, '<');
   });
 
   loop.to({}, { duration: 1 });
@@ -124,11 +124,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var stepVal = eraseWidths[idx++];
     loop.to(valE, { duration: 0.1, text: '' })
-        .to(consoleEl, { width: stepVal.w, duration: 0.1, ease: 'power2.in' }, '<');
+        .to(consoleEl, { width: stepVal.w, duration: 0.1, ease: 'power3.in' }, '<');
 
     var stepCmd = eraseWidths[idx++];
     loop.to(cmdE, { duration: 0.14, text: '' })
-        .to(consoleEl, { width: stepCmd.w, duration: 0.14, ease: 'power2.in' }, '<')
+        .to(consoleEl, { width: stepCmd.w, duration: 0.14, ease: 'power3.in' }, '<')
         .set(lineE, { display: 'none' })
         .set(consoleEl, { height: stepCmd.h });
   }
@@ -139,12 +139,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var step0Val = eraseWidths[idx++];
   loop.to(firstVal, { duration: 0.1, text: '' })
-      .to(consoleEl, { width: step0Val.w, duration: 0.1, ease: 'power2.in' }, '<');
+      .to(consoleEl, { width: step0Val.w, duration: 0.1, ease: 'power3.in' }, '<');
 
   var step0Cmd = eraseWidths[idx++];
   loop.to(firstCmd, { duration: 0.14, text: '' })
-      .to(consoleEl, { width: step0Cmd.w, duration: 0.14, ease: 'power2.in' }, '<')
-      .to(consoleEl, { autoAlpha: 0, scale: 0.96, duration: 0.14, ease: 'power2.in' }, '<')
+      .to(consoleEl, { width: step0Cmd.w, duration: 0.14, ease: 'power3.in' }, '<')
+      .to(consoleEl, { autoAlpha: 0, scale: 0.96, duration: 0.14, ease: 'power3.in' }, '<')
       .set(firstLine, { display: 'none' })
       .set(consoleEl, { height: step0Cmd.h });
 
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     gsap.timeline({ delay: 0.5 })
       .set(graphEl, { autoAlpha: 1 })
-      .to(graphEl, { clipPath: 'inset(0 0% 0 0 round 12px)', duration: 0.5, ease: 'power2.out' });
+      .to(graphEl, { clipPath: 'inset(0 0% 0 0 round 12px)', duration: 0.5, ease: 'power3.out' });
 
     gsap.to(graphScroll, {
       x: -190,
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return by(t);
     };
   }
-  var easyEase = cubicBezierEase(0.42, 0, 0.58, 1);
+  var easyEase = cubicBezierEase(0.22, 1, 0.36, 1);
 
   var actionsEl = document.getElementById('heroActions');
   var cursorEl = document.getElementById('heroActionsCursor');
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     gsap.timeline({ delay: 0.7 })
       .set(actionsEl, { autoAlpha: 1 })
-      .to(actionsEl, { height: actionsHeight, duration: 0.5, ease: 'power2.out' });
+      .to(actionsEl, { height: actionsHeight, duration: 0.5, ease: 'power3.out' });
 
     var lastActiveIdx = 0;
     function syncActiveByCursor() {

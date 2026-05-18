@@ -124,6 +124,18 @@
       font-size: clamp(1rem, 4vw, 1.2rem);
     }
 
+    .section-numnber {
+      background-color: #fafafa;
+    }
+
+    .section-numnber .header-number {
+      color: #F24622;
+    }
+
+    .section-numnber .paragraph {
+      color: #0e0e0e;
+    }
+
     @media (max-width: 479px) {
       .hero-subtitle {
         font-size: 4.3vw;
@@ -560,9 +572,6 @@ margin: 0rem !important;
                     </div>
                   </div>
                 </div>
-                <div class="header26_image-wrapper">
-                  <div class="div-block-163"></div><img sizes="(max-width: 1815px) 100vw, 1815px" srcset="images/marker-stella_1marker-stella.avif 800w, images/marker-stella_1.avif 1815w" alt="Stella Real-TimeData &amp; Decision Platform" src="images/marker-stella_1.avif" loading="eager" class="header26_image is-mobile"><img sizes="(max-width: 2000px) 100vw, 2000px" srcset="images/67fccd904a368834a7330fb3_schema_big_stella-p-2000-p-500.png 500w, images/67fccd904a368834a7330fb3_schema_big_stella-p-2000-p-800.png 800w, images/67fccd904a368834a7330fb3_schema_big_stella-p-2000.avif 2000w" alt="stella data decision platform" src="images/67fccd904a368834a7330fb3_schema_big_stella-p-2000.avif" loading="eager" class="header26_image">
-                </div>
               </div>
             </div>
           </div>
@@ -572,30 +581,21 @@ margin: 0rem !important;
         <div class="padding-global">
           <div class="container-large">
             <div class="padding-section-large">
-              <div class="header26_component">
-                <div class="margin-bottom margin-xxlarge">
-                  <div class="text-align-center">
-                    <div class="max-width-large align-center">
-                      <p class="header-3">Stella’s real-time data streaming platform</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div class="number-grid_container">
                 <div class="number_container">
-                  <h2 data-gsap="free.5" class="header-number is-center">10M</h2>
+                  <h2 class="header-number is-center">10M</h2>
                   <p class="paragraph is-capitalized is-center">Concurrent<br>Data Sources</p>
                 </div>
                 <div class="number_container">
-                  <h2 data-gsap="free.5" class="header-number is-center">1M</h2>
+                  <h2 class="header-number is-center">1M</h2>
                   <p class="paragraph is-capitalized is-center">data events<br>per second</p>
                 </div>
                 <div class="number_container">
-                  <h2 data-gsap="free.5" class="header-number is-center">50K</h2>
+                  <h2 class="header-number is-center">50K</h2>
                   <p class="paragraph is-capitalized is-center">Client triggers<br>per second</p>
                 </div>
                 <div class="number_container">
-                  <h2 data-gsap="free.5" class="header-number is-center">1BN</h2>
+                  <h2 class="header-number is-center">1BN</h2>
                   <p class="paragraph is-capitalized is-center">aggregated<br>events p/s</p>
                 </div>
               </div>
@@ -603,6 +603,19 @@ margin: 0rem !important;
           </div>
         </div>
       </header>
+      <section class="section_header26">
+        <div class="padding-global">
+          <div class="container-large is-fullwidth">
+            <div class="padding-section-large">
+              <div class="header26_component">
+                <div class="header26_image-wrapper">
+                  <div class="div-block-163"></div><img sizes="(max-width: 1815px) 100vw, 1815px" srcset="images/marker-stella_1marker-stella.avif 800w, images/marker-stella_1.avif 1815w" alt="Stella Real-TimeData &amp; Decision Platform" src="images/marker-stella_1.avif" loading="eager" class="header26_image is-mobile"><img sizes="(max-width: 2000px) 100vw, 2000px" srcset="images/67fccd904a368834a7330fb3_schema_big_stella-p-2000-p-500.png 500w, images/67fccd904a368834a7330fb3_schema_big_stella-p-2000-p-800.png 800w, images/67fccd904a368834a7330fb3_schema_big_stella-p-2000.avif 2000w" alt="stella data decision platform" src="images/67fccd904a368834a7330fb3_schema_big_stella-p-2000.avif" loading="eager" class="header26_image">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <header id="solutions" class="section-tabs">
         <div class="padding-global">
           <div class="container-large">
@@ -1210,5 +1223,24 @@ layoutTL.from(layoutText.words,{
     })();
   </script>
   <script defer src="js/hero-animations.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.from('.section-numnber .number_container', {
+        opacity: 0,
+        y: 60,
+        duration: 0.7,
+        ease: 'power3.out',
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: '.section-numnber',
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      });
+    });
+  </script>
 </body>
 </html>
