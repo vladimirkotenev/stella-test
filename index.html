@@ -120,6 +120,21 @@
       .hero-graph-wrap { display: none; }
     }
 
+    .hero-subtitle {
+      font-size: clamp(1rem, 4vw, 1.2rem);
+    }
+
+    @media (max-width: 479px) {
+      .hero-subtitle {
+        font-size: 1rem;
+        max-width: 17rem;
+      }
+
+      .hero-title-gap {
+        margin-bottom: 16px !important;
+      }
+    }
+
     .hero-actions-wrap {
       position: absolute;
       top: 170px;

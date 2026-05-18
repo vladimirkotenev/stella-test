@@ -192,22 +192,25 @@
 }
 
 /* ===== MOBILE ===== */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .site-nav {
     padding: 16px 20px;
   }
 
   .site-nav__menu {
     display: none;
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
+    z-index: 100;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 0;
-    background: rgba(14, 14, 14, 0.97);
-    padding: 8px 20px 24px;
+    background: #0e0e0e;
+    padding: 80px 20px 40px;
   }
 
   .site-nav__menu.is-open {
@@ -217,26 +220,62 @@
   .site-nav__link {
     width: 100%;
     padding: 14px 0;
-    font-size: 1.0625rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 1.75rem;
+    text-align: center;
   }
 
-  .site-nav__link:last-of-type {
-    border-bottom: none;
-  }
-
-  /* Hide desktop CTA, show mobile CTA inside menu */
-  .site-nav__right .site-nav__cta {
+  .site-nav__link::after {
     display: none;
   }
 
+  .site-nav__right {
+    margin-left: auto;
+  }
+
+  /* Hide CTA in navbar — hero already has one */
+  .site-nav__right .site-nav__cta,
   .site-nav__cta--mobile {
-    display: inline-flex;
-    margin-top: 20px;
-    align-self: flex-start;
+    display: none;
+  }
+
+  .site-nav__logo,
+  .site-nav__burger {
+    position: relative;
+    z-index: 101;
   }
 
   .site-nav__burger {
     display: flex;
+  }
+
+  .site-nav__burger:focus {
+    outline: none;
+  }
+
+  @keyframes navLinkIn {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .site-nav__menu.is-open .site-nav__link {
+    animation: navLinkIn 0.5s cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
+
+  .site-nav__menu.is-open .site-nav__link:nth-child(1) { animation-delay: 0.05s; }
+  .site-nav__menu.is-open .site-nav__link:nth-child(2) { animation-delay: 0.12s; }
+  .site-nav__menu.is-open .site-nav__link:nth-child(3) { animation-delay: 0.19s; }
+  .site-nav__menu.is-open .site-nav__link:nth-child(4) { animation-delay: 0.26s; }
+  .site-nav__menu.is-open .site-nav__link:nth-child(5) { animation-delay: 0.33s; }
+}
+
+@media (max-width: 479px) {
+  .site-nav__logo img {
+    height: 28px;
   }
 }
