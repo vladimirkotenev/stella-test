@@ -1,4 +1,4 @@
-<!DOCTYPE html><!--  This site was created in Webflow. https://webflow.com  --><!--  Last Published: Fri May 08 2026 13:13:02 GMT+0000 (Coordinated Universal Time)  -->
+<!DOCTYPE html>
 <html data-wf-page="67ea4806ad174809d4ce102b" data-wf-site="67ea4806ad174809d4ce0fb5">
 <head>
   <meta charset="utf-8">
@@ -12,7 +12,6 @@
   <meta property="og:type" content="website">
   <meta content="summary_large_image" name="twitter:card">
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <meta content="Webflow" name="generator">
   <link href="css/bundle.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
@@ -476,6 +475,12 @@
       display: block;
     }
 
+    .w-mod-js .section-flow .flow-row__icon img,
+    .w-mod-js .section-flow .flow-row__icon .flow-row__tag {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
     .flow-row__tag {
       font-family: 'Poppins', sans-serif;
       font-size: 14px;
@@ -642,7 +647,7 @@ a,
 .hide {
   display: none !important;
 }
-/* Remove default Webflow chevron from form select */
+/* Remove default chevron from form select */
 select{
   -webkit-appearance: none;
   appearance: none;
@@ -917,23 +922,23 @@ margin: 0rem !important;
               <div class="flow-row">
                 <div class="flow-row__text-block">
                   <div class="flow-row__icon flow-row__icon--1">
-                    <img src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" alt="">
                     <span class="flow-row__tag">ERP systems</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--2">
-                    <img src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" alt="">
                     <span class="flow-row__tag">IoT</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--3">
-                    <img src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/sensors.avif" alt="">
                     <span class="flow-row__tag">Sensors</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--4">
-                    <img src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" alt="">
                     <span class="flow-row__tag">Data systems</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--5">
-                    <img src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/transactions.avif" alt="">
                     <span class="flow-row__tag">Transactions</span>
                   </div>
                   <h2 class="flow-row__text">Connect<br>your data</h2>
@@ -944,7 +949,7 @@ margin: 0rem !important;
                       <path d="M0 6h76m0 0L71 1m5 5l-5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
-                  <img src="images/stella_data.avif" alt="Stella data platform" class="flow-row__image">
+                  <img loading="lazy" src="images/stella_data.avif" alt="Stella data platform" class="flow-row__image">
                   <div class="flow-row__arrow" aria-hidden="true">
                     <svg width="80" height="12" viewBox="0 0 80 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M0 6h76m0 0L71 1m5 5l-5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -953,23 +958,23 @@ margin: 0rem !important;
                 </div>
                 <div class="flow-row__text-block flow-row__text-block--right">
                   <div class="flow-row__icon flow-row__icon--1">
-                    <img src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" alt="">
                     <span class="flow-row__tag">Better business decisions</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--2">
-                    <img src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" alt="">
                     <span class="flow-row__tag">Increased efficiency</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--3">
-                    <img src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" alt="">
                     <span class="flow-row__tag">Fast reactions</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--4">
-                    <img src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" alt="">
                     <span class="flow-row__tag">Problem prediction</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--5">
-                    <img src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/automation.avif" alt="">
                     <span class="flow-row__tag">Automation</span>
                   </div>
                   <h2 class="flow-row__text">Get<br>decisions</h2>
@@ -1648,6 +1653,31 @@ layoutTL.from(layoutText.words,{
               }
             });
           });
+        }
+      });
+
+      const flowIcons = document.querySelectorAll('.section-flow .flow-row__icon');
+
+      ScrollTrigger.create({
+        trigger: '.flow-row',
+        start: 'top 70%',
+        once: true,
+        onEnter: () => {
+          for (let n = 1; n <= 5; n++) {
+            const pair = document.querySelectorAll(`.section-flow .flow-row__icon--${n}`);
+            const targets = [];
+            pair.forEach(icon => {
+              targets.push(...icon.querySelectorAll('img, .flow-row__tag'));
+            });
+            if (!targets.length) continue;
+            gsap.to(targets, {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: 'power3.out',
+              delay: (n - 1) * 0.12
+            });
+          }
         }
       });
     });
