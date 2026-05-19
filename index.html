@@ -366,12 +366,15 @@
       font-weight: 500;
       letter-spacing: 0.02em;
       color: #0e0e0e;
+      opacity: 0.6;
+      text-transform: lowercase;
     }
 
     .hero-actions__item.is-active {
       color: #F24622;
       font-weight: 700;
       background-color: rgba(242, 70, 34, 0.12);
+      opacity: 1;
     }
 
     .hero-actions__cursor {
@@ -387,6 +390,77 @@
 
     @media (max-width: 991px) {
       .hero-actions-wrap { display: none; }
+    }
+
+    .section-flow { background-color: #fafafa; }
+
+    .flow-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .flow-row__text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 56px;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      font-weight: 400;
+      color: #0e0e0e;
+      margin: 0;
+      text-align: left;
+    }
+
+    .flow-row__arrow {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      color: #F24622;
+    }
+
+    .flow-row__arrow:first-of-type { transform: translateX(10px); }
+    .flow-row__arrow:last-of-type  { transform: translateX(-10px); }
+
+    .flow-row__image {
+      width: 240px;
+      height: auto;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    @media (max-width: 991px) {
+      .flow-row { flex-wrap: wrap; gap: 20px; }
+      .flow-row__text { font-size: clamp(2rem, 6vw, 3rem); }
+      .flow-row__image { width: 180px; }
+    }
+
+    .section_header26 .hero-line {
+      background-image: linear-gradient(
+        100deg,
+        #f24622 0%,
+        #f24622 35%,
+        #ffffff 50%,
+        #fcd7cf 65%,
+        #f24622 100%
+      );
+      background-size: 200% 100%;
+      animation:
+        heroLineIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+        hero-title-shimmer 8s linear infinite;
+    }
+
+    .section_header26 .hero-line:nth-child(1) { animation-delay: 0.2s, 0s; }
+    .section_header26 .hero-line:nth-child(2) { animation-delay: 0.3s, 0s; }
+    .section_header26 .hero-line:nth-child(3) { animation-delay: 0.4s, 0s; }
+
+    @keyframes hero-title-shimmer {
+      from { background-position: 0% 50%; }
+      to   { background-position: -200% 50%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .section_header26 .hero-line { animation: heroLineIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
     }
   </style>
 </head>
@@ -759,6 +833,29 @@ margin: 0rem !important;
           </div>
         </div>
       </header>
+      <section class="section-flow">
+        <div class="padding-global">
+          <div class="container-large">
+            <div class="padding-section-large">
+              <div class="flow-row">
+                <h2 class="flow-row__text">Connect<br>your data</h2>
+                <div class="flow-row__arrow" aria-hidden="true">
+                  <svg width="80" height="12" viewBox="0 0 80 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 6h76m0 0L71 1m5 5l-5 5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <img src="images/stella_data.png" alt="Stella data platform" class="flow-row__image">
+                <div class="flow-row__arrow" aria-hidden="true">
+                  <svg width="80" height="12" viewBox="0 0 80 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 6h76m0 0L71 1m5 5l-5 5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <h2 class="flow-row__text">Get<br>decisions</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <header class="section-numnber">
         <div class="padding-global">
           <div class="container-large">
@@ -785,54 +882,6 @@ margin: 0rem !important;
           </div>
         </div>
       </header>
-      <section class="section_header26">
-        <div class="padding-global">
-          <div class="container-large is-fullwidth">
-            <div class="padding-section-large">
-              <div class="header26_component">
-                <div class="stella-diagram">
-                  <div class="stella-diagram__grid">
-                    <div class="stella-diagram__side stella-diagram__side--left">
-                      <h3 class="stella-diagram__heading">Connect<br>Your Data</h3>
-                      <ul class="stella-diagram__list">
-                        <li>ERP Systems</li>
-                        <li>IoT</li>
-                        <li>Sensors</li>
-                        <li>Data Systems</li>
-                        <li>Transactions</li>
-                      </ul>
-                    </div>
-                    <div class="stella-diagram__arrow" aria-hidden="true">
-                      <svg width="40" height="12" viewBox="0 0 40 12" fill="none"><path d="M0 6h36m0 0L31 1m5 5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <div class="stella-diagram__center">
-                      <div class="stella-diagram__ring stella-diagram__ring--1" aria-hidden="true"></div>
-                      <div class="stella-diagram__ring stella-diagram__ring--2" aria-hidden="true"></div>
-                      <div class="stella-diagram__ring stella-diagram__ring--3" aria-hidden="true"></div>
-                      <div class="stella-diagram__core">
-                        <img src="images/stella-logo.svg" alt="Stella">
-                      </div>
-                    </div>
-                    <div class="stella-diagram__arrow" aria-hidden="true">
-                      <svg width="40" height="12" viewBox="0 0 40 12" fill="none"><path d="M0 6h36m0 0L31 1m5 5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <div class="stella-diagram__side stella-diagram__side--right">
-                      <h3 class="stella-diagram__heading">Get<br>Decisions</h3>
-                      <ul class="stella-diagram__list">
-                        <li>Increased Efficiency</li>
-                        <li>Better Business Decisions</li>
-                        <li>Fast Reactions</li>
-                        <li>Automation</li>
-                        <li>Problem Prediction</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <header id="solutions" class="section-tabs">
         <div class="padding-global">
           <div class="container-large">
