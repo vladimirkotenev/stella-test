@@ -292,24 +292,34 @@
       font-size: clamp(1rem, 4vw, 1.2rem);
     }
 
+    .hero-title-gap  { margin-bottom: 40px; }
+    .hero-button-gap { margin-top: 80px; }
+
     .section-numnber {
-      background-color: #fafafa;
+      background-color: #0e0e0e;
+    }
+
+    .section-numnber .section-numnber__heading {
+      color: #fafafa;
+      margin-bottom: clamp(2rem, 4vw, 3.5rem);
     }
 
     .section-numnber .header-number {
       color: #F24622;
-      font-size: clamp(3.5rem, 9vw, 8.5rem);
-      font-weight: 700;
+      font-size: clamp(3.5rem, 8.5vw, 8rem);
+      font-weight: 400;
       line-height: 1;
       letter-spacing: -0.03em;
     }
 
     .section-numnber .header-number__suffix {
       display: inline-block;
+      text-transform: lowercase;
+      color: #fafafa;
     }
 
     .section-numnber .paragraph {
-      color: #0e0e0e;
+      color: #fafafa;
       font-size: 1rem;
       font-weight: 400;
       text-transform: none;
@@ -391,8 +401,61 @@
       .hero-actions-wrap { display: none; }
     }
 
+    .hero-console { animation: hero-drift-1 17s ease-in-out 0.7s infinite; }
+    .hero-graph   { animation: hero-drift-2 19s ease-in-out 1s   infinite; }
+    .hero-actions { animation: hero-drift-3 16s ease-in-out 1.2s infinite; }
+
+    @keyframes hero-drift-1 {
+      0%, 100% { translate: 0 0; }
+      25%      { translate: 12px -8px; }
+      50%      { translate: -6px 14px; }
+      75%      { translate: -14px -10px; }
+    }
+
+    @keyframes hero-drift-2 {
+      0%, 100% { translate: 0 0; }
+      25%      { translate: -10px 12px; }
+      50%      { translate: 14px 6px; }
+      75%      { translate: -8px -14px; }
+    }
+
+    @keyframes hero-drift-3 {
+      0%, 100% { translate: 0 0; }
+      25%      { translate: 14px 10px; }
+      50%      { translate: -12px -6px; }
+      75%      { translate: 8px 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-console, .hero-graph, .hero-actions { animation: none; }
+    }
+
     .section-flow { background-color: #fafafa; }
-    .section-flow .padding-section-large { padding-top: clamp(6rem, 16vw, 13rem); }
+    .section-flow .padding-section-large {
+      padding-top: clamp(5rem, 9vw, 8rem);
+      padding-bottom: clamp(11rem, 16vw, 14rem);
+    }
+
+    .section-numnber .padding-section-large {
+      padding-top: clamp(3rem, 7vw, 6rem);
+      padding-bottom: clamp(3rem, 7vw, 6rem);
+    }
+
+    .section-flow__heading,
+    .section-numnber__heading,
+    .section-tabs__heading {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(13px, 1.4vw, 17px);
+      line-height: 1.2;
+      letter-spacing: 0.16em;
+      font-weight: 300;
+      color: #0e0e0e;
+      text-align: center;
+      text-transform: uppercase;
+      margin: 0 0 clamp(4rem, 8vw, 7rem);
+    }
+
+    .section-tabs .section-tabs__heading { color: #fafafa; }
 
     .flow-row {
       display: flex;
@@ -894,7 +957,7 @@ margin: 0rem !important;
                 <div class="margin-bottom margin-xxlarge">
                   <div class="text-align-center">
                     <div class="max-width-large align-center">
-                      <div class="margin-bottom margin-small hero-title-gap" style="margin-bottom: 40px;">
+                      <div class="margin-bottom margin-small hero-title-gap">
                         <h1 class="header-1">
                           <span class="hero-line">Real-time</span>
                           <span class="hero-line">data &amp; decision</span>
@@ -902,7 +965,7 @@ margin: 0rem !important;
                         </h1>
                       </div>
                       <p class="header-3 is-center hero-subtitle">Democratizing data management and<br>automating decision processes</p>
-                      <div class="margin-top margin-medium hero-button-gap" style="margin-top: 80px;">
+                      <div class="margin-top margin-medium hero-button-gap">
                         <div class="button-group is-center">
                           <a href="schedule-a-demo.html" class="button site-nav__cta w-button">Schedule a Demo</a>
                         </div>
@@ -919,6 +982,7 @@ margin: 0rem !important;
         <div class="padding-global">
           <div class="container-large">
             <div class="padding-section-large">
+              <h5 class="section-flow__heading">Connect everything you have</h5>
               <div class="flow-row">
                 <div class="flow-row__text-block">
                   <div class="flow-row__icon flow-row__icon--1">
@@ -988,6 +1052,7 @@ margin: 0rem !important;
         <div class="padding-global">
           <div class="container-large">
             <div class="padding-section-large">
+              <h5 class="section-numnber__heading">As much as you want</h5>
               <div class="number-grid_container">
                 <div class="number_container">
                   <h2 class="header-number is-center"><span class="header-number__val" data-target="10">0</span><span class="header-number__suffix">M</span></h2>
@@ -1018,7 +1083,7 @@ margin: 0rem !important;
                 <div class="margin-bottom margin-xxlarge no-padding">
                   <div class="text-align-center">
                     <div class="max-width-large align-center">
-                      <h2 class="header-2">Stella’s real-time data<br>‍<span class="header-2 is-white">streaming platfrom​</span></h2>
+                      <h5 class="section-tabs__heading">Stella’s real-time data streaming platform</h5>
                     </div>
                   </div>
                 </div>
