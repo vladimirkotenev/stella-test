@@ -436,6 +436,72 @@
     }
 
     .section-flow { background-color: #fafafa; }
+
+    .is-light-section { background-color: #fafafa; }
+    .is-light-section .header-2,
+    .is-light-section .paragraph,
+    .is-light-section .text-style-tagline,
+    .is-light-section h3.paragraph { color: #0e0e0e; }
+    .is-light-section .paragraph.is-bold { color: #0e0e0e; }
+
+    .key-features__grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(20px, 2.5vw, 36px);
+      margin-top: 0;
+    }
+
+    .key-features__item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .key-features__image {
+      background: #ededed;
+      border-radius: 0;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5b6770;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(12px, 1vw, 14px);
+      font-weight: 400;
+      text-align: center;
+      padding: 16px;
+      margin-bottom: clamp(18px, 1.8vw, 24px);
+      letter-spacing: 0.02em;
+    }
+
+    .section_layout1.is-light-section .section-flow__heading { margin-bottom: 0; }
+    .section_layout1.is-light-section .header26_component { margin-bottom: clamp(20px, 2.5vw, 36px); }
+    .section_layout1.is-light-section .header26_component .margin-bottom.margin-xxlarge { margin-bottom: 0; }
+
+    .key-features__title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(20px, 1.7vw, 26px);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #0e0e0e;
+      margin: 0 0 clamp(10px, 1vw, 14px);
+    }
+
+    .key-features__text {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(14px, 1vw, 16px);
+      line-height: 1.55;
+      color: #5b6770;
+      margin: 0;
+    }
+
+    @media (max-width: 992px) {
+      .key-features__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 560px) {
+      .key-features__grid { grid-template-columns: 1fr; }
+    }
     .section-flow .padding-section-large {
       padding-top: clamp(5rem, 9vw, 8rem);
       padding-bottom: clamp(11rem, 16vw, 14rem);
@@ -741,7 +807,15 @@
     .w-mod-js .section-numnber__heading,
     .w-mod-js .section-tabs__heading,
     .w-mod-js .scenarios-tabs__menu,
-    .w-mod-js .scenarios-tabs__content {
+    .w-mod-js .scenarios-tabs__content,
+    .w-mod-js .layout250_component > .margin-bottom.margin-small.is-left,
+    .w-mod-js .layout250_item,
+    .w-mod-js .layout250_component .div-block > .margin-top.margin-medium,
+    .w-mod-js .key-features__item,
+    .w-mod-js .section_layout192.is-cta-light .hero-line,
+    .w-mod-js .section_layout192.is-cta-light .hero-subtitle,
+    .w-mod-js .section_layout192.is-cta-light .hero-button-gap .button,
+    .w-mod-js .section_layout192.is-cta-light .cta-banner {
       opacity: 0;
       transform: translateY(30px);
     }
@@ -817,6 +891,28 @@
     .section_header26 .hero-line:nth-child(1) { animation-delay: 0.2s, 0s; }
     .section_header26 .hero-line:nth-child(2) { animation-delay: 0.3s, 0s; }
     .section_header26 .hero-line:nth-child(3) { animation-delay: 0.4s, 0s; }
+
+    .section_layout192.is-cta-light { background-color: #fafafa; background-image: none; }
+    .section_layout192.is-cta-light .header-1 {
+      background-image: none;
+      -webkit-text-fill-color: #f24622;
+      color: #f24622;
+    }
+    .section_layout192.is-cta-light .hero-line {
+      background-image: none;
+      -webkit-text-fill-color: #f24622;
+      color: #f24622;
+      animation: none;
+      opacity: 1;
+    }
+    .section_layout192.is-cta-light .hero-subtitle {
+      color: #0e0e0e;
+      animation: none;
+    }
+    .section_layout192.is-cta-light .hero-button-gap .button {
+      animation: none;
+      opacity: 1;
+    }
 
     @keyframes hero-title-shimmer {
       from { background-position: 0% 50%; }
@@ -1474,7 +1570,7 @@ margin: 0rem !important;
           </div>
         </div>
       </section>
-      <section class="section_layout1">
+      <section class="section_layout1 is-light-section">
         <div class="padding-global">
           <div class="container-large">
             <div class="padding-section-large">
@@ -1482,196 +1578,58 @@ margin: 0rem !important;
                 <div class="margin-bottom margin-xxlarge no-padding">
                   <div class="text-align-center">
                     <div class="max-width-large align-center">
-                      <h2 class="header-2">Key functionalities <span class="header-2 is-white">Complete Real-Time Decision Cycle​</span></h2>
+                      <h5 class="section-flow__heading">Key functionalities</h5>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="layout1_component">
-                <div class="w-layout-grid layout1_content">
-                  <div class="layout1_content-left is-solution">
-                    <div class="margin-bottom margin-xsmall">
-                      <div class="text-style-tagline">Key functionalities</div>
-                    </div>
-                    <div class="margin-bottom margin-small">
-                      <h2 class="header-2">Data Acquisition and Integration</h2>
-                    </div>
-                    <p class="paragraph">Stella simplifies data acquisition and integration, enabling your organization to collect and unify data from millions of devices and hundreds of sources in real-time. Our platform ensures a seamless flow of information, providing a single source of truth for all your data-driven decisions.</p>
-                    <div class="icons-container">
-                      <div class="number_container is-align-horizontal is-top-margin"><img src="images/streaming_analytics.svg" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">Streaming Analytics</h3>
-                      </div>
-                      <div class="number_container is-align-horizontal is-top-margin"><img src="images/connecting-data.svg" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">Connecting any data sources</h3>
-                      </div>
-                      <div class="number_container is-align-horizontal is-top-margin"><img src="images/Flexible-API-architecture.svg" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">Flexible API architecture</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="w-node-_8263c249-a8b9-fc2a-9fe9-aa86451f44d4-d4ce102b" class="layout1_image-wrapper"><img loading="lazy" src="images/parking-stella_1.avif" width="606" height="605" alt="stella data decision platform" class="layout1_image"></div>
-                </div>
+              <div class="key-features__grid">
+                <article class="key-features__item">
+                  <div class="key-features__image" aria-hidden="true">Image will be added</div>
+                  <h3 class="key-features__title">Data Acquisition and Integration</h3>
+                  <p class="key-features__text">Stella simplifies data acquisition and integration, enabling your organization to collect and unify data from millions of devices and hundreds of sources in real-time. Our platform ensures a seamless flow of information, providing a single source of truth for all your data-driven decisions.</p>
+                </article>
+                <article class="key-features__item">
+                  <div class="key-features__image" aria-hidden="true">Image will be added</div>
+                  <h3 class="key-features__title">Modeling and Automation of Decision Processes</h3>
+                  <p class="key-features__text">Stella enhances decision-making with advanced modeling and automation, integrating AI/ML models into your workflows for smarter outcomes. Our platform enables real-time decision orchestration, ensuring your business processes are adaptive, efficient, and data-driven.</p>
+                </article>
+                <article class="key-features__item">
+                  <div class="key-features__image" aria-hidden="true">Image will be added</div>
+                  <h3 class="key-features__title">Scalable Process Orchestration and Optimization</h3>
+                  <p class="key-features__text">Stella empowers your organization to orchestrate and optimize processes at any scale, ensuring seamless operations even under the most demanding workloads. Our platform automates workflows, streamlines decision-making, and adapts to your growing needs, delivering efficiency and reliability across your business.</p>
+                </article>
+                <article class="key-features__item">
+                  <div class="key-features__image" aria-hidden="true">Image will be added</div>
+                  <h3 class="key-features__title">Complete Real-Time Decision Cycle</h3>
+                  <p class="key-features__text">Stella delivers a comprehensive real-time decision cycle, enabling your organization to ingest, process, and act on data instantly. From data acquisition to actionable insights, our platform ensures every decision is informed, timely, and impactful, keeping you ahead in dynamic environments.</p>
+                </article>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <section class="section_layout192">
+      <section class="section_layout192 is-cta-light">
         <div class="padding-global">
           <div class="container-large">
             <div class="padding-section-large">
-              <div class="layout192_component">
-                <div class="w-layout-grid layout192_content">
-                  <div id="w-node-_1a0733ae-49f7-8dd8-2bf2-f504f3092774-d4ce102b" class="layout192_image-wrapper"><img sizes="100vw" srcset="images/ai-stella-p-500.png 500w, images/ai-stella-p-800.png 800w, images/ai-stella-p-1080.png 1080w, images/ai-stella-p-1600.png 1600w, images/ai-stella.avif 1801w" alt="stella data decision platform" src="images/ai-stella.avif" width="1801" height="1801" loading="lazy" class="layout192_image"></div>
-                  <div id="w-node-_1a0733ae-49f7-8dd8-2bf2-f504f3092776-d4ce102b" class="layout192_content-right">
-                    <div class="margin-bottom margin-xsmall">
-                      <div class="text-style-tagline">Key functionalities</div>
-                    </div>
-                    <div class="margin-bottom margin-small">
-                      <h2 class="header-2">Modeling and Automation of Decision Processes​</h2>
-                    </div>
-                    <p class="paragraph">Stella enhances decision-making with advanced modeling and automation, integrating AI/ML models into your workflows for smarter outcomes. Our platform enables real-time decision orchestration, ensuring your business processes are adaptive, efficient, and data-driven. </p>
-                    <div class="icons-container">
-                      <div class="number_container is-align-horizontal is-top-margin"><img src="images/Real-time-decision-orchestration.svg" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">Real-time decision orchestration</h3>
+              <div class="header26_component">
+                <div class="margin-bottom margin-xxlarge no-padding">
+                  <div class="text-align-center">
+                    <div class="max-width-large align-center">
+                      <div class="margin-bottom margin-small hero-title-gap">
+                        <h1 class="header-1">
+                          <span class="hero-line">Endless Data &amp; AI</span>
+                          <span class="hero-line">Possibilities For The</span>
+                          <span class="hero-line">Right Decisions</span>
+                        </h1>
                       </div>
-                      <div class="number_container is-align-horizontal is-top-margin"><img src="images/Flexible-API-architecture.svg" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">Integration of own AI/ML models</h3>
-                      </div>
-                      <div class="number_container is-align-horizontal is-top-margin"><img src="images/Adaptive-decision-making.svg" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">Adaptive decision-making</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="section_layout1">
-        <div class="padding-global">
-          <div class="container-large">
-            <div class="padding-section-large">
-              <div class="layout1_component">
-                <div class="w-layout-grid layout1_content">
-                  <div class="layout1_content-left is-solution">
-                    <div class="margin-bottom margin-xsmall">
-                      <div class="text-style-tagline">Key functionalities</div>
-                    </div>
-                    <div class="margin-bottom margin-small">
-                      <h2 class="header-2">Scalable Process Orchestration and Optimization</h2>
-                    </div>
-                    <p class="paragraph">Stella empowers your organization to orchestrate and optimize processes at any scale, ensuring seamless operations even under the most demanding workloads. Our platform automates workflows, streamlines decision-making, and adapts to your growing needs, delivering efficiency and reliability across your business.</p>
-                    <div class="icons-container">
-                      <div class="number_container is-align-horizontal is-top-margin"><img src="images/Connecting-AI-business-rules-and--operational-logic-1.svg" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">Automation of decision-making processes</h3>
-                      </div>
-                      <div class="number_container is-align-horizontal is-top-margin"><img src="images/Connecting-AI-business-rules-and--operational-logic.svg" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">Connecting AI, business rules and operational logic</h3>
-                      </div>
-                      <div class="number_container is-align-horizontal is-top-margin"><img src="images/Adaptive-workload-management.svg" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">Adaptive workload management</h3>
-                      </div>
-                      <div class="number_container is-align-horizontal is-top-margin"><img src="images/Lightning-fast-reactions-milliseconds.svg" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">Lightning-fast reactions (milliseconds)</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="w-node-db9eb10e-1dc2-ed65-0769-8d8bfac3c189-d4ce102b" class="layout1_image-wrapper"><img sizes="100vw" srcset="images/orchestration-p-500.png 500w, images/orchestration-p-800.png 800w, images/orchestration-p-1080.png 1080w, images/orchestration.avif 1801w" alt="stella data decision platform" src="images/orchestration.avif" width="1801" height="1801" loading="lazy" class="layout1_image"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="section_layout192">
-        <div class="padding-global">
-          <div class="container-large">
-            <div class="padding-section-large">
-              <div class="layout192_component">
-                <div class="w-layout-grid layout192_content">
-                  <div id="w-node-bc6a1439-8ab3-02d2-9e02-6c4e0334795a-d4ce102b" class="layout192_image-wrapper"><img sizes="100vw" srcset="images/circle_stella_1circle_stella.avif 500w, images/circle_stella_1circle_stella.avif 800w, images/circle_stella_1.avif 1800w" alt="stella data decision platform" src="images/circle_stella_1.avif" width="1800" height="1801" loading="lazy" class="layout192_image"></div>
-                  <div id="w-node-bc6a1439-8ab3-02d2-9e02-6c4e0334795c-d4ce102b" class="layout192_content-right">
-                    <div class="margin-bottom margin-xsmall">
-                      <div class="text-style-tagline">Key functionalities</div>
-                    </div>
-                    <div class="margin-bottom margin-small">
-                      <h2 class="header-2">Complete Real-Time Decision Cycle</h2>
-                    </div>
-                    <p class="paragraph">Stella delivers a comprehensive real-time decision cycle, enabling your organization to ingest, process, and act on data instantly. From data acquisition to actionable insights, our platform ensures every decision is informed, timely, and impactful, keeping you ahead in dynamic environments.</p>
-                    <div class="icons-container">
-                      <div class="number_container is-align-horizontal is-top-margin"><img src="images/Real-time-decision-orchestration.svg" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">Real-time business insights</h3>
-                      </div>
-                      <div class="number_container is-align-horizontal is-top-margin"><img src="images/Connecting-AI-business-rules-and--operational-logic-3.svg" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">AI-driven monitoring</h3>
-                      </div>
-                      <div class="number_container is-align-horizontal is-top-margin"><img src="images/Connecting-AI-business-rules-and--operational-logic-4.svg" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">Support for Event-Driven Architecture</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <header id="technology" class="section-tech">
-        <div class="padding-global">
-          <div class="container-large">
-            <div class="padding-section-large">
-              <div class="layout1_component">
-                <div class="w-layout-grid grid">
-                  <div class="layout1_content-left is-horizotantal">
-                    <div class="margin-bottom margin-xsmall">
-                      <div class="text-style-tagline">TECHNOLOGY</div>
-                      <div class="margin-bottom margin-small">
-                        <h2 class="header-2">Harnessing Advanced Technology for IoT</h2>
-                      </div>
-                      <p class="paragraph"><span class="paragraph">The Stella platform is a powerful, layered ecosystem designed to transform real-time data into actionable insights, empowering organizations to thrive in dynamic environments. It begins with the Integration Layer, which seamlessly collects and unifies data from diverse sources like IoT devices, business applications, and external platforms, ensuring a steady flow of information. <br></span></p>
-                      <div class="margin-top margin-medium">
-                        <div class="button-group">
-                          <a href="technology.html" class="button w-button">Learn more</a>
+                      <p class="header-3 is-center hero-subtitle">Stella offers a flexible and open architecture that supports stream<br>processing and analysis of large volumes of events in real-time.</p>
+                      <div class="margin-top margin-medium hero-button-gap">
+                        <div class="button-group is-center">
+                          <a href="schedule-a-demo.html" class="button site-nav__cta w-button">Schedule a Demo</a>
                         </div>
                       </div>
-                    </div>
-                    <div class="layout1_image-wrapper is-grid">
-                      <div class="div-block-167">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">INTEGRATION LAYER</h3><img src="images/integration-stella.png" width="1312" height="235" loading="lazy" sizes="100vw" srcset="images/integration-stella-p-500.png 500w, images/integration-stella-p-800.png 800w, images/integration-stella-p-1080.png 1080w, images/integration-stella.png 1312w" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
-                      </div>
-                      <div class="div-block-167">
-                        <h4 data-gsap="free.5" class="paragraph is-capitalized">APPLICATION LAYER</h4><img src="images/application-stella.png" width="1312" height="234" loading="lazy" sizes="100vw" srcset="images/application-stella-p-500.png 500w, images/application-stella-p-800.png 800w, images/application-stella-p-1080.png 1080w, images/application-stella.png 1312w" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
-                      </div>
-                      <div class="div-block-167">
-                        <h4 data-gsap="free.5" class="paragraph is-capitalized">PROCESSING LAYER</h4><img src="images/streaming-stella.png" width="1312" height="235" loading="lazy" sizes="100vw" srcset="images/streaming-stella-p-500.png 500w, images/streaming-stella-p-800.png 800w, images/streaming-stella-p-1080.png 1080w, images/streaming-stella.png 1312w" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
-                      </div>
-                      <div class="div-block-167">
-                        <h4 data-gsap="free.5" class="paragraph is-capitalized">DATA LAYER</h4><img src="images/communication-stella.png" width="438" height="79" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
-                      </div>
-                      <div class="div-block-167">
-                        <h4 data-gsap="free.5" class="paragraph is-capitalized">INFRASTRUCTURE LAYER</h4><img src="images/orchestration-stella.png" width="1312" height="235" loading="lazy" sizes="100vw" srcset="images/orchestration-stella-p-500.png 500w, images/orchestration-stella-p-800.png 800w, images/orchestration-stella-p-1080.png 1080w, images/orchestration-stella.png 1312w" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-      <section class="section_layout192">
-        <div class="padding-global">
-          <div class="container-large">
-            <div class="padding-section-large">
-              <div class="header26_component">
-                <div class="margin-bottom margin-xxlarge no-padding">
-                  <div class="text-align-center">
-                    <div class="max-width-large align-center">
-                      <h2 class="header-2 is-big">Endless Data &amp; AI Possibilities For The Right Decisions​</h2>
-                      <h3 data-gsap="free.5" class="header-3">Stella offers a flexible and open architecture that supports stream processing and analysis of large volumes of events in real-time.</h3>
-                      <a href="schedule-a-demo.html" class="button w-button">Schedule a Demo</a>
                     </div>
                   </div>
                 </div>
@@ -1685,57 +1643,6 @@ margin: 0rem !important;
           </div>
         </div>
       </section>
-      <footer class="footer3_component">
-        <div class="padding-global">
-          <div class="container-large">
-            <div class="div-block-168"><img src="images/stella-systems-locations-map.webp" loading="lazy" sizes="(max-width: 767px) 100vw, 767px" srcset="images/stella-systems-locations-map-p-500.webp 500w, images/stella-systems-locations-map.webp 767w" alt="Stella Real-TimeData &amp; Decision Platform">
-              <div class="div-block-169">
-                <div class="text-size-medium-3">Our locations</div>
-                <ul role="list" class="list-3">
-                  <li class="list-item">Florida</li>
-                  <li class="list-item">Newcastle</li>
-                  <li class="list-item">London </li>
-                  <li class="list-item">Warsaw</li>
-                </ul>
-              </div>
-            </div>
-            <div class="padding-vertical padding-xxlarge">
-              <div class="padding-bottom padding-xxlarge">
-                <div class="w-layout-grid footer3_top-wrapper">
-                  <div id="w-node-a3aaf5db-0072-3f54-cf3e-5e802538f44c-2538f446" class="footer3_left-wrapper">
-                    <a href="#" class="footer3_logo-link w-nav-brand"><img loading="lazy" src="images/stella-logo.svg" alt="" class="footer3_logo"></a>
-                    <div class="margin-bottom margin-medium">
-                      <div class="footer3_details-wrapper">
-                        <div class="margin-bottom margin-tiny">
-                          <h1 class="header-2">Real-Time Data <br>&amp; Decision Platform</h1>
-                        </div>
-                        <div class="margin-bottom margin-small is-left">
-                          <div class="paragraph is-small">Stella Systems<br> (C) 2025</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w-layout-grid footer3_menu-wrapper">
-                    <div class="footer3_link-list">
-                      <a href="about-us.html" class="footer3_link">About us</a>
-                      <a href="index.html" aria-current="page" class="footer3_link w--current">Solutions</a>
-                      <a href="technology.html" class="footer3_link">Technology</a>
-                    </div>
-                    <div class="footer3_link-list">
-                      <a href="contact-us.html" class="footer3_link">Contact</a>
-                      <a href="schedule-a-demo.html" class="footer3_link">Schedule a Demo</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="margin-bottom margin-small is-horizontal is-footer">
-                <div class="paragraph is-small">All rights reserved Stella Systems 2025</div>
-                <a href="#" class="link is-small">Privacy policy</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </main>
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=67ea4806ad174809d4ce0fb5" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
@@ -1819,7 +1726,7 @@ margin: 0rem !important;
 
       ScrollTrigger.create({
         trigger: '.section-numnber .number-grid_container',
-        start: 'top 70%',
+        start: 'top 60%',
         once: true,
         onEnter: () => {
           numberContainers.forEach((container, i) => {
@@ -1854,7 +1761,7 @@ margin: 0rem !important;
       if (headlineLines.length) {
         ScrollTrigger.create({
           trigger: '.streaming-headline',
-          start: 'top 70%',
+          start: 'top 60%',
           once: true,
           onEnter: () => {
             gsap.to(headlineLines, {
@@ -1882,7 +1789,7 @@ margin: 0rem !important;
 
       ScrollTrigger.create({
         trigger: '.flow-row',
-        start: 'top 70%',
+        start: 'top 60%',
         once: true,
         onEnter: () => {
           for (let n = 1; n <= 5; n++) {
@@ -1907,7 +1814,7 @@ margin: 0rem !important;
         document.querySelectorAll(selector).forEach((el) => {
           ScrollTrigger.create({
             trigger: el,
-            start: 'top 70%',
+            start: 'top 60%',
             once: true,
             onEnter: () => {
               gsap.to(el, {
@@ -1928,6 +1835,47 @@ margin: 0rem !important;
       revealOnScroll('.section-tabs__heading');
       revealOnScroll('.scenarios-tabs__menu');
       revealOnScroll('.scenarios-tabs__content');
+      revealOnScroll('.layout250_component > .margin-bottom.margin-small.is-left');
+      revealOnScroll('.layout250_item');
+      revealOnScroll('.layout250_component .div-block > .margin-top.margin-medium');
+      const keyFeatureItems = document.querySelectorAll('.key-features__item');
+      if (keyFeatureItems.length) {
+        ScrollTrigger.create({
+          trigger: '.key-features__grid',
+          start: 'top 60%',
+          once: true,
+          onEnter: () => {
+            gsap.to(keyFeatureItems, {
+              opacity: 1,
+              y: 0,
+              duration: 0.7,
+              ease: 'power3.out',
+              stagger: 0.12
+            });
+          }
+        });
+      }
+      revealOnScroll('.section_layout192.is-cta-light .cta-banner');
+
+      const ctaSection = document.querySelector('.section_layout192.is-cta-light');
+      if (ctaSection) {
+        ScrollTrigger.create({
+          trigger: ctaSection,
+          start: 'top 60%',
+          once: true,
+          onEnter: () => {
+            const lines = ctaSection.querySelectorAll('.hero-line');
+            const subtitle = ctaSection.querySelector('.hero-subtitle');
+            const button = ctaSection.querySelector('.hero-button-gap .button');
+            const tl = gsap.timeline({ defaults: { duration: 0.9, ease: 'power3.out' } });
+            lines.forEach((line, i) => {
+              tl.to(line, { opacity: 1, y: 0 }, 0.2 + i * 0.1);
+            });
+            if (subtitle) tl.to(subtitle, { opacity: 1, y: 0 }, 0.5);
+            if (button) tl.to(button, { opacity: 1, y: 0 }, 0.6);
+          }
+        });
+      }
     });
   </script>
 </body>
