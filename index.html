@@ -526,13 +526,13 @@
     }
 
     .flow-row__icon .flow-row__tag {
-      margin-top: clamp(-14px, -1.1vw, -7px);
+      margin-top: 8px;
       position: relative;
       z-index: 1;
     }
 
     .flow-row__icon img {
-      width: clamp(34px, 5.3vw, 68px);
+      width: clamp(40px, 6.25vw, 80px);
       height: auto;
       object-fit: contain;
       display: block;
@@ -548,20 +548,24 @@
       font-family: 'Poppins', sans-serif;
       font-size: 14px;
       font-weight: 400;
-      line-height: 1;
+      line-height: 1.2;
       color: #0e0e0e;
-      background: #ffffff;
-      border: 1px solid #0e0e0e;
-      border-radius: 800px;
-      padding: clamp(6px, 0.6vw, 8px) clamp(10px, 1.25vw, 16px);
-      white-space: nowrap;
+      background: transparent;
+      border: none;
+      padding: 0;
+      text-align: center;
+      white-space: normal;
     }
 
-    .flow-row__icon--1 { top: clamp(-90px, -7vw, -45px);  left: clamp(-70px, -5.5vw, -35px);  animation: flow-icon-drift 17s ease-in-out infinite; }
-    .flow-row__icon--2 { top: clamp(-100px, -7.8vw, -50px); right: clamp(-10px, -0.8vw, -5px);  animation: flow-icon-drift 19s ease-in-out -5s infinite; }
+    .section-flow .padding-section-large {
+      padding-bottom: clamp(10rem, 16vw, 16rem);
+    }
+
+    .flow-row__icon--1 { top: clamp(-150px, -11.5vw, -75px);  left: clamp(-70px, -5.5vw, -35px);  animation: flow-icon-drift 17s ease-in-out infinite; }
+    .flow-row__icon--2 { top: clamp(-160px, -12.5vw, -80px); right: clamp(-10px, -0.8vw, -5px);  animation: flow-icon-drift 19s ease-in-out -5s infinite; }
     .flow-row__icon--3 { top: 50%; left: clamp(-150px, -11.7vw, -75px); transform: translateY(-50%); animation: flow-icon-drift 16s ease-in-out -9s infinite; }
-    .flow-row__icon--4 { bottom: clamp(-110px, -8.6vw, -55px); left: clamp(-40px, -3.1vw, -20px); animation: flow-icon-drift 18s ease-in-out -3s infinite; }
-    .flow-row__icon--5 { bottom: clamp(-90px, -7vw, -45px); right: clamp(-60px, -4.7vw, -30px); animation: flow-icon-drift 20s ease-in-out -12s infinite; }
+    .flow-row__icon--4 { bottom: clamp(-170px, -13.3vw, -85px); left: clamp(-40px, -3.1vw, -20px); animation: flow-icon-drift 18s ease-in-out -3s infinite; }
+    .flow-row__icon--5 { bottom: clamp(-150px, -11.5vw, -75px); right: clamp(-60px, -4.7vw, -30px); animation: flow-icon-drift 20s ease-in-out -12s infinite; }
 
     @keyframes flow-icon-drift {
       0%, 100% { translate: 0 0; }
@@ -578,6 +582,79 @@
 
     @media (prefers-reduced-motion: reduce) {
       .flow-row__icon { animation: none; }
+    }
+
+    .streaming-headline {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: clamp(28px, 4.45vw, 64px);
+      line-height: 1.4;
+      letter-spacing: -0.03em;
+      color: #0e0e0e;
+      margin: 0 0 clamp(64px, 8vw, 120px);
+      text-align: left;
+    }
+
+    .streaming-headline__line {
+      display: block;
+    }
+
+    .w-mod-js .streaming-headline__line {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .streaming-headline__shape {
+      display: inline-block;
+      vertical-align: middle;
+      height: 1.1em;
+      border-radius: 999px;
+      margin-top: -0.15em;
+    }
+
+    .streaming-headline__shape--circle {
+      width: 1.1em;
+      position: relative;
+    }
+
+    .streaming-headline__circle-icon {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+    }
+
+    .streaming-headline__shape--pill {
+      width: 3.13em;
+      margin-left: 0.25em;
+      position: relative;
+    }
+
+    .streaming-headline__pill-wave {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+    }
+
+    .streaming-headline__shape--gray {
+      background: #ededed;
+    }
+
+    .streaming-headline__shape--orange {
+      background: #f24622;
+    }
+
+    .streaming-headline__shape--circle + .streaming-headline__shape--circle {
+      margin-left: -0.3em;
+    }
+
+    .streaming-headline__shape + .streaming-headline__line-text {
+      margin-left: 0.25em;
     }
 
     .section_header26 .hero-line {
@@ -982,12 +1059,17 @@ margin: 0rem !important;
         <div class="padding-global">
           <div class="container-large">
             <div class="padding-section-large">
+              <h2 class="streaming-headline">
+                <span class="streaming-headline__line">Stella&rsquo;s real-time streaming<span class="streaming-headline__shape streaming-headline__shape--pill streaming-headline__shape--orange" aria-hidden="true"><svg class="streaming-headline__pill-wave" viewBox="0 0 200 70" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g class="streaming-headline__pill-wave-scroll"><path d="M 0 35 Q 25 -10 50 35 T 100 35 T 150 35 T 200 35 T 250 35 T 300 35 T 350 35 T 400 35" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/></g></svg></span></span>
+                <span class="streaming-headline__line">platform seamlessly drives insights</span>
+                <span class="streaming-headline__line"><span class="streaming-headline__shape streaming-headline__shape--circle streaming-headline__shape--gray" aria-hidden="true"><svg class="streaming-headline__circle-icon" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="32" y="18" width="6" height="22" rx="3" fill="#F24622"/><circle cx="35" cy="50" r="3.5" fill="#F24622"/></svg></span><span class="streaming-headline__shape streaming-headline__shape--circle streaming-headline__shape--orange" aria-hidden="true"><svg class="streaming-headline__circle-icon" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 35 16 C 28 16 22 21 22 28 C 22 35 26 40 30 41 L 30 45 L 40 45 L 40 41 C 44 40 48 35 48 28 C 48 21 42 16 35 16 Z" fill="#ffffff"/><rect x="29" y="47" width="12" height="3" rx="1.3" fill="#ffffff"/><rect x="31" y="52" width="8" height="3" rx="1.3" fill="#ffffff"/></svg></span><span class="streaming-headline__line-text">into business decision making</span></span>
+              </h2>
               <h5 class="section-flow__heading">Connect everything you have</h5>
               <div class="flow-row">
                 <div class="flow-row__text-block">
                   <div class="flow-row__icon flow-row__icon--1">
                     <img loading="lazy" src="images/pr_pred.avif" alt="">
-                    <span class="flow-row__tag">ERP systems</span>
+                    <span class="flow-row__tag">ERP<br>systems</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--2">
                     <img loading="lazy" src="images/pr_pred.avif" alt="">
@@ -999,7 +1081,7 @@ margin: 0rem !important;
                   </div>
                   <div class="flow-row__icon flow-row__icon--4">
                     <img loading="lazy" src="images/pr_pred.avif" alt="">
-                    <span class="flow-row__tag">Data systems</span>
+                    <span class="flow-row__tag">Data<br>systems</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--5">
                     <img loading="lazy" src="images/transactions.avif" alt="">
@@ -1022,24 +1104,24 @@ margin: 0rem !important;
                 </div>
                 <div class="flow-row__text-block flow-row__text-block--right">
                   <div class="flow-row__icon flow-row__icon--1">
-                    <img loading="lazy" src="images/pr_pred.avif" alt="">
-                    <span class="flow-row__tag">Better business decisions</span>
+                    <img loading="lazy" src="images/automation.avif" alt="">
+                    <span class="flow-row__tag">Automation</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--2">
                     <img loading="lazy" src="images/pr_pred.avif" alt="">
-                    <span class="flow-row__tag">Increased efficiency</span>
+                    <span class="flow-row__tag">Increased<br>efficiency</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--3">
                     <img loading="lazy" src="images/pr_pred.avif" alt="">
-                    <span class="flow-row__tag">Fast reactions</span>
+                    <span class="flow-row__tag">Fast<br>reactions</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--4">
                     <img loading="lazy" src="images/pr_pred.avif" alt="">
-                    <span class="flow-row__tag">Problem prediction</span>
+                    <span class="flow-row__tag">Problem<br>prediction</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--5">
-                    <img loading="lazy" src="images/automation.avif" alt="">
-                    <span class="flow-row__tag">Automation</span>
+                    <img loading="lazy" src="images/pr_pred.avif" alt="">
+                    <span class="flow-row__tag">Better business<br>decisions</span>
                   </div>
                   <h2 class="flow-row__text">Get<br>decisions</h2>
                 </div>
@@ -1083,7 +1165,7 @@ margin: 0rem !important;
                 <div class="margin-bottom margin-xxlarge no-padding">
                   <div class="text-align-center">
                     <div class="max-width-large align-center">
-                      <h5 class="section-tabs__heading">Stella’s real-time data streaming platform</h5>
+                      <h5 class="section-tabs__heading">Business Scenarios</h5>
                     </div>
                   </div>
                 </div>
@@ -1680,6 +1762,42 @@ layoutTL.from(layoutText.words,{
         burger.setAttribute('aria-expanded', String(open));
       });
     })();
+
+    (function () {
+      var nav = document.querySelector('.site-nav');
+      var hero = document.querySelector('.section_header26');
+      if (!nav) return;
+
+      var lastY = window.pageYOffset || 0;
+      var ticking = false;
+
+      function getThreshold() {
+        if (!hero) return nav.offsetHeight;
+        return hero.offsetTop + hero.offsetHeight - nav.offsetHeight;
+      }
+
+      function update() {
+        var y = window.pageYOffset || 0;
+        var threshold = getThreshold();
+        var goingDown = y > lastY;
+
+        if (goingDown && y > threshold) {
+          nav.classList.add('is-hidden');
+        } else if (!goingDown) {
+          nav.classList.remove('is-hidden');
+        }
+
+        lastY = y;
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
   </script>
   <script defer src="js/hero-animations.js"></script>
   <script>
@@ -1720,6 +1838,35 @@ layoutTL.from(layoutText.words,{
           });
         }
       });
+
+      const headlineLines = document.querySelectorAll('.streaming-headline__line');
+
+      if (headlineLines.length) {
+        ScrollTrigger.create({
+          trigger: '.streaming-headline',
+          start: 'top 80%',
+          once: true,
+          onEnter: () => {
+            gsap.to(headlineLines, {
+              opacity: 1,
+              y: 0,
+              duration: 0.7,
+              ease: 'power3.out',
+              stagger: 0.18
+            });
+          }
+        });
+      }
+
+      const pillWave = document.querySelector('.streaming-headline__pill-wave-scroll');
+      if (pillWave) {
+        gsap.to(pillWave, {
+          x: -200,
+          duration: 4,
+          ease: 'none',
+          repeat: -1
+        });
+      }
 
       const flowIcons = document.querySelectorAll('.section-flow .flow-row__icon');
 

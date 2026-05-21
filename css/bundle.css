@@ -10085,6 +10085,17 @@ figcaption {
   z-index: 9999;
   padding: 24px;
   background-color: #0e0e0e;
+  transform: translateY(0);
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+
+.site-nav.is-hidden {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav { transition: none; }
 }
 
 .site-nav__inner {
