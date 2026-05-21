@@ -299,6 +299,11 @@
       background-color: #0e0e0e;
     }
 
+    .w-mod-js .section-numnber .number_container {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
     .section-numnber .section-numnber__heading {
       color: #fafafa;
       margin-bottom: clamp(2rem, 4vw, 3.5rem);
@@ -455,7 +460,9 @@
       margin: 0 0 clamp(4rem, 8vw, 7rem);
     }
 
-    .section-tabs .section-tabs__heading { color: #fafafa; }
+    .section-tabs .section-tabs__heading { color: #fafafa; margin-bottom: 0; }
+    .section-tabs .header26_component { margin-bottom: clamp(28px, 3vw, 48px); }
+    .section-tabs .header26_component .margin-bottom.margin-xxlarge { margin-bottom: 0; }
 
     .flow-row {
       display: flex;
@@ -561,6 +568,134 @@
       padding-bottom: clamp(10rem, 16vw, 16rem);
     }
 
+    .section-flow,
+    .section-numnber,
+    .section-tabs,
+    .section_layout250,
+    .section_layout1,
+    .section_layout192,
+    .section-tech {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 1000px;
+    }
+
+    .scenarios-tabs.w-tabs { display: block; }
+
+    .scenarios-tabs__menu.w-tab-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      padding: 0;
+      top: auto;
+      margin: 0 0 clamp(40px, 4.5vw, 64px);
+    }
+
+    .scenarios-tabs__pill.w-tab-link {
+      display: inline-flex;
+      align-items: center;
+      background: #1f1f1f;
+      color: #fafafa;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(14px, 1.1vw, 16px);
+      font-weight: 400;
+      padding: clamp(10px, 1vw, 14px) clamp(20px, 2vw, 32px);
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+      letter-spacing: 0;
+    }
+
+    .scenarios-tabs__pill.w-tab-link:hover {
+      background: #2e2e2e;
+      border-radius: 999px;
+    }
+
+    .scenarios-tabs__pill.w-tab-link.w--current {
+      background: #ffffff;
+      color: #0e0e0e;
+      border-radius: 999px;
+    }
+
+    .scenarios-tabs__content.w-tab-content {
+      margin-top: 0;
+      display: block;
+    }
+
+    .scenarios-card {
+      background: #fafafa;
+      border-radius: clamp(16px, 1.8vw, 28px);
+      padding: clamp(32px, 4.5vw, 72px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+      gap: clamp(28px, 4vw, 64px);
+      align-items: center;
+    }
+
+    .scenarios-card__left {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(20px, 2vw, 28px);
+    }
+
+    .scenarios-card__icon {
+      width: clamp(56px, 5vw, 72px);
+      height: clamp(56px, 5vw, 72px);
+      border-radius: clamp(12px, 1.2vw, 16px);
+      background: #ededed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .scenarios-card__icon svg {
+      width: 58%;
+      height: 58%;
+      display: block;
+    }
+
+    .scenarios-card__title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(24px, 2.8vw, 40px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #0e0e0e;
+      margin: 0;
+    }
+
+    .scenarios-card__text {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(15px, 1.25vw, 18px);
+      line-height: 1.55;
+      color: #5b6770;
+      margin: 0;
+    }
+
+    .scenarios-card__right {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: clamp(12px, 1.2vw, 18px);
+      overflow: hidden;
+    }
+
+    .scenarios-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .scenarios-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .flow-row__icon--1 { top: clamp(-150px, -11.5vw, -75px);  left: clamp(-70px, -5.5vw, -35px);  animation: flow-icon-drift 17s ease-in-out infinite; }
     .flow-row__icon--2 { top: clamp(-160px, -12.5vw, -80px); right: clamp(-10px, -0.8vw, -5px);  animation: flow-icon-drift 19s ease-in-out -5s infinite; }
     .flow-row__icon--3 { top: 50%; left: clamp(-150px, -11.7vw, -75px); transform: translateY(-50%); animation: flow-icon-drift 16s ease-in-out -9s infinite; }
@@ -599,7 +734,14 @@
       display: block;
     }
 
-    .w-mod-js .streaming-headline__line {
+    .w-mod-js .streaming-headline__line,
+    .w-mod-js .section-flow__heading,
+    .w-mod-js .flow-row__text,
+    .w-mod-js .flow-row__center-group,
+    .w-mod-js .section-numnber__heading,
+    .w-mod-js .section-tabs__heading,
+    .w-mod-js .scenarios-tabs__menu,
+    .w-mod-js .scenarios-tabs__content {
       opacity: 0;
       transform: translateY(30px);
     }
@@ -690,7 +832,7 @@
   <header class="site-nav">
     <div class="site-nav__inner">
       <a href="index.html" class="site-nav__logo">
-        <img src="images/stella-logo.svg" alt="Stella">
+        <img src="images/stella-logo.svg" alt="Stella" width="151" height="49" fetchpriority="high">
       </a>
       <nav class="site-nav__menu" id="siteNavMenu">
         <a href="about-us.html" class="site-nav__link">About us</a>
@@ -1068,23 +1210,23 @@ margin: 0rem !important;
               <div class="flow-row">
                 <div class="flow-row__text-block">
                   <div class="flow-row__icon flow-row__icon--1">
-                    <img loading="lazy" src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
                     <span class="flow-row__tag">ERP<br>systems</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--2">
-                    <img loading="lazy" src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
                     <span class="flow-row__tag">IoT</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--3">
-                    <img loading="lazy" src="images/sensors.avif" alt="">
+                    <img loading="lazy" src="images/sensors.avif" width="300" height="300" alt="">
                     <span class="flow-row__tag">Sensors</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--4">
-                    <img loading="lazy" src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
                     <span class="flow-row__tag">Data<br>systems</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--5">
-                    <img loading="lazy" src="images/transactions.avif" alt="">
+                    <img loading="lazy" src="images/transactions.avif" width="300" height="300" alt="">
                     <span class="flow-row__tag">Transactions</span>
                   </div>
                   <h2 class="flow-row__text">Connect<br>your data</h2>
@@ -1095,7 +1237,7 @@ margin: 0rem !important;
                       <path d="M0 6h76m0 0L71 1m5 5l-5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
-                  <img loading="lazy" src="images/stella_data.avif" alt="Stella data platform" class="flow-row__image">
+                  <img loading="lazy" src="images/stella_data.avif" width="720" height="477" alt="Stella data platform" class="flow-row__image">
                   <div class="flow-row__arrow" aria-hidden="true">
                     <svg width="80" height="12" viewBox="0 0 80 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M0 6h76m0 0L71 1m5 5l-5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1104,23 +1246,23 @@ margin: 0rem !important;
                 </div>
                 <div class="flow-row__text-block flow-row__text-block--right">
                   <div class="flow-row__icon flow-row__icon--1">
-                    <img loading="lazy" src="images/automation.avif" alt="">
+                    <img loading="lazy" src="images/automation.avif" width="300" height="300" alt="">
                     <span class="flow-row__tag">Automation</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--2">
-                    <img loading="lazy" src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
                     <span class="flow-row__tag">Increased<br>efficiency</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--3">
-                    <img loading="lazy" src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
                     <span class="flow-row__tag">Fast<br>reactions</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--4">
-                    <img loading="lazy" src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
                     <span class="flow-row__tag">Problem<br>prediction</span>
                   </div>
                   <div class="flow-row__icon flow-row__icon--5">
-                    <img loading="lazy" src="images/pr_pred.avif" alt="">
+                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
                     <span class="flow-row__tag">Better business<br>decisions</span>
                   </div>
                   <h2 class="flow-row__text">Get<br>decisions</h2>
@@ -1170,254 +1312,106 @@ margin: 0rem !important;
                   </div>
                 </div>
               </div>
-              <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="tabs w-tabs">
-                <div class="tabs-menu-2 w-tab-menu">
-                  <a data-w-tab="Tab 1" class="tab-link-tab-1-2 w-inline-block w-tab-link w--current">
-                    <div class="tab-link">City</div>
-                  </a>
-                  <a data-w-tab="Tab 2" class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                    <div class="tab-link">Agriculture</div>
-                  </a>
-                  <a data-w-tab="Tab 3" class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                    <div class="tab-link">Factory</div>
-                  </a>
-                  <a data-w-tab="Tab 4" class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                    <div class="tab-link">Banking</div>
-                  </a>
-                  <a data-w-tab="Tab 5" class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                    <div class="tab-link">Retail</div>
-                  </a>
-                  <a data-w-tab="Tab 6" class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                    <div class="tab-link">Energy</div>
-                  </a>
+              <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="scenarios-tabs tabs w-tabs">
+                <div class="scenarios-tabs__menu tabs-menu-2 w-tab-menu">
+                  <a data-w-tab="Tab 1" class="scenarios-tabs__pill w-inline-block w-tab-link w--current">City</a>
+                  <a data-w-tab="Tab 2" class="scenarios-tabs__pill w-inline-block w-tab-link">Agriculture</a>
+                  <a data-w-tab="Tab 3" class="scenarios-tabs__pill w-inline-block w-tab-link">Factory</a>
+                  <a data-w-tab="Tab 4" class="scenarios-tabs__pill w-inline-block w-tab-link">Banking</a>
+                  <a data-w-tab="Tab 5" class="scenarios-tabs__pill w-inline-block w-tab-link">Retail</a>
+                  <a data-w-tab="Tab 6" class="scenarios-tabs__pill w-inline-block w-tab-link">Energy</a>
                 </div>
-                <div class="tabs-content w-tab-content">
-                  <div data-w-tab="Tab 1" class="tab-pane-tab-1 w-tab-pane w--tab-active">
-                    <div class="div-block-159">
-                      <div class="div-block-162"><img loading="lazy" src="images/Rectangle-481_1.avif" alt="Stella Real-TimeData &amp; Decision Platform" class="image-container">
-                        <div class="div-block-164">
-                          <p class="header-3">Smart City</p>
-                          <p class="paragraph">Air Quality Monitoring In The District. <br>Reduce traffic jams, improve driver service and make efficient use of urban infrastructure​.</p>
+                <div class="scenarios-tabs__content tabs-content w-tab-content">
+                  <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
+                    <div class="scenarios-card">
+                      <div class="scenarios-card__left">
+                        <div class="scenarios-card__icon">
+                          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="14" width="7" height="14" fill="#F24622"/><rect x="12" y="6" width="8" height="22" fill="#F24622"/><rect x="22" y="11" width="7" height="17" fill="#F24622"/><rect x="14" y="10" width="1.5" height="2" fill="#fff"/><rect x="16.5" y="10" width="1.5" height="2" fill="#fff"/><rect x="14" y="14" width="1.5" height="2" fill="#fff"/><rect x="16.5" y="14" width="1.5" height="2" fill="#fff"/><rect x="14" y="18" width="1.5" height="2" fill="#fff"/><rect x="16.5" y="18" width="1.5" height="2" fill="#fff"/></svg>
                         </div>
+                        <h3 class="scenarios-card__title">Smart City</h3>
+                        <p class="scenarios-card__text">Air Quality Monitoring in the district. Reduce traffic jams, improve driver service and make efficient use of urban infrastructure.</p>
                       </div>
-                      <div class="number-grid_container is-7-column">
-                        <div class="number_container"><img loading="lazy" src="images/data.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h3 data-gsap="free.5" class="header-4 is-center">Data acquisition</h3>
-                          <p class="paragraph is-capitalized is-center icon-image">Parking space occupancy sensors (real-time)</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/integration.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h3 data-gsap="free.5" class="header-4 is-center">Integration</h3>
-                          <p class="paragraph is-capitalized is-center icon-image">Data on free and occupied spaces + status of parking signs</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/rules.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h3 data-gsap="free.5" class="header-4 is-center">Rules</h3>
-                          <p class="paragraph is-capitalized is-center icon-image">If there &lt; X% of free spaces, display &quot;full parking&quot;</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/decision.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h3 data-gsap="free.5" class="header-4 is-center">Decision</h3>
-                          <p class="paragraph is-capitalized is-center icon-image">Updating the boards, redirecting to another parking lot</p>
-                        </div>
+                      <div class="scenarios-card__right">
+                        <img loading="lazy" src="images/Rectangle-481_1.avif" width="621" height="284" alt="Smart City scenario" class="scenarios-card__image">
                       </div>
                     </div>
                   </div>
                   <div data-w-tab="Tab 2" class="w-tab-pane">
-                    <div class="div-block-159">
-                      <div class="div-block-162"><img sizes="100vw" srcset="images/Rectangle-483_1Rectangle-483.avif 500w, images/Rectangle-483_1.avif 620w" alt="Stella Real-TimeData &amp; Decision Platform" src="images/Rectangle-483_1.avif" loading="lazy" class="image-container">
-                        <div class="div-block-164">
-                          <p class="header-3">Agriculture</p>
-                          <p class="paragraph">Monitoring of Environmental Conditions in Agriculture. Warning farmers in the event of impending adverse weather conditions​.</p>
+                    <div class="scenarios-card">
+                      <div class="scenarios-card__left">
+                        <div class="scenarios-card__icon">
+                          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M27 4 C 14 4, 5 13, 5 24 C 5 26, 6 27.5, 7 28.5 C 11 22, 16 17, 22 13 C 17 18, 13 24, 10 28.5 C 14 28, 28 21, 27 4 Z" fill="#F24622"/></svg>
                         </div>
+                        <h3 class="scenarios-card__title">Agriculture</h3>
+                        <p class="scenarios-card__text">Monitoring of environmental conditions in agriculture. Warning farmers in the event of impending adverse weather conditions.</p>
                       </div>
-                      <div class="number-grid_container is-7-column">
-                        <div class="number_container"><img loading="lazy" src="images/data.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Data acquisition</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Soil sensors (moisture, salinity), weather stations (temperature, precipitation)</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/integration.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Integration</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Real-time analysis of irrigation plans and growing conditions</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/rules.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Rules</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Automatic start of the irrigation system</p>
-                        </div><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down"><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right">
-                        <div class="number_container"><img loading="lazy" src="images/decision.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Decision</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Warning farmers in the event of impending adverse weather conditions​</p>
-                        </div>
+                      <div class="scenarios-card__right">
+                        <img sizes="100vw" srcset="images/Rectangle-483_1Rectangle-483.avif 500w, images/Rectangle-483_1.avif 620w" src="images/Rectangle-483_1.avif" width="620" height="284" alt="Agriculture scenario" loading="lazy" class="scenarios-card__image">
                       </div>
                     </div>
                   </div>
                   <div data-w-tab="Tab 3" class="w-tab-pane">
-                    <div class="div-block-159">
-                      <div class="div-block-162"><img loading="lazy" src="images/Rectangle-485_1.avif" alt="Stella Real-TimeData &amp; Decision Platform" class="image-container">
-                        <div class="div-block-164">
-                          <p class="header-3">Factory</p>
-                          <p class="paragraph">Ongoing Parameter Control in CNC. Prevent damage to machinery, reduce repair costs and downtime​.</p>
+                    <div class="scenarios-card">
+                      <div class="scenarios-card__left">
+                        <div class="scenarios-card__icon">
+                          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 28 L 3 16 L 11 20 L 11 16 L 19 20 L 19 16 L 27 20 L 27 6 L 30 6 L 30 28 Z" fill="#F24622"/></svg>
                         </div>
+                        <h3 class="scenarios-card__title">Factory</h3>
+                        <p class="scenarios-card__text">Ongoing parameter control in CNC. Prevent damage to machinery, reduce repair costs and downtime.</p>
                       </div>
-                      <div class="number-grid_container is-7-column">
-                        <div class="number_container"><img loading="lazy" src="images/data.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Data acquisition</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">CNC machine sensors (pressure, rotation speed, vibration).</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/integration.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Integration</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Machine data in one monitoring system.</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/rules.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Rules</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">If a parameter exceeds a critical threshold, pause/send alert.</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/decision.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Decision</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Immediately notify the operator, stop the process until verification.</p>
-                        </div>
+                      <div class="scenarios-card__right">
+                        <img loading="lazy" src="images/Rectangle-485_1.avif" width="621" height="284" alt="Factory scenario" class="scenarios-card__image">
                       </div>
                     </div>
                   </div>
                   <div data-w-tab="Tab 4" class="w-tab-pane">
-                    <div class="div-block-159">
-                      <div class="div-block-162"><img loading="lazy" src="images/Rectangle-487_1.avif" alt="Stella Real-TimeData &amp; Decision Platform" class="image-container">
-                        <div class="div-block-164">
-                          <p class="header-3">Banking</p>
-                          <p class="paragraph">Automatic Installment Planning. Ensuring the availability of goods on the shelves, no empty seats, better shopping experience for the customer​.</p>
+                    <div class="scenarios-card">
+                      <div class="scenarios-card__left">
+                        <div class="scenarios-card__icon">
+                          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16 3 L 3 10 L 29 10 Z" fill="#F24622"/><rect x="5" y="12" width="3" height="13" fill="#F24622"/><rect x="10" y="12" width="3" height="13" fill="#F24622"/><rect x="19" y="12" width="3" height="13" fill="#F24622"/><rect x="24" y="12" width="3" height="13" fill="#F24622"/><rect x="3" y="26" width="26" height="3" fill="#F24622"/></svg>
                         </div>
+                        <h3 class="scenarios-card__title">Banking</h3>
+                        <p class="scenarios-card__text">Automatic installment planning. Link payment dates to balances, trigger reminders and collections escalation when deadlines pass.</p>
                       </div>
-                      <div class="number-grid_container is-7-column">
-                        <div class="number_container"><img loading="lazy" src="images/data.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Data acquisition</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">The banking system tracks the repayment schedule and deposits of customers.</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/integration.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Integration</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Link payment dates to account balance.</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/rules.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Rules</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">If due date and default → reminder. When the deadline has passed, → debt collection escalation.</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/decision.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Decision</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Generate SMS/e-mail messages or a task for the collections department.​</p>
-                        </div>
+                      <div class="scenarios-card__right">
+                        <img loading="lazy" src="images/Rectangle-487_1.avif" width="621" height="284" alt="Banking scenario" class="scenarios-card__image">
                       </div>
                     </div>
                   </div>
-                  <div data-w-tab="Tab 5" class="tab-pane-tab-5 w-tab-pane">
-                    <div class="div-block-159">
-                      <div class="div-block-162"><img loading="lazy" src="images/Rectangle-489_1.avif" alt="Stella Real-TimeData &amp; Decision Platform" class="image-container">
-                        <div class="div-block-164">
-                          <p class="header-3">Retail</p>
-                          <p class="paragraph">Omnichannel Assortment Management. Avoid overstocking, improve assortment availability, unified inventory management across multiple sales channels​. </p>
+                  <div data-w-tab="Tab 5" class="w-tab-pane">
+                    <div class="scenarios-card">
+                      <div class="scenarios-card__left">
+                        <div class="scenarios-card__icon">
+                          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 11 L 5 28 L 27 28 L 27 11 Z" fill="#F24622"/><path d="M11 11 L 11 8 C 11 5, 13 3, 16 3 C 19 3, 21 5, 21 8 L 21 11" stroke="#F24622" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
                         </div>
+                        <h3 class="scenarios-card__title">Retail</h3>
+                        <p class="scenarios-card__text">Omnichannel assortment management. Avoid overstocking, improve availability and unify inventory across all sales channels.</p>
                       </div>
-                      <div class="number-grid_container is-8-column">
-                        <div class="number_container"><img loading="lazy" src="images/data.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Data acquisition</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Telephone orders + sales in brick-and-mortar stores.</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/integration.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Integration</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Real-time streaming inventory consolidation.</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/rules.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Rules</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">When the product is last, block sales at other points.</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/ai.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">ML</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Demand estimation.</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/decision.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Decision</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Reservation of goods / message about shortage.​</p>
-                        </div>
+                      <div class="scenarios-card__right">
+                        <img loading="lazy" src="images/Rectangle-489_1.avif" width="621" height="284" alt="Retail scenario" class="scenarios-card__image">
                       </div>
                     </div>
                   </div>
                   <div data-w-tab="Tab 6" class="w-tab-pane">
-                    <div class="div-block-159">
-                      <div class="div-block-162"><img sizes="100vw" srcset="images/Rectangle-491_1Rectangle-491.avif 500w, images/Rectangle-491_1.avif 621w" alt="Stella Real-TimeData &amp; Decision Platform" src="images/Rectangle-491_1.avif" loading="lazy" class="image-container">
-                        <div class="div-block-164">
-                          <p class="header-3">Power Grid Monitoring</p>
-                          <p class="paragraph">Monitoring power grids in real-time to ensure stability and efficiency of energy distribution. Prevent power outages, optimize energy distribution, and enhance grid reliability.</p>
+                    <div class="scenarios-card">
+                      <div class="scenarios-card__left">
+                        <div class="scenarios-card__icon">
+                          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M19 3 L 6 18 L 14 18 L 12 29 L 26 13 L 17 13 Z" fill="#F24622"/></svg>
                         </div>
+                        <h3 class="scenarios-card__title">Energy</h3>
+                        <p class="scenarios-card__text">Power grid monitoring in real-time. Prevent outages, optimize distribution and enhance reliability through automatic balancing or operator alerts.</p>
                       </div>
-                      <div class="number-grid_container is-7-column">
-                        <div class="number_container"><img loading="lazy" src="images/data.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Data acquisition</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Sensors on the network measure voltage, current, load, and balance of power distribution.</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/integration.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Integration</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Data integrated into a smart grid management system for real-time monitoring and analysis.</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="image-41"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/rules.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Rules</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">If overloads or imbalances are detected (e.g., voltage drop &gt; threshold), trigger an alert.</p>
-                        </div><img loading="lazy" src="images/arrow.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-right"><img loading="lazy" src="images/arrow-down.png" alt="Stella Real-TimeData &amp; Decision Platform" class="arrow-down">
-                        <div class="number_container"><img loading="lazy" src="images/decision.svg" alt="Stella Real-TimeData &amp; Decision Platform" class="icon-image">
-                          <h4 data-gsap="free.5" class="header-4 is-center">Decision</h4>
-                          <p class="paragraph is-capitalized is-center icon-image">Automatic circuit switching to balance load or immediate notification to operators for manual intervention.</p>
-                        </div>
+                      <div class="scenarios-card__right">
+                        <img sizes="100vw" srcset="images/Rectangle-491_1Rectangle-491.avif 500w, images/Rectangle-491_1.avif 621w" src="images/Rectangle-491_1.avif" width="621" height="284" alt="Energy scenario" loading="lazy" class="scenarios-card__image">
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="banner">
-                <p class="header-3">Download all Business Scenarios</p>
-                <a href="https://stellaproject-my.sharepoint.com/:p:/g/personal/kosma_lenar_stella_systems/EcYDycig4fNIl29qF-4R9VoBSm-rHphcscb8Xk8IqZOzwg?e=BR7pAj" target="_blank" class="button is-secondary w-button">Download</a>
               </div>
             </div>
           </div>
         </div>
       </header>
-      <section class="section_layout484">
-        <div class="padding-global">
-          <div class="container-large">
-            <div class="padding-section-large">
-              <div class="layout484_component">
-                <div class="max-width-xlarge align-center">
-                  <h2 class="layout484_text">&quot;Stella&#x27;s real-time data streaming platform allows businesses to seamlessly incorporate real-time insights into their decision making&quot;</h2>
-                </div>
-              </div>
-              <div class="layout484_split-text w-embed w-script"><!--  GSAP, ScrollTrigger and Split-Type are loaded at the bottom of the page  -->
-                <script>
-document.addEventListener('DOMContentLoaded', function() {
-// Function to check if the viewport width is 767px or less
-function isMobile() {
-  return window.innerWidth <= 767;
-}
-// Split text into individual words
-const layoutText = new SplitType(".layout484_text", { types: "words" });
-const layoutTL = gsap.timeline();
-// Define different start and end values for mobile devices
-let startValue = isMobile() ? "top 35%" : "top center";
-let endValue = isMobile() ? "bottom 90%" : "bottom center";
-layoutTL.from(layoutText.words,{
-  // Initial opacity for each word
-  opacity: 0.25,
-  // Stagger animation of each word
-  stagger: 0.1,
-  scrollTrigger: { 
-    trigger: ".section_layout484",
-    // Trigger animation when .section_layout484 reaches certain part of the viewport
-    start: startValue,
-    // End animation when .section_layout484 reaches certain part of the viewport
-    end: endValue,
-    // Smooth transition based on scroll position
-    scrub: 2 
-  }
-});
-});
-</script>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <section class="section_layout250">
         <div class="padding-global">
           <div class="container-large">
@@ -1434,7 +1428,7 @@ layoutTL.from(layoutText.words,{
                   <div class="w-layout-grid layout250_list">
                     <div class="layout250_item">
                       <div class="margin-bottom margin-medium">
-                        <div class="home4-features_image-wrapper"><img loading="lazy" src="images/image-6.avif" alt="Stella Real-TimeData &amp; Decision Platform" class="layout250_image"></div>
+                        <div class="home4-features_image-wrapper"><img loading="lazy" src="images/image-6.avif" width="480" height="221" alt="Stella Real-TimeData &amp; Decision Platform" class="layout250_image"></div>
                       </div>
                       <div class="margin-bottom margin-xsmall">
                         <h3 data-gsap="free.5" class="header-3">Handle billions of events in real-time</h3>
@@ -1443,7 +1437,7 @@ layoutTL.from(layoutText.words,{
                     </div>
                     <div class="layout250_item">
                       <div class="margin-bottom margin-medium">
-                        <div class="home4-features_image-wrapper"><img loading="lazy" src="images/image-11.avif" alt="Stella Real-TimeData &amp; Decision Platform" class="layout250_image"></div>
+                        <div class="home4-features_image-wrapper"><img loading="lazy" src="images/image-11.avif" width="480" height="221" alt="Stella Real-TimeData &amp; Decision Platform" class="layout250_image"></div>
                       </div>
                       <div class="margin-bottom margin-xsmall">
                         <h3 data-gsap="free.5" class="header-3">Eliminate black-box AI components</h3>
@@ -1452,7 +1446,7 @@ layoutTL.from(layoutText.words,{
                     </div>
                     <div class="layout250_item">
                       <div class="margin-bottom margin-medium">
-                        <div class="home4-features_image-wrapper"><img loading="lazy" src="images/image-15.avif" alt="Stella Real-TimeData &amp; Decision Platform" class="layout250_image"></div>
+                        <div class="home4-features_image-wrapper"><img loading="lazy" src="images/image-15.avif" width="480" height="221" alt="Stella Real-TimeData &amp; Decision Platform" class="layout250_image"></div>
                       </div>
                       <div class="margin-bottom margin-xsmall">
                         <h3 data-gsap="free.5" class="header-3">Activate Real-Time Decision Making at Scale</h3>
@@ -1461,7 +1455,7 @@ layoutTL.from(layoutText.words,{
                     </div>
                     <div class="layout250_item">
                       <div class="margin-bottom margin-medium">
-                        <div class="home4-features_image-wrapper"><img loading="lazy" src="images/image-12.avif" alt="Stella Real-TimeData &amp; Decision Platform" class="layout250_image"></div>
+                        <div class="home4-features_image-wrapper"><img loading="lazy" src="images/image-12.avif" width="480" height="221" alt="Stella Real-TimeData &amp; Decision Platform" class="layout250_image"></div>
                       </div>
                       <div class="margin-bottom margin-xsmall">
                         <h3 data-gsap="free.5" class="header-3">Deploy Anywhere, Integrate Seamlessly</h3>
@@ -1515,7 +1509,7 @@ layoutTL.from(layoutText.words,{
                       </div>
                     </div>
                   </div>
-                  <div id="w-node-_8263c249-a8b9-fc2a-9fe9-aa86451f44d4-d4ce102b" class="layout1_image-wrapper"><img loading="lazy" src="images/parking-stella_1.avif" alt="stella data decision platform" class="layout1_image"></div>
+                  <div id="w-node-_8263c249-a8b9-fc2a-9fe9-aa86451f44d4-d4ce102b" class="layout1_image-wrapper"><img loading="lazy" src="images/parking-stella_1.avif" width="606" height="605" alt="stella data decision platform" class="layout1_image"></div>
                 </div>
               </div>
             </div>
@@ -1528,7 +1522,7 @@ layoutTL.from(layoutText.words,{
             <div class="padding-section-large">
               <div class="layout192_component">
                 <div class="w-layout-grid layout192_content">
-                  <div id="w-node-_1a0733ae-49f7-8dd8-2bf2-f504f3092774-d4ce102b" class="layout192_image-wrapper"><img sizes="100vw" srcset="images/ai-stella-p-500.png 500w, images/ai-stella-p-800.png 800w, images/ai-stella-p-1080.png 1080w, images/ai-stella-p-1600.png 1600w, images/ai-stella.avif 1801w" alt="stella data decision platform" src="images/ai-stella.avif" loading="lazy" class="layout192_image"></div>
+                  <div id="w-node-_1a0733ae-49f7-8dd8-2bf2-f504f3092774-d4ce102b" class="layout192_image-wrapper"><img sizes="100vw" srcset="images/ai-stella-p-500.png 500w, images/ai-stella-p-800.png 800w, images/ai-stella-p-1080.png 1080w, images/ai-stella-p-1600.png 1600w, images/ai-stella.avif 1801w" alt="stella data decision platform" src="images/ai-stella.avif" width="1801" height="1801" loading="lazy" class="layout192_image"></div>
                   <div id="w-node-_1a0733ae-49f7-8dd8-2bf2-f504f3092776-d4ce102b" class="layout192_content-right">
                     <div class="margin-bottom margin-xsmall">
                       <div class="text-style-tagline">Key functionalities</div>
@@ -1584,7 +1578,7 @@ layoutTL.from(layoutText.words,{
                       </div>
                     </div>
                   </div>
-                  <div id="w-node-db9eb10e-1dc2-ed65-0769-8d8bfac3c189-d4ce102b" class="layout1_image-wrapper"><img sizes="100vw" srcset="images/orchestration-p-500.png 500w, images/orchestration-p-800.png 800w, images/orchestration-p-1080.png 1080w, images/orchestration.avif 1801w" alt="stella data decision platform" src="images/orchestration.avif" loading="lazy" class="layout1_image"></div>
+                  <div id="w-node-db9eb10e-1dc2-ed65-0769-8d8bfac3c189-d4ce102b" class="layout1_image-wrapper"><img sizes="100vw" srcset="images/orchestration-p-500.png 500w, images/orchestration-p-800.png 800w, images/orchestration-p-1080.png 1080w, images/orchestration.avif 1801w" alt="stella data decision platform" src="images/orchestration.avif" width="1801" height="1801" loading="lazy" class="layout1_image"></div>
                 </div>
               </div>
             </div>
@@ -1597,7 +1591,7 @@ layoutTL.from(layoutText.words,{
             <div class="padding-section-large">
               <div class="layout192_component">
                 <div class="w-layout-grid layout192_content">
-                  <div id="w-node-bc6a1439-8ab3-02d2-9e02-6c4e0334795a-d4ce102b" class="layout192_image-wrapper"><img sizes="100vw" srcset="images/circle_stella_1circle_stella.avif 500w, images/circle_stella_1circle_stella.avif 800w, images/circle_stella_1.avif 1800w" alt="stella data decision platform" src="images/circle_stella_1.avif" loading="lazy" class="layout192_image"></div>
+                  <div id="w-node-bc6a1439-8ab3-02d2-9e02-6c4e0334795a-d4ce102b" class="layout192_image-wrapper"><img sizes="100vw" srcset="images/circle_stella_1circle_stella.avif 500w, images/circle_stella_1circle_stella.avif 800w, images/circle_stella_1.avif 1800w" alt="stella data decision platform" src="images/circle_stella_1.avif" width="1800" height="1801" loading="lazy" class="layout192_image"></div>
                   <div id="w-node-bc6a1439-8ab3-02d2-9e02-6c4e0334795c-d4ce102b" class="layout192_content-right">
                     <div class="margin-bottom margin-xsmall">
                       <div class="text-style-tagline">Key functionalities</div>
@@ -1645,19 +1639,19 @@ layoutTL.from(layoutText.words,{
                     </div>
                     <div class="layout1_image-wrapper is-grid">
                       <div class="div-block-167">
-                        <h3 data-gsap="free.5" class="paragraph is-capitalized">INTEGRATION LAYER</h3><img src="images/integration-stella.png" loading="lazy" sizes="100vw" srcset="images/integration-stella-p-500.png 500w, images/integration-stella-p-800.png 800w, images/integration-stella-p-1080.png 1080w, images/integration-stella.png 1312w" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
+                        <h3 data-gsap="free.5" class="paragraph is-capitalized">INTEGRATION LAYER</h3><img src="images/integration-stella.png" width="1312" height="235" loading="lazy" sizes="100vw" srcset="images/integration-stella-p-500.png 500w, images/integration-stella-p-800.png 800w, images/integration-stella-p-1080.png 1080w, images/integration-stella.png 1312w" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
                       </div>
                       <div class="div-block-167">
-                        <h4 data-gsap="free.5" class="paragraph is-capitalized">APPLICATION LAYER</h4><img src="images/application-stella.png" loading="lazy" sizes="100vw" srcset="images/application-stella-p-500.png 500w, images/application-stella-p-800.png 800w, images/application-stella-p-1080.png 1080w, images/application-stella.png 1312w" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
+                        <h4 data-gsap="free.5" class="paragraph is-capitalized">APPLICATION LAYER</h4><img src="images/application-stella.png" width="1312" height="234" loading="lazy" sizes="100vw" srcset="images/application-stella-p-500.png 500w, images/application-stella-p-800.png 800w, images/application-stella-p-1080.png 1080w, images/application-stella.png 1312w" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
                       </div>
                       <div class="div-block-167">
-                        <h4 data-gsap="free.5" class="paragraph is-capitalized">PROCESSING LAYER</h4><img src="images/streaming-stella.png" loading="lazy" sizes="100vw" srcset="images/streaming-stella-p-500.png 500w, images/streaming-stella-p-800.png 800w, images/streaming-stella-p-1080.png 1080w, images/streaming-stella.png 1312w" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
+                        <h4 data-gsap="free.5" class="paragraph is-capitalized">PROCESSING LAYER</h4><img src="images/streaming-stella.png" width="1312" height="235" loading="lazy" sizes="100vw" srcset="images/streaming-stella-p-500.png 500w, images/streaming-stella-p-800.png 800w, images/streaming-stella-p-1080.png 1080w, images/streaming-stella.png 1312w" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
                       </div>
                       <div class="div-block-167">
-                        <h4 data-gsap="free.5" class="paragraph is-capitalized">DATA LAYER</h4><img src="images/communication-stella.png" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
+                        <h4 data-gsap="free.5" class="paragraph is-capitalized">DATA LAYER</h4><img src="images/communication-stella.png" width="438" height="79" loading="lazy" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
                       </div>
                       <div class="div-block-167">
-                        <h4 data-gsap="free.5" class="paragraph is-capitalized">INFRASTRUCTURE LAYER</h4><img src="images/orchestration-stella.png" loading="lazy" sizes="100vw" srcset="images/orchestration-stella-p-500.png 500w, images/orchestration-stella-p-800.png 800w, images/orchestration-stella-p-1080.png 1080w, images/orchestration-stella.png 1312w" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
+                        <h4 data-gsap="free.5" class="paragraph is-capitalized">INFRASTRUCTURE LAYER</h4><img src="images/orchestration-stella.png" width="1312" height="235" loading="lazy" sizes="100vw" srcset="images/orchestration-stella-p-500.png 500w, images/orchestration-stella-p-800.png 800w, images/orchestration-stella-p-1080.png 1080w, images/orchestration-stella.png 1312w" alt="Stella Real-TimeData &amp; Decision Platform" class="image-39">
                       </div>
                     </div>
                   </div>
@@ -1684,7 +1678,7 @@ layoutTL.from(layoutText.words,{
               </div>
               <div class="cta-banner">
                 <div class="w-layout-grid cta-banner">
-                  <div id="w-node-_04737483-b839-0694-bf50-d77f75fd7e02-d4ce102b" class="layout192_image-wrapper"><img sizes="100vw" srcset="images/app_stella_1app_stella.avif 500w, images/app_stella_1app_stella.avif 800w, images/app_stella_1app_stella.avif 1080w, images/app_stella_1.avif 2445w" alt="stella data decision platform" src="images/app_stella_1.avif" loading="lazy" class="app-image"></div>
+                  <div id="w-node-_04737483-b839-0694-bf50-d77f75fd7e02-d4ce102b" class="layout192_image-wrapper"><img sizes="100vw" srcset="images/app_stella_1app_stella.avif 500w, images/app_stella_1app_stella.avif 800w, images/app_stella_1app_stella.avif 1080w, images/app_stella_1.avif 2445w" alt="stella data decision platform" src="images/app_stella_1.avif" width="2445" height="1469" loading="lazy" class="app-image"></div>
                 </div>
               </div>
             </div>
@@ -1751,6 +1745,7 @@ layoutTL.from(layoutText.words,{
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
   <script defer src="https://unpkg.com/split-type"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
   <script async="" src="https://gfluo.b-cdn.net/v/gfluo-free.min.js"></script>
   <script>
     (function () {
@@ -1805,11 +1800,26 @@ layoutTL.from(layoutText.words,{
       if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
       gsap.registerPlugin(ScrollTrigger);
 
+      const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+      if (!isTouchDevice && typeof Lenis !== 'undefined') {
+        const lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+          smoothTouch: false
+        });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+      }
+
       const numberContainers = document.querySelectorAll('.section-numnber .number_container');
 
       ScrollTrigger.create({
-        trigger: '.section-numnber',
-        start: 'top 80%',
+        trigger: '.section-numnber .number-grid_container',
+        start: 'top 70%',
         once: true,
         onEnter: () => {
           numberContainers.forEach((container, i) => {
@@ -1817,9 +1827,9 @@ layoutTL.from(layoutText.words,{
             const valEl = container.querySelector('.header-number__val');
             const target = parseInt(valEl.dataset.target, 10);
 
-            gsap.from(container, {
-              opacity: 0,
-              y: 40,
+            gsap.to(container, {
+              opacity: 1,
+              y: 0,
               duration: 0.6,
               ease: 'power3.out',
               delay
@@ -1844,7 +1854,7 @@ layoutTL.from(layoutText.words,{
       if (headlineLines.length) {
         ScrollTrigger.create({
           trigger: '.streaming-headline',
-          start: 'top 80%',
+          start: 'top 70%',
           once: true,
           onEnter: () => {
             gsap.to(headlineLines, {
@@ -1892,6 +1902,32 @@ layoutTL.from(layoutText.words,{
           }
         }
       });
+
+      function revealOnScroll(selector) {
+        document.querySelectorAll(selector).forEach((el) => {
+          ScrollTrigger.create({
+            trigger: el,
+            start: 'top 70%',
+            once: true,
+            onEnter: () => {
+              gsap.to(el, {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                ease: 'power3.out'
+              });
+            }
+          });
+        });
+      }
+
+      revealOnScroll('.section-flow__heading');
+      revealOnScroll('.flow-row__text');
+      revealOnScroll('.flow-row__center-group');
+      revealOnScroll('.section-numnber__heading');
+      revealOnScroll('.section-tabs__heading');
+      revealOnScroll('.scenarios-tabs__menu');
+      revealOnScroll('.scenarios-tabs__content');
     });
   </script>
 </body>
