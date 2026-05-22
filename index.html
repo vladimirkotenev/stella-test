@@ -527,22 +527,21 @@
 
     .locations__map-dot { fill: #f24622; fill-opacity: 0.5; }
 
-    .locations__marker-core { fill: #f24622; }
-
     .locations__marker-ring {
       fill: none;
       stroke: #f24622;
-      stroke-width: 1.6;
+      stroke-width: 4;
       transform-origin: center;
       transform-box: fill-box;
-      animation: locations-ring-pulse 2.6s ease-out infinite;
+      animation: locations-ring-pulse 2.6s cubic-bezier(0.16, 0.84, 0.44, 1) infinite;
     }
 
     .locations__marker-ring--delayed { animation-delay: 1.3s; }
 
     @keyframes locations-ring-pulse {
-      0%   { transform: scale(0.4); opacity: 0.85; }
-      100% { transform: scale(3.6); opacity: 0; }
+      0%   { transform: scale(0.4); opacity: 1; stroke-width: 5; }
+      60%  { opacity: 0.35; }
+      100% { transform: scale(8); opacity: 0; stroke-width: 1; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1521,7 +1520,7 @@ margin: 0rem !important;
                         <p class="scenarios-card__text">Air Quality Monitoring in the district. Reduce traffic jams, improve driver service and make efficient use of urban infrastructure.</p>
                       </div>
                       <div class="scenarios-card__right">
-                        <img loading="lazy" src="images/Rectangle-481_1.avif" width="621" height="284" alt="Smart City scenario" class="scenarios-card__image">
+                        <img loading="lazy" src="images/parking.avif" width="1250" height="782" alt="Smart City scenario" class="scenarios-card__image">
                       </div>
                     </div>
                   </div>
@@ -1535,7 +1534,7 @@ margin: 0rem !important;
                         <p class="scenarios-card__text">Monitoring of environmental conditions in agriculture. Warning farmers in the event of impending adverse weather conditions.</p>
                       </div>
                       <div class="scenarios-card__right">
-                        <img sizes="100vw" srcset="images/Rectangle-483_1Rectangle-483.avif 500w, images/Rectangle-483_1.avif 620w" src="images/Rectangle-483_1.avif" width="620" height="284" alt="Agriculture scenario" loading="lazy" class="scenarios-card__image">
+                        <img loading="lazy" src="images/sensor.avif" width="1250" height="782" alt="Agriculture scenario" class="scenarios-card__image">
                       </div>
                     </div>
                   </div>
@@ -2133,7 +2132,6 @@ margin: 0rem !important;
           '<g transform="translate(' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ')">' +
             '<circle class="locations__marker-ring" cx="0" cy="0" r="3.5"/>' +
             '<circle class="locations__marker-ring locations__marker-ring--delayed" cx="0" cy="0" r="3.5"/>' +
-            '<circle class="locations__marker-core" cx="0" cy="0" r="3.5"/>' +
           '</g>'
         );
       });
