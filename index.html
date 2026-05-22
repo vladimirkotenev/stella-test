@@ -301,7 +301,7 @@
 
     .w-mod-js .section-numnber .number_container {
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(12px);
     }
 
     .section-numnber .section-numnber__heading {
@@ -614,7 +614,7 @@
     .w-mod-js .section-flow .flow-row__icon img,
     .w-mod-js .section-flow .flow-row__icon .flow-row__tag {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(12px);
     }
 
     .flow-row__tag {
@@ -817,7 +817,7 @@
     .w-mod-js .section_layout192.is-cta-light .hero-button-gap .button,
     .w-mod-js .section_layout192.is-cta-light .cta-banner {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(12px);
     }
 
     .streaming-headline__shape {
@@ -1586,22 +1586,22 @@ margin: 0rem !important;
               <div class="key-features__grid">
                 <article class="key-features__item">
                   <div class="key-features__image" aria-hidden="true">Image will be added</div>
-                  <h3 class="key-features__title">Data Acquisition and Integration</h3>
+                  <h3 class="key-features__title">Data acquisition and integration</h3>
                   <p class="key-features__text">Stella simplifies data acquisition and integration, enabling your organization to collect and unify data from millions of devices and hundreds of sources in real-time. Our platform ensures a seamless flow of information, providing a single source of truth for all your data-driven decisions.</p>
                 </article>
                 <article class="key-features__item">
                   <div class="key-features__image" aria-hidden="true">Image will be added</div>
-                  <h3 class="key-features__title">Modeling and Automation of Decision Processes</h3>
+                  <h3 class="key-features__title">Modeling and automation of decision processes</h3>
                   <p class="key-features__text">Stella enhances decision-making with advanced modeling and automation, integrating AI/ML models into your workflows for smarter outcomes. Our platform enables real-time decision orchestration, ensuring your business processes are adaptive, efficient, and data-driven.</p>
                 </article>
                 <article class="key-features__item">
                   <div class="key-features__image" aria-hidden="true">Image will be added</div>
-                  <h3 class="key-features__title">Scalable Process Orchestration and Optimization</h3>
+                  <h3 class="key-features__title">Scalable process orchestration and optimization</h3>
                   <p class="key-features__text">Stella empowers your organization to orchestrate and optimize processes at any scale, ensuring seamless operations even under the most demanding workloads. Our platform automates workflows, streamlines decision-making, and adapts to your growing needs, delivering efficiency and reliability across your business.</p>
                 </article>
                 <article class="key-features__item">
                   <div class="key-features__image" aria-hidden="true">Image will be added</div>
-                  <h3 class="key-features__title">Complete Real-Time Decision Cycle</h3>
+                  <h3 class="key-features__title">Complete real-time decision cycle</h3>
                   <p class="key-features__text">Stella delivers a comprehensive real-time decision cycle, enabling your organization to ingest, process, and act on data instantly. From data acquisition to actionable insights, our platform ensures every decision is informed, timely, and impactful, keeping you ahead in dynamic environments.</p>
                 </article>
               </div>
@@ -1672,6 +1672,23 @@ margin: 0rem !important;
 
       var lastY = window.pageYOffset || 0;
       var ticking = false;
+      var isAnimating = false;
+      var unlockTimer = 0;
+
+      function unlock() {
+        clearTimeout(unlockTimer);
+        isAnimating = false;
+      }
+
+      function lock() {
+        isAnimating = true;
+        clearTimeout(unlockTimer);
+        unlockTimer = setTimeout(unlock, 400);
+      }
+
+      nav.addEventListener('transitionend', function (e) {
+        if (e.propertyName === 'transform') unlock();
+      });
 
       function getThreshold() {
         if (!hero) return nav.offsetHeight;
@@ -1680,13 +1697,23 @@ margin: 0rem !important;
 
       function update() {
         var y = window.pageYOffset || 0;
+
+        if (isAnimating) {
+          lastY = y;
+          ticking = false;
+          return;
+        }
+
         var threshold = getThreshold();
         var goingDown = y > lastY;
+        var hidden = nav.classList.contains('is-hidden');
 
-        if (goingDown && y > threshold) {
+        if (goingDown && y > threshold && !hidden) {
           nav.classList.add('is-hidden');
-        } else if (!goingDown) {
+          lock();
+        } else if (!goingDown && hidden) {
           nav.classList.remove('is-hidden');
+          lock();
         }
 
         lastY = y;
@@ -1726,7 +1753,7 @@ margin: 0rem !important;
 
       ScrollTrigger.create({
         trigger: '.section-numnber .number-grid_container',
-        start: 'top 60%',
+        start: 'top 80%',
         once: true,
         onEnter: () => {
           numberContainers.forEach((container, i) => {
@@ -1737,8 +1764,8 @@ margin: 0rem !important;
             gsap.to(container, {
               opacity: 1,
               y: 0,
-              duration: 0.6,
-              ease: 'power3.out',
+              duration: 0.5,
+              ease: 'power2.out',
               delay
             });
 
@@ -1761,15 +1788,15 @@ margin: 0rem !important;
       if (headlineLines.length) {
         ScrollTrigger.create({
           trigger: '.streaming-headline',
-          start: 'top 60%',
+          start: 'top 80%',
           once: true,
           onEnter: () => {
             gsap.to(headlineLines, {
               opacity: 1,
               y: 0,
-              duration: 0.7,
-              ease: 'power3.out',
-              stagger: 0.18
+              duration: 0.5,
+              ease: 'power2.out',
+              stagger: 0.12
             });
           }
         });
@@ -1789,7 +1816,7 @@ margin: 0rem !important;
 
       ScrollTrigger.create({
         trigger: '.flow-row',
-        start: 'top 60%',
+        start: 'top 85%',
         once: true,
         onEnter: () => {
           for (let n = 1; n <= 5; n++) {
@@ -1802,9 +1829,9 @@ margin: 0rem !important;
             gsap.to(targets, {
               opacity: 1,
               y: 0,
-              duration: 0.6,
-              ease: 'power3.out',
-              delay: (n - 1) * 0.12
+              duration: 0.5,
+              ease: 'power2.out',
+              delay: (n - 1) * 0.08
             });
           }
         }
@@ -1814,14 +1841,14 @@ margin: 0rem !important;
         document.querySelectorAll(selector).forEach((el) => {
           ScrollTrigger.create({
             trigger: el,
-            start: 'top 60%',
+            start: 'top 85%',
             once: true,
             onEnter: () => {
               gsap.to(el, {
                 opacity: 1,
                 y: 0,
-                duration: 0.7,
-                ease: 'power3.out'
+                duration: 0.5,
+                ease: 'power2.out'
               });
             }
           });
@@ -1842,15 +1869,15 @@ margin: 0rem !important;
       if (keyFeatureItems.length) {
         ScrollTrigger.create({
           trigger: '.key-features__grid',
-          start: 'top 60%',
+          start: 'top 80%',
           once: true,
           onEnter: () => {
             gsap.to(keyFeatureItems, {
               opacity: 1,
               y: 0,
-              duration: 0.7,
-              ease: 'power3.out',
-              stagger: 0.12
+              duration: 0.5,
+              ease: 'power2.out',
+              stagger: 0.08
             });
           }
         });
@@ -1861,13 +1888,13 @@ margin: 0rem !important;
       if (ctaSection) {
         ScrollTrigger.create({
           trigger: ctaSection,
-          start: 'top 60%',
+          start: 'top 75%',
           once: true,
           onEnter: () => {
             const lines = ctaSection.querySelectorAll('.hero-line');
             const subtitle = ctaSection.querySelector('.hero-subtitle');
             const button = ctaSection.querySelector('.hero-button-gap .button');
-            const tl = gsap.timeline({ defaults: { duration: 0.9, ease: 'power3.out' } });
+            const tl = gsap.timeline({ defaults: { duration: 0.6, ease: 'power3.out' } });
             lines.forEach((line, i) => {
               tl.to(line, { opacity: 1, y: 0 }, 0.2 + i * 0.1);
             });

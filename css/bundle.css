@@ -10083,7 +10083,7 @@ figcaption {
   left: 0;
   right: 0;
   z-index: 9999;
-  padding: 24px;
+  padding: 14px 24px;
   background-color: #0e0e0e;
   transform: translateY(0);
   transition: transform 0.35s ease;
