@@ -22,7 +22,19 @@
   <link href="images/webclip.jpg" rel="apple-touch-icon">
   <style>
     section.section_header26 { background-color: #fafafa; }
+    .section_header26 { position: relative; overflow: hidden; }
     .section_header26 .header26_component { position: relative; }
+    .section_header26 > .padding-global { position: relative; z-index: 1; }
+
+    .hero-flow {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      display: block;
+    }
 
     .stella-diagram {
       position: relative;
@@ -290,6 +302,8 @@
 
     .hero-subtitle {
       font-size: clamp(1rem, 4vw, 1.2rem);
+      color: #8a8f98;
+      font-weight: 300;
     }
 
     .hero-title-gap  { margin-bottom: 40px; }
@@ -900,7 +914,7 @@
     .w-mod-js .scenarios-card__icon,
     .w-mod-js .scenarios-card__title,
     .w-mod-js .scenarios-card__text,
-    .w-mod-js .scenarios-card__image,
+    .w-mod-js .scenarios-card__right,
     .w-mod-js .key-features__item,
     .w-mod-js .locations__layout,
     .w-mod-js .section_layout192.is-cta-light .hero-line,
@@ -965,18 +979,10 @@
     }
 
     .section_header26 .hero-line {
-      background-image: linear-gradient(
-        100deg,
-        #f24622 0%,
-        #f24622 35%,
-        #ffffff 50%,
-        #fcd7cf 65%,
-        #f24622 100%
-      );
-      background-size: 200% 100%;
-      animation:
-        heroLineIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-        hero-title-shimmer 4.8s linear infinite;
+      background-image: none;
+      color: #ffffff;
+      -webkit-text-fill-color: #ffffff;
+      animation: heroLineIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
     .section_header26 .hero-line:nth-child(1) { animation-delay: 0.2s, 0s; }
@@ -1310,6 +1316,7 @@ margin: 0rem !important;
     </div>
     <main class="main-wrapper">
       <header class="section_header26">
+        <canvas class="hero-flow" id="heroFlow" aria-hidden="true"></canvas>
         <div class="padding-global is-hero">
           <div class="container-large is-fullwidth">
             <div class="padding-section-large">
@@ -1318,15 +1325,35 @@ margin: 0rem !important;
                   <div class="hero-graph" id="heroGraph">
                     <div class="hero-graph__label">value</div>
                     <svg class="hero-graph__svg" viewBox="0 0 190 90" preserveAspectRatio="none">
-                      <defs>
-                        <linearGradient id="heroGraphGradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stop-color="#F24622" stop-opacity="0.55"/>
-                          <stop offset="100%" stop-color="#F24622" stop-opacity="0"/>
-                        </linearGradient>
-                      </defs>
+                      <g class="hero-graph__grid" stroke="#e3e3e3" stroke-width="0.5" shape-rendering="crispEdges">
+                        <line x1="0" y1="10" x2="190" y2="10"/>
+                        <line x1="0" y1="20" x2="190" y2="20"/>
+                        <line x1="0" y1="30" x2="190" y2="30"/>
+                        <line x1="0" y1="40" x2="190" y2="40"/>
+                        <line x1="0" y1="50" x2="190" y2="50"/>
+                        <line x1="0" y1="60" x2="190" y2="60"/>
+                        <line x1="0" y1="70" x2="190" y2="70"/>
+                        <line x1="0" y1="80" x2="190" y2="80"/>
+                        <line x1="10"  y1="0" x2="10"  y2="90"/>
+                        <line x1="20"  y1="0" x2="20"  y2="90"/>
+                        <line x1="30"  y1="0" x2="30"  y2="90"/>
+                        <line x1="40"  y1="0" x2="40"  y2="90"/>
+                        <line x1="50"  y1="0" x2="50"  y2="90"/>
+                        <line x1="60"  y1="0" x2="60"  y2="90"/>
+                        <line x1="70"  y1="0" x2="70"  y2="90"/>
+                        <line x1="80"  y1="0" x2="80"  y2="90"/>
+                        <line x1="90"  y1="0" x2="90"  y2="90"/>
+                        <line x1="100" y1="0" x2="100" y2="90"/>
+                        <line x1="110" y1="0" x2="110" y2="90"/>
+                        <line x1="120" y1="0" x2="120" y2="90"/>
+                        <line x1="130" y1="0" x2="130" y2="90"/>
+                        <line x1="140" y1="0" x2="140" y2="90"/>
+                        <line x1="150" y1="0" x2="150" y2="90"/>
+                        <line x1="160" y1="0" x2="160" y2="90"/>
+                        <line x1="170" y1="0" x2="170" y2="90"/>
+                        <line x1="180" y1="0" x2="180" y2="90"/>
+                      </g>
                       <g class="hero-graph__scroll" id="heroGraphScroll">
-                        <path d="M 0 65 C 7 60 17 55 24 55 C 31 55 41 60 48 65 C 54 70 64 75 71 75 C 78 75 88 70 95 65 C 102 60 112 55 119 55 C 126 55 136 60 143 65 C 149 70 159 75 166 75 C 173 75 183 70 190 65 L 190 90 L 0 90 Z" fill="url(#heroGraphGradient)"/>
-                        <path d="M 0 65 C 7 60 17 55 24 55 C 31 55 41 60 48 65 C 54 70 64 75 71 75 C 78 75 88 70 95 65 C 102 60 112 55 119 55 C 126 55 136 60 143 65 C 149 70 159 75 166 75 C 173 75 183 70 190 65 L 190 90 L 0 90 Z" fill="url(#heroGraphGradient)" transform="translate(190, 0)"/>
                         <path d="M 0 65 C 7 60 17 55 24 55 C 31 55 41 60 48 65 C 54 70 64 75 71 75 C 78 75 88 70 95 65 C 102 60 112 55 119 55 C 126 55 136 60 143 65 C 149 70 159 75 166 75 C 173 75 183 70 190 65" fill="none" stroke="#F24622" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
                         <path d="M 0 65 C 7 60 17 55 24 55 C 31 55 41 60 48 65 C 54 70 64 75 71 75 C 78 75 88 70 95 65 C 102 60 112 55 119 55 C 126 55 136 60 143 65 C 149 70 159 75 166 75 C 173 75 183 70 190 65" fill="none" stroke="#F24622" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" transform="translate(190, 0)"/>
                       </g>
@@ -1813,6 +1840,159 @@ margin: 0rem !important;
         }
       }, { passive: true });
     })();
+
+    (function () {
+      var canvas = document.getElementById('heroFlow');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = 0, h = 0;
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var running = true;
+      var rafId = null;
+
+      // Bezier paths as fractions of (w, h): [P0x,P0y, P1x,P1y, P2x,P2y, P3x,P3y]
+      // Plus speed (cycles/sec) and signal color
+      var paths = [
+        { p:[0.00, 0.18,  0.25, -0.05,  0.70, 0.42,  1.00, 0.08], speed: 0.32, color: '#F24622' },
+        { p:[1.00, 0.48,  0.68, 0.78,   0.30, 0.18,  0.00, 0.55], speed: 0.28, color: '#F24622' },
+        { p:[0.02, 0.88,  0.30, 1.10,   0.65, 0.62,  1.00, 0.90], speed: 0.38, color: '#F24622' }
+      ];
+      var signalsPerPath = 2;
+
+      function resize() {
+        var rect = canvas.getBoundingClientRect();
+        w = rect.width;
+        h = rect.height;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      function bezier(t, a, b, c, d) {
+        var u = 1 - t;
+        return u * u * u * a + 3 * u * u * t * b + 3 * u * t * t * c + t * t * t * d;
+      }
+
+      var HALF_WINDOW = 0.05;   // bright segment length (as fraction of path)
+      var SEG_SAMPLES = 10;     // polyline samples for the bright segment
+
+      function rgba(color, a) {
+        return color === '#F24622'
+          ? 'rgba(242,70,34,' + a + ')'
+          : 'rgba(255,255,255,' + a + ')';
+      }
+
+      function drawSignal(p, tCenter, color) {
+        var tStart = Math.max(0, tCenter - HALF_WINDOW);
+        var tEnd = Math.min(1, tCenter + HALF_WINDOW);
+        if (tEnd - tStart < 0.005) return;
+
+        var x0 = p[0], y0 = p[1], x1 = p[2], y1 = p[3];
+        var x2 = p[4], y2 = p[5], x3 = p[6], y3 = p[7];
+        var xs = bezier(tStart, x0, x1, x2, x3);
+        var ys = bezier(tStart, y0, y1, y2, y3);
+        var xe = bezier(tEnd, x0, x1, x2, x3);
+        var ye = bezier(tEnd, y0, y1, y2, y3);
+
+        var peak = (tCenter - tStart) / (tEnd - tStart);
+        var s0 = Math.max(0.001, peak - 0.35);
+        var s1 = Math.max(0.01, peak - 0.05);
+        var s2 = Math.min(0.99, peak + 0.08);
+
+        // Sample polyline once, reuse for all 3 layers
+        var pts = new Array((SEG_SAMPLES + 1) * 2);
+        for (var k = 0; k <= SEG_SAMPLES; k++) {
+          var tk = tStart + (tEnd - tStart) * (k / SEG_SAMPLES);
+          pts[k * 2] = bezier(tk, x0, x1, x2, x3);
+          pts[k * 2 + 1] = bezier(tk, y0, y1, y2, y3);
+        }
+
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        // 3 stacked strokes: outer halo, mid, core — fakes shadowBlur cheaply
+        var layers = [
+          { width: 8,   peakA: 0.18 },
+          { width: 3.5, peakA: 0.5  },
+          { width: 1.4, peakA: 1.0  }
+        ];
+
+        for (var L = 0; L < 3; L++) {
+          var w = layers[L].width;
+          var a = layers[L].peakA;
+          var grad = ctx.createLinearGradient(xs, ys, xe, ye);
+          grad.addColorStop(0, rgba(color, 0));
+          grad.addColorStop(s0, rgba(color, 0));
+          grad.addColorStop(s1, rgba(color, 0.8 * a));
+          grad.addColorStop(peak, rgba(color, a));
+          grad.addColorStop(s2, rgba(color, 0.4 * a));
+          grad.addColorStop(1, rgba(color, 0));
+
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = w;
+          ctx.beginPath();
+          ctx.moveTo(pts[0], pts[1]);
+          for (var m = 2; m < pts.length; m += 2) ctx.lineTo(pts[m], pts[m + 1]);
+          ctx.stroke();
+        }
+      }
+
+      function frame(now) {
+        ctx.clearRect(0, 0, w, h);
+        var time = now / 1000;
+
+        // Pre-scale path coords to pixels (reused for baseline + signals)
+        for (var i = 0; i < paths.length; i++) {
+          var path = paths[i];
+          var p = path.p;
+          var sp = [p[0]*w, p[1]*h, p[2]*w, p[3]*h, p[4]*w, p[5]*h, p[6]*w, p[7]*h];
+
+          // Faint baseline wire
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(sp[0], sp[1]);
+          ctx.bezierCurveTo(sp[2], sp[3], sp[4], sp[5], sp[6], sp[7]);
+          ctx.stroke();
+
+          // Signals
+          for (var s = 0; s < signalsPerPath; s++) {
+            var t = (time * path.speed + s / signalsPerPath + i * 0.17) % 1;
+            drawSignal(sp, t, path.color);
+          }
+        }
+
+        if (running && !reduced) rafId = requestAnimationFrame(frame);
+      }
+
+      function start() {
+        if (rafId) return;
+        running = true;
+        rafId = requestAnimationFrame(frame);
+      }
+      function stop() {
+        running = false;
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+
+      if (reduced) {
+        // Draw one static frame so the wires are visible
+        frame(0);
+      } else {
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { e.isIntersecting ? start() : stop(); });
+          }, { rootMargin: '50px' });
+          io.observe(canvas);
+        } else {
+          start();
+        }
+      }
+    })();
   </script>
   <script defer src="js/hero-animations.js"></script>
   <script>
@@ -1952,7 +2132,7 @@ margin: 0rem !important;
         const activePane = document.querySelector('.scenarios-tabs .w-tab-pane.w--tab-active');
         if (!activePane) return;
         const targets = activePane.querySelectorAll(
-          '.scenarios-card__icon, .scenarios-card__title, .scenarios-card__text, .scenarios-card__image'
+          '.scenarios-card__icon, .scenarios-card__title, .scenarios-card__text, .scenarios-card__right'
         );
         if (!targets.length) return;
         gsap.fromTo(
