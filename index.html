@@ -1855,20 +1855,54 @@ margin: 0rem !important;
       var canvas = document.getElementById('heroFlow');
       if (!canvas) return;
       var ctx = canvas.getContext('2d');
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var dpr = 1; // small dots — retina supersampling adds no visible quality, just cost
       var w = 0, h = 0;
       var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var running = true;
       var rafId = null;
 
-      // Bezier paths as fractions of (w, h): [P0x,P0y, P1x,P1y, P2x,P2y, P3x,P3y]
-      // Plus speed (cycles/sec) and signal color
-      var paths = [
-        { p:[0.00, 0.18,  0.25, -0.05,  0.70, 0.42,  1.00, 0.08], speed: 0.32, color: '#F24622' },
-        { p:[1.00, 0.48,  0.68, 0.78,   0.30, 0.18,  0.00, 0.55], speed: 0.28, color: '#F24622' },
-        { p:[0.02, 0.88,  0.30, 1.10,   0.65, 0.62,  1.00, 0.90], speed: 0.38, color: '#F24622' }
+      // Halftone dot grid with drifting "hot zones"
+      var DOT_SPACING = 20;
+      var DOT_BASE_R = 1.0;
+      var BASE_ALPHA = 0.08;
+      var PEAK_ALPHA = 0.55;
+      var SPOT_RADIUS = 240;
+      var SPOT_RADIUS_SQ = SPOT_RADIUS * SPOT_RADIUS;
+      var TWO_PI = Math.PI * 2;
+
+      // Drifting zones via Lissajous-like motion
+      // cx,cy = center anchor (fractions); rx,ry = drift amplitude; fx,fy = freq (Hz); px,py = phase
+      var spots = [
+        { cx: 0.50, cy: 0.50, rx: 0.32, ry: 0.26, fx: 0.060, fy: 0.085, px: 0.0, py: 1.0 },
+        { cx: 0.50, cy: 0.50, rx: 0.28, ry: 0.30, fx: 0.055, fy: 0.075, px: 2.6, py: 4.2 },
+        { cx: 0.50, cy: 0.50, rx: 0.30, ry: 0.28, fx: 0.048, fy: 0.092, px: 5.1, py: 2.4 }
       ];
-      var signalsPerPath = 2;
+
+      // Grid metadata + reusable buffer for "drawn this frame" flags (AABB culling)
+      var cols = 0, rows = 0;
+      var drawnFlags = null;
+
+      // Offscreen canvas for the static base-dot layer (rendered once per resize, blitted each frame)
+      var baseCanvas = document.createElement('canvas');
+      var baseCtx = baseCanvas.getContext('2d');
+
+      function buildBase() {
+        baseCanvas.width = Math.floor(w * dpr);
+        baseCanvas.height = Math.floor(h * dpr);
+        baseCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        baseCtx.clearRect(0, 0, w, h);
+        baseCtx.fillStyle = 'rgba(242, 70, 34, ' + BASE_ALPHA + ')';
+        baseCtx.beginPath();
+        for (var c = 0; c < cols; c++) {
+          var x = (c + 0.5) * DOT_SPACING;
+          for (var r = 0; r < rows; r++) {
+            var y = (r + 0.5) * DOT_SPACING;
+            baseCtx.moveTo(x + DOT_BASE_R, y);
+            baseCtx.arc(x, y, DOT_BASE_R, 0, TWO_PI);
+          }
+        }
+        baseCtx.fill();
+      }
 
       function resize() {
         var rect = canvas.getBoundingClientRect();
@@ -1877,101 +1911,70 @@ margin: 0rem !important;
         canvas.width = Math.floor(w * dpr);
         canvas.height = Math.floor(h * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cols = Math.max(0, Math.floor((w - DOT_SPACING / 2) / DOT_SPACING) + 1);
+        rows = Math.max(0, Math.floor((h - DOT_SPACING / 2) / DOT_SPACING) + 1);
+        drawnFlags = new Uint8Array(cols * rows);
+        buildBase();
       }
       resize();
       window.addEventListener('resize', resize);
 
-      function bezier(t, a, b, c, d) {
-        var u = 1 - t;
-        return u * u * u * a + 3 * u * u * t * b + 3 * u * t * t * c + t * t * t * d;
-      }
-
-      var HALF_WINDOW = 0.05;   // bright segment length (as fraction of path)
-      var SEG_SAMPLES = 10;     // polyline samples for the bright segment
-
-      function rgba(color, a) {
-        return color === '#F24622'
-          ? 'rgba(242,70,34,' + a + ')'
-          : 'rgba(255,255,255,' + a + ')';
-      }
-
-      function drawSignal(p, tCenter, color) {
-        var tStart = Math.max(0, tCenter - HALF_WINDOW);
-        var tEnd = Math.min(1, tCenter + HALF_WINDOW);
-        if (tEnd - tStart < 0.005) return;
-
-        var x0 = p[0], y0 = p[1], x1 = p[2], y1 = p[3];
-        var x2 = p[4], y2 = p[5], x3 = p[6], y3 = p[7];
-        var xs = bezier(tStart, x0, x1, x2, x3);
-        var ys = bezier(tStart, y0, y1, y2, y3);
-        var xe = bezier(tEnd, x0, x1, x2, x3);
-        var ye = bezier(tEnd, y0, y1, y2, y3);
-
-        var peak = (tCenter - tStart) / (tEnd - tStart);
-        var s0 = Math.max(0.001, peak - 0.35);
-        var s1 = Math.max(0.01, peak - 0.05);
-        var s2 = Math.min(0.99, peak + 0.08);
-
-        // Sample polyline once, reuse for all 3 layers
-        var pts = new Array((SEG_SAMPLES + 1) * 2);
-        for (var k = 0; k <= SEG_SAMPLES; k++) {
-          var tk = tStart + (tEnd - tStart) * (k / SEG_SAMPLES);
-          pts[k * 2] = bezier(tk, x0, x1, x2, x3);
-          pts[k * 2 + 1] = bezier(tk, y0, y1, y2, y3);
-        }
-
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-
-        // 3 stacked strokes: outer halo, mid, core — fakes shadowBlur cheaply
-        var layers = [
-          { width: 8,   peakA: 0.18 },
-          { width: 3.5, peakA: 0.5  },
-          { width: 1.4, peakA: 1.0  }
-        ];
-
-        for (var L = 0; L < 3; L++) {
-          var w = layers[L].width;
-          var a = layers[L].peakA;
-          var grad = ctx.createLinearGradient(xs, ys, xe, ye);
-          grad.addColorStop(0, rgba(color, 0));
-          grad.addColorStop(s0, rgba(color, 0));
-          grad.addColorStop(s1, rgba(color, 0.8 * a));
-          grad.addColorStop(peak, rgba(color, a));
-          grad.addColorStop(s2, rgba(color, 0.4 * a));
-          grad.addColorStop(1, rgba(color, 0));
-
-          ctx.strokeStyle = grad;
-          ctx.lineWidth = w;
-          ctx.beginPath();
-          ctx.moveTo(pts[0], pts[1]);
-          for (var m = 2; m < pts.length; m += 2) ctx.lineTo(pts[m], pts[m + 1]);
-          ctx.stroke();
-        }
-      }
-
       function frame(now) {
         ctx.clearRect(0, 0, w, h);
+        // Base layer: just blit the cached offscreen canvas
+        ctx.drawImage(baseCanvas, 0, 0, w, h);
+
         var time = now / 1000;
 
-        // Pre-scale path coords to pixels (reused for baseline + signals)
-        for (var i = 0; i < paths.length; i++) {
-          var path = paths[i];
-          var p = path.p;
-          var sp = [p[0]*w, p[1]*h, p[2]*w, p[3]*h, p[4]*w, p[5]*h, p[6]*w, p[7]*h];
+        // Pre-compute zone positions in px
+        var spotPx = [];
+        for (var k = 0; k < spots.length; k++) {
+          var s = spots[k];
+          spotPx.push(
+            w * (s.cx + s.rx * Math.cos(time * TWO_PI * s.fx + s.px)),
+            h * (s.cy + s.ry * Math.sin(time * TWO_PI * s.fy + s.py))
+          );
+        }
 
-          // Faint baseline wire
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(sp[0], sp[1]);
-          ctx.bezierCurveTo(sp[2], sp[3], sp[4], sp[5], sp[6], sp[7]);
-          ctx.stroke();
+        // Hot layer with AABB culling: only iterate dots inside each spot's bounding box
+        drawnFlags.fill(0);
+        for (var sp = 0; sp < spotPx.length; sp += 2) {
+          var sx = spotPx[sp], sy = spotPx[sp + 1];
+          var cmin = Math.max(0, Math.ceil((sx - SPOT_RADIUS) / DOT_SPACING - 0.5));
+          var cmax = Math.min(cols - 1, Math.floor((sx + SPOT_RADIUS) / DOT_SPACING - 0.5));
+          var rmin = Math.max(0, Math.ceil((sy - SPOT_RADIUS) / DOT_SPACING - 0.5));
+          var rmax = Math.min(rows - 1, Math.floor((sy + SPOT_RADIUS) / DOT_SPACING - 0.5));
 
-          // Signals
-          for (var s = 0; s < signalsPerPath; s++) {
-            var t = (time * path.speed + s / signalsPerPath + i * 0.17) % 1;
-            drawSignal(sp, t, path.color);
+          for (var cc = cmin; cc <= cmax; cc++) {
+            var x = (cc + 0.5) * DOT_SPACING;
+            for (var rr = rmin; rr <= rmax; rr++) {
+              var idx = rr * cols + cc;
+              if (drawnFlags[idx]) continue;
+              drawnFlags[idx] = 1;
+              var y = (rr + 0.5) * DOT_SPACING;
+
+              // Intensity = max across all spots (dot may lie inside several bboxes)
+              var maxI = 0;
+              for (var m = 0; m < spotPx.length; m += 2) {
+                var ddx = x - spotPx[m];
+                var ddy = y - spotPx[m + 1];
+                var d2 = ddx * ddx + ddy * ddy;
+                if (d2 < SPOT_RADIUS_SQ) {
+                  var t = 1 - Math.sqrt(d2) / SPOT_RADIUS;
+                  var inten = t * t;
+                  if (inten > maxI) maxI = inten;
+                }
+              }
+
+              if (maxI > 0.02) {
+                var alpha = BASE_ALPHA + (PEAK_ALPHA - BASE_ALPHA) * maxI;
+                var radius = DOT_BASE_R + maxI * 1.4;
+                ctx.fillStyle = 'rgba(242, 70, 34, ' + alpha + ')';
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, TWO_PI);
+                ctx.fill();
+              }
+            }
           }
         }
 
