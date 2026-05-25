@@ -34,7 +34,10 @@
       pointer-events: none;
       z-index: 0;
       display: block;
+      opacity: 0;
+      transition: opacity 0.8s ease-out 0.15s;
     }
+    .hero-flow.is-visible { opacity: 1; }
 
     .stella-diagram {
       position: relative;
@@ -486,6 +489,13 @@
       margin-bottom: clamp(18px, 1.8vw, 24px);
       letter-spacing: 0.02em;
     }
+    img.key-features__image {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      padding: 0;
+    }
 
     .section_layout1.is-light-section .section-flow__heading { margin-bottom: 0; }
     .section_layout1.is-light-section .header26_component { margin-bottom: clamp(20px, 2.5vw, 36px); }
@@ -644,7 +654,7 @@
 
     .flow-row__text {
       font-family: 'Poppins', sans-serif;
-      font-size: clamp(28px, 4.4vw, 56px);
+      font-size: clamp(24px, 3.6vw, 48px);
       line-height: 0.9;
       letter-spacing: -0.02em;
       font-weight: 400;
@@ -1527,17 +1537,17 @@ margin: 0rem !important;
                   </div>
                 </div>
               </div>
-              <div data-current="Tab 1" data-easing="ease" data-duration-in="0" data-duration-out="0" class="scenarios-tabs tabs w-tabs">
+              <div data-current="Tab 2" data-easing="ease" data-duration-in="0" data-duration-out="0" class="scenarios-tabs tabs w-tabs">
                 <div class="scenarios-tabs__menu tabs-menu-2 w-tab-menu">
-                  <a data-w-tab="Tab 1" class="scenarios-tabs__pill w-inline-block w-tab-link w--current">City</a>
-                  <a data-w-tab="Tab 2" class="scenarios-tabs__pill w-inline-block w-tab-link">Agriculture</a>
+                  <a data-w-tab="Tab 1" class="scenarios-tabs__pill w-inline-block w-tab-link">City</a>
+                  <a data-w-tab="Tab 2" class="scenarios-tabs__pill w-inline-block w-tab-link w--current">Agriculture</a>
                   <a data-w-tab="Tab 3" class="scenarios-tabs__pill w-inline-block w-tab-link">Factory</a>
                   <a data-w-tab="Tab 4" class="scenarios-tabs__pill w-inline-block w-tab-link">Banking</a>
                   <a data-w-tab="Tab 5" class="scenarios-tabs__pill w-inline-block w-tab-link">Retail</a>
                   <a data-w-tab="Tab 6" class="scenarios-tabs__pill w-inline-block w-tab-link">Energy</a>
                 </div>
                 <div class="scenarios-tabs__content tabs-content w-tab-content">
-                  <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
+                  <div data-w-tab="Tab 1" class="w-tab-pane">
                     <div class="scenarios-card">
                       <div class="scenarios-card__left">
                         <div class="scenarios-card__icon">
@@ -1551,7 +1561,7 @@ margin: 0rem !important;
                       </div>
                     </div>
                   </div>
-                  <div data-w-tab="Tab 2" class="w-tab-pane">
+                  <div data-w-tab="Tab 2" class="w-tab-pane w--tab-active">
                     <div class="scenarios-card">
                       <div class="scenarios-card__left">
                         <div class="scenarios-card__icon">
@@ -1642,22 +1652,22 @@ margin: 0rem !important;
               </div>
               <div class="key-features__grid">
                 <article class="key-features__item">
-                  <div class="key-features__image" aria-hidden="true">Image will be added</div>
+                  <img src="images/art_1.svg" alt="" class="key-features__image" loading="lazy">
                   <h3 class="key-features__title">Data acquisition and integration</h3>
                   <p class="key-features__text">Stella simplifies data acquisition and integration, enabling your organization to collect and unify data from millions of devices and hundreds of sources in real-time. Our platform ensures a seamless flow of information, providing a single source of truth for all your data-driven decisions.</p>
                 </article>
                 <article class="key-features__item">
-                  <div class="key-features__image" aria-hidden="true">Image will be added</div>
+                  <img src="images/art_4.svg" alt="" class="key-features__image" loading="lazy">
                   <h3 class="key-features__title">Modeling and automation of decision processes</h3>
                   <p class="key-features__text">Stella enhances decision-making with advanced modeling and automation, integrating AI/ML models into your workflows for smarter outcomes. Our platform enables real-time decision orchestration, ensuring your business processes are adaptive, efficient, and data-driven.</p>
                 </article>
                 <article class="key-features__item">
-                  <div class="key-features__image" aria-hidden="true">Image will be added</div>
+                  <img src="images/art_3.svg" alt="" class="key-features__image" loading="lazy">
                   <h3 class="key-features__title">Scalable process orchestration and optimization</h3>
                   <p class="key-features__text">Stella empowers your organization to orchestrate and optimize processes at any scale, ensuring seamless operations even under the most demanding workloads. Our platform automates workflows, streamlines decision-making, and adapts to your growing needs, delivering efficiency and reliability across your business.</p>
                 </article>
                 <article class="key-features__item">
-                  <div class="key-features__image" aria-hidden="true">Image will be added</div>
+                  <img src="images/art_2.svg" alt="" class="key-features__image" loading="lazy">
                   <h3 class="key-features__title">Complete real-time decision cycle</h3>
                   <p class="key-features__text">Stella delivers a comprehensive real-time decision cycle, enabling your organization to ingest, process, and act on data instantly. From data acquisition to actionable insights, our platform ensures every decision is informed, timely, and impactful, keeping you ahead in dynamic environments.</p>
                 </article>
@@ -1971,6 +1981,7 @@ margin: 0rem !important;
       function start() {
         if (rafId) return;
         running = true;
+        canvas.classList.add('is-visible');
         rafId = requestAnimationFrame(frame);
       }
       function stop() {
@@ -1981,6 +1992,7 @@ margin: 0rem !important;
 
       if (reduced) {
         // Draw one static frame so the wires are visible
+        canvas.classList.add('is-visible');
         frame(0);
       } else {
         if ('IntersectionObserver' in window) {

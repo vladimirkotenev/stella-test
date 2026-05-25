@@ -120,7 +120,7 @@ h1 {
  */
 mark {
   background: #ff0;
-  color: #000;
+  color: #0e0e0e;
 }
 /**
  * Address inconsistent and variable font size in all browsers.
@@ -2164,9 +2164,9 @@ textarea.w-select {
   --color-scheme-1--text: var(--_primitives---colors--neutral-darkest);
   --_typography---font-styles--heading: Poppins, sans-serif;
   --color-scheme-1--primary: #f24622;
-  --color-scheme-1--black: #000;
+  --color-scheme-1--black: #0e0e0e;
   --_primitives---colors--white: #fff;
-  --_primitives---colors--neutral-darkest: black;
+  --_primitives---colors--neutral-darkest: #0e0e0e;
   --text-color--text-alternate\<deleted\|relume-variable-text-color-3\>: var(--base-color-neutral--white\<deleted\|relume-variable-color-neutral-2\>);
   --_primitives---opacity--transparent: transparent;
   --color-scheme-1--gray-light: #d1dde8;
@@ -4591,7 +4591,7 @@ figcaption {
 }
 
 .header-4.is-black {
-  color: #000;
+  color: #0e0e0e;
   font-weight: 700;
 }
 
@@ -5329,7 +5329,7 @@ figcaption {
 }
 
 .form_field-label-3 {
-  color: #000;
+  color: #0e0e0e;
   margin-bottom: .5rem;
   font-weight: 400;
 }
@@ -5346,7 +5346,7 @@ figcaption {
 }
 
 .header-9 {
-  color: #000;
+  color: #0e0e0e;
   font-size: 4.8rem;
   font-weight: 600;
 }
@@ -5559,7 +5559,7 @@ figcaption {
 }
 
 .form_input-3 {
-  color: #000;
+  color: #0e0e0e;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -5595,7 +5595,7 @@ figcaption {
 }
 
 .header-11 {
-  color: #000;
+  color: #0e0e0e;
   font-size: 1.4rem;
   line-height: 1.5;
 }
