@@ -549,27 +549,27 @@
       aspect-ratio: 1000 / 506;
     }
 
-    .locations__map-dot { fill: #f24622; fill-opacity: 0.5; }
+    .locations__map-dot { fill: #8a8f98; fill-opacity: 0.5; }
 
-    .locations__marker-ring {
-      fill: none;
-      stroke: #f24622;
-      stroke-width: 4;
-      transform-origin: center;
+    /* City markers: filled orange circles pulsing outward from each point (radar).
+       Two per city, born a fraction of a cycle apart so both stay visible together
+       as a double ripple. Peak opacity 0.5; fades in on birth, out as it expands. */
+    .locations__halo {
+      fill: #f24622;
       transform-box: fill-box;
-      animation: locations-ring-pulse 2.6s cubic-bezier(0.16, 0.84, 0.44, 1) infinite;
+      transform-origin: center;
+      animation: locations-pulse 2.6s linear infinite;
     }
 
-    .locations__marker-ring--delayed { animation-delay: 1.3s; }
-
-    @keyframes locations-ring-pulse {
-      0%   { transform: scale(0.4); opacity: 1; stroke-width: 5; }
-      60%  { opacity: 0.35; }
-      100% { transform: scale(8); opacity: 0; stroke-width: 1; }
+    @keyframes locations-pulse {
+      0%   { transform: scale(0.2); opacity: 0; }
+      12%  { opacity: 0.5; }
+      60%  { transform: scale(2); }
+      100% { transform: scale(2.8); opacity: 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .locations__marker-ring { animation: none; opacity: 0; }
+      .locations__halo { animation: none; opacity: 0.5; transform: scale(1); }
     }
 
     .locations__list {
@@ -1818,6 +1818,10 @@ margin: 0rem !important;
         return hero.offsetTop + hero.offsetHeight - nav.offsetHeight;
       }
 
+      // Ignore sub-pixel jitter and the easing "tail" of smooth scroll — those
+      // near-zero deltas otherwise read as a direction flip and make the nav twitch.
+      var DEADZONE = 6;
+
       function update() {
         var y = window.pageYOffset || 0;
 
@@ -1827,15 +1831,23 @@ margin: 0rem !important;
           return;
         }
 
+        var delta = y - lastY;
+
+        // Movement too small to be intentional: keep lastY as the reference so a
+        // slow scroll still accumulates past the deadzone instead of being lost.
+        if (delta > -DEADZONE && delta < DEADZONE) {
+          ticking = false;
+          return;
+        }
+
         var threshold = getThreshold();
-        var goingDown = y > lastY;
         var hidden = nav.classList.contains('is-hidden');
 
-        if (goingDown && y > threshold && !hidden) {
-          nav.classList.add('is-hidden');
+        if (delta > 0 && y > threshold && !hidden) {
+          nav.classList.add('is-hidden');   // scroll down → hide
           lock();
-        } else if (!goingDown && hidden) {
-          nav.classList.remove('is-hidden');
+        } else if (delta < 0 && hidden) {
+          nav.classList.remove('is-hidden'); // scroll up → show
           lock();
         }
 
@@ -1864,19 +1876,22 @@ margin: 0rem !important;
       // Halftone dot grid with drifting "hot zones"
       var DOT_SPACING = 20;
       var DOT_BASE_R = 1.0;
-      var BASE_ALPHA = 0.08;
-      var PEAK_ALPHA = 0.55;
-      var SPOT_RADIUS = 240;
+      var BASE_ALPHA = 0.12;
+      var PEAK_ALPHA = 0.85;
+      var SPOT_RADIUS = 360;
       var SPOT_RADIUS_SQ = SPOT_RADIUS * SPOT_RADIUS;
       var TWO_PI = Math.PI * 2;
 
       // Drifting zones via Lissajous-like motion
       // cx,cy = center anchor (fractions); rx,ry = drift amplitude; fx,fy = freq (Hz); px,py = phase
+      // color = RGB triplet the dots glow toward inside this zone
+      var ORANGE = '242, 106, 34';
       var spots = [
-        { cx: 0.50, cy: 0.50, rx: 0.32, ry: 0.26, fx: 0.060, fy: 0.085, px: 0.0, py: 1.0 },
-        { cx: 0.50, cy: 0.50, rx: 0.28, ry: 0.30, fx: 0.055, fy: 0.075, px: 2.6, py: 4.2 },
-        { cx: 0.50, cy: 0.50, rx: 0.30, ry: 0.28, fx: 0.048, fy: 0.092, px: 5.1, py: 2.4 }
+        { cx: 0.50, cy: 0.50, rx: 0.32, ry: 0.26, fx: 0.060, fy: 0.085, px: 0.0, py: 1.0, color: ORANGE },
+        { cx: 0.50, cy: 0.50, rx: 0.28, ry: 0.30, fx: 0.055, fy: 0.075, px: 2.6, py: 4.2, color: ORANGE },
+        { cx: 0.50, cy: 0.50, rx: 0.30, ry: 0.28, fx: 0.048, fy: 0.092, px: 5.1, py: 2.4, color: ORANGE }
       ];
+      var spotColors = spots.map(function (s) { return s.color; });
 
       // Grid metadata + reusable buffer for "drawn this frame" flags (AABB culling)
       var cols = 0, rows = 0;
@@ -1891,7 +1906,7 @@ margin: 0rem !important;
         baseCanvas.height = Math.floor(h * dpr);
         baseCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
         baseCtx.clearRect(0, 0, w, h);
-        baseCtx.fillStyle = 'rgba(242, 70, 34, ' + BASE_ALPHA + ')';
+        baseCtx.fillStyle = 'rgba(242, 106, 34, ' + BASE_ALPHA + ')';
         baseCtx.beginPath();
         for (var c = 0; c < cols; c++) {
           var x = (c + 0.5) * DOT_SPACING;
@@ -1953,8 +1968,10 @@ margin: 0rem !important;
               drawnFlags[idx] = 1;
               var y = (rr + 0.5) * DOT_SPACING;
 
-              // Intensity = max across all spots (dot may lie inside several bboxes)
+              // Intensity = max across all spots (dot may lie inside several bboxes);
+              // the strongest spot also decides this dot's color.
               var maxI = 0;
+              var maxColor = ORANGE;
               for (var m = 0; m < spotPx.length; m += 2) {
                 var ddx = x - spotPx[m];
                 var ddy = y - spotPx[m + 1];
@@ -1962,14 +1979,14 @@ margin: 0rem !important;
                 if (d2 < SPOT_RADIUS_SQ) {
                   var t = 1 - Math.sqrt(d2) / SPOT_RADIUS;
                   var inten = t * t;
-                  if (inten > maxI) maxI = inten;
+                  if (inten > maxI) { maxI = inten; maxColor = spotColors[m >> 1]; }
                 }
               }
 
               if (maxI > 0.02) {
                 var alpha = BASE_ALPHA + (PEAK_ALPHA - BASE_ALPHA) * maxI;
-                var radius = DOT_BASE_R + maxI * 1.4;
-                ctx.fillStyle = 'rgba(242, 70, 34, ' + alpha + ')';
+                var radius = DOT_BASE_R + maxI * 1.7;
+                ctx.fillStyle = 'rgba(' + maxColor + ', ' + alpha + ')';
                 ctx.beginPath();
                 ctx.arc(x, y, radius, 0, TWO_PI);
                 ctx.fill();
@@ -2321,12 +2338,14 @@ margin: 0rem !important;
         { lon: -0.1,  lat: 51.5 }, // London
         { lon: 21,    lat: 52.2 }  // Warsaw
       ];
-      cities.forEach((c) => {
+      const RING_GAP = 0.7; // 2nd ring trails the 1st by this much so both stay visible
+      cities.forEach((c, i) => {
         const [cx, cy] = project(c.lon, c.lat);
+        const phase = -(i * 0.5); // per-city offset so cities don't pulse in lockstep
         parts.push(
-          '<g transform="translate(' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ')">' +
-            '<circle class="locations__marker-ring" cx="0" cy="0" r="3.5"/>' +
-            '<circle class="locations__marker-ring locations__marker-ring--delayed" cx="0" cy="0" r="3.5"/>' +
+          '<g class="locations__marker" transform="translate(' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ')">' +
+            '<circle class="locations__halo" cx="0" cy="0" r="16" style="animation-delay:' + phase.toFixed(2) + 's"/>' +
+            '<circle class="locations__halo" cx="0" cy="0" r="16" style="animation-delay:' + (phase - RING_GAP).toFixed(2) + 's"/>' +
           '</g>'
         );
       });
