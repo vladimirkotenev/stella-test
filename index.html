@@ -656,117 +656,10 @@
     .section-tabs .header26_component { margin-bottom: clamp(28px, 3vw, 48px); }
     .section-tabs .header26_component .margin-bottom.margin-xxlarge { margin-bottom: 0; }
 
-    .flow-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: clamp(16px, 2.5vw, 32px);
-    }
-
-    .flow-row__text {
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(24px, 3.6vw, 48px);
-      line-height: 0.9;
-      letter-spacing: -0.02em;
-      font-weight: 400;
-      color: #0e0e0e;
-      margin: 0;
-      text-align: left;
-    }
-
-    .flow-row__center-group {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-shrink: 0;
-    }
-
-    .flow-row__arrow {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      color: #F24622;
-    }
-
-    .flow-row__arrow svg {
-      width: clamp(30px, 4.7vw, 60px);
-      height: auto;
-    }
-
-    /* No translateX — flex gap places arrows exactly between text and image */
-
-    .flow-row__image {
-      width: clamp(120px, 18.75vw, 240px);
-      height: auto;
-      flex-shrink: 0;
-      display: block;
-      /* Compensate for transparent padding inside the PNG so arrows visually
-         sit 16px from the building edge, not from the file edge */
-      margin: 0 clamp(-35px, -2.8vw, -18px);
-    }
-
-    .flow-row__text-block {
-      position: relative;
-      flex-shrink: 0;
-      transform: translateX(clamp(-20px, -1.56vw, -10px));
-    }
-
-    .flow-row__text-block--right {
-      transform: translateX(clamp(10px, 1.56vw, 20px));
-    }
-
-    .flow-row__icon {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .flow-row__icon .flow-row__tag {
-      margin-top: 8px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .flow-row__icon img {
-      width: clamp(40px, 6.25vw, 80px);
-      height: auto;
-      object-fit: contain;
-      display: block;
-    }
-
-    .w-mod-js .section-flow .flow-row__icon img,
-    .w-mod-js .section-flow .flow-row__icon .flow-row__tag {
-      opacity: 0;
-      transform: translateY(12px);
-    }
-
-    .flow-row__tag {
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.2;
-      color: #0e0e0e;
-      background: transparent;
-      border: none;
-      padding: 0;
-      text-align: center;
-      white-space: normal;
-    }
-
     /* ---- Connect -> datacenter -> Get flow diagram ---- */
     .flow-diagram {
       position: relative;
       margin-top: 0;
-    }
-
-    .flow-diagram__heads {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 24px;
     }
 
     .flow-diagram__body {
@@ -785,27 +678,6 @@
       overflow: visible;
       pointer-events: none;
       z-index: 0;
-    }
-
-    .flow-diagram__side {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .flow-diagram__side--left { align-items: flex-end; text-align: right; }
-    .flow-diagram__side--right { align-items: flex-start; text-align: left; }
-
-    .flow-diagram__title {
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(28px, 3.6vw, 52px);
-      font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      color: #0e0e0e;
-      margin: 0;
-      white-space: nowrap;
     }
 
     .flow-diagram__list {
@@ -849,14 +721,6 @@
       white-space: nowrap;
     }
 
-    .flow-diagram__dot {
-      flex: 0 0 auto;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: #f24622;
-    }
-
     .flow-diagram__center {
       position: relative;
       z-index: 1;
@@ -872,42 +736,35 @@
 
     .flow-diagram__line {
       fill: none;
-      stroke: rgba(14, 14, 14, 0.14);
-      stroke-width: 1.5;
+      stroke: #ebebeb;
+      stroke-width: 1.4;
+      stroke-linejoin: round;
     }
 
+    /* smooth orange gradient streak flowing along each line (Vercel "lines_glow"-style).
+       The stroke is a repeating linear gradient animated via gradientTransform (see JS defs). */
     .flow-diagram__pulse {
       fill: none;
-      stroke: #f24622;
       stroke-width: 2;
       stroke-linecap: round;
-      stroke-dasharray: 10 90;
-      animation: flow-pulse 2.6s linear infinite;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 2px rgba(242, 70, 34, 0.45));
     }
 
-    @keyframes flow-pulse {
-      from { stroke-dashoffset: 100; }
-      to   { stroke-dashoffset: 0; }
+    @media (prefers-reduced-motion: reduce) {
+      .flow-diagram__pulse { display: none; }
     }
 
     @media (max-width: 767px) {
-      .flow-diagram__heads {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        text-align: center;
-      }
       .flow-diagram__body {
         grid-template-columns: 1fr;
         justify-items: center;
         row-gap: clamp(28px, 6vw, 44px);
       }
       .flow-diagram__list { align-items: center; }
+      .flow-diagram__lines { display: none; }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .flow-diagram__pulse { animation: none; opacity: 0; }
-    }
 
     .section-flow .padding-section-large {
       padding-bottom: clamp(10rem, 16vw, 16rem);
@@ -1122,29 +979,6 @@
       }
     }
 
-    .flow-row__icon--1 { top: clamp(-150px, -11.5vw, -75px);  left: clamp(-70px, -5.5vw, -35px);  animation: flow-icon-drift 17s ease-in-out infinite; }
-    .flow-row__icon--2 { top: clamp(-160px, -12.5vw, -80px); right: clamp(-10px, -0.8vw, -5px);  animation: flow-icon-drift 19s ease-in-out -5s infinite; }
-    .flow-row__icon--3 { top: 50%; left: clamp(-150px, -11.7vw, -75px); transform: translateY(-50%); animation: flow-icon-drift 16s ease-in-out -9s infinite; }
-    .flow-row__icon--4 { bottom: clamp(-170px, -13.3vw, -85px); left: clamp(-40px, -3.1vw, -20px); animation: flow-icon-drift 18s ease-in-out -3s infinite; }
-    .flow-row__icon--5 { bottom: clamp(-150px, -11.5vw, -75px); right: clamp(-60px, -4.7vw, -30px); animation: flow-icon-drift 20s ease-in-out -12s infinite; }
-
-    @keyframes flow-icon-drift {
-      0%, 100% { translate: 0 0; }
-      25%      { translate: 12px -8px; }
-      50%      { translate: -6px 14px; }
-      75%      { translate: -14px -10px; }
-    }
-
-    .flow-row__text-block--right .flow-row__icon--1 { left: auto; right: clamp(-70px, -5.5vw, -35px);  animation-delay: -7s;  }
-    .flow-row__text-block--right .flow-row__icon--2 { left: clamp(-10px, -0.8vw, -5px); right: auto;   animation-delay: -2s;  }
-    .flow-row__text-block--right .flow-row__icon--3 { left: auto; right: clamp(-150px, -11.7vw, -75px); animation-delay: -14s; }
-    .flow-row__text-block--right .flow-row__icon--4 { left: auto; right: clamp(-40px, -3.1vw, -20px);  animation-delay: -10s; }
-    .flow-row__text-block--right .flow-row__icon--5 { left: clamp(-60px, -4.7vw, -30px); right: auto;  animation-delay: -6s;  }
-
-    @media (prefers-reduced-motion: reduce) {
-      .flow-row__icon { animation: none; }
-    }
-
     .streaming-headline {
       font-family: 'Poppins', sans-serif;
       font-weight: 400;
@@ -1162,8 +996,6 @@
 
     .w-mod-js .streaming-headline__line,
     .w-mod-js .section-flow__heading,
-    .w-mod-js .flow-row__text,
-    .w-mod-js .flow-row__center-group,
     .w-mod-js .section-numnber__heading,
     .w-mod-js .section-tabs__heading,
     .w-mod-js .scenarios-tabs__menu,
@@ -1679,6 +1511,7 @@ margin: 0rem !important;
               </h2>
               <h5 class="section-flow__heading">Connect your data and get decisions</h5>
               <div class="flow-diagram">
+                <svg class="flow-diagram__lines" aria-hidden="true" preserveAspectRatio="none"></svg>
                 <div class="flow-diagram__body">
                   <ul class="flow-diagram__list flow-diagram__list--left">
                     <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/pr_pred.avif" width="300" height="300" alt="" loading="lazy"><span class="flow-diagram__label">Sensors</span></li>
@@ -2316,31 +2149,6 @@ margin: 0rem !important;
         });
       }
 
-      const flowIcons = document.querySelectorAll('.section-flow .flow-row__icon');
-
-      ScrollTrigger.create({
-        trigger: '.flow-row',
-        start: 'top 85%',
-        once: true,
-        onEnter: () => {
-          for (let n = 1; n <= 5; n++) {
-            const pair = document.querySelectorAll(`.section-flow .flow-row__icon--${n}`);
-            const targets = [];
-            pair.forEach(icon => {
-              targets.push(...icon.querySelectorAll('img, .flow-row__tag'));
-            });
-            if (!targets.length) continue;
-            gsap.to(targets, {
-              opacity: 1,
-              y: 0,
-              duration: 0.5,
-              ease: 'power2.out',
-              delay: (n - 1) * 0.08
-            });
-          }
-        }
-      });
-
       function revealOnScroll(selector) {
         document.querySelectorAll(selector).forEach((el) => {
           ScrollTrigger.create({
@@ -2360,8 +2168,6 @@ margin: 0rem !important;
       }
 
       revealOnScroll('.section-flow__heading');
-      revealOnScroll('.flow-row__text');
-      revealOnScroll('.flow-row__center-group');
       revealOnScroll('.section-numnber__heading');
       revealOnScroll('.section-tabs__heading');
       revealOnScroll('.scenarios-tabs__menu');
@@ -2638,45 +2444,95 @@ margin: 0rem !important;
     })();
   </script>
   <script>
-    /* Flow diagram: curved connector lines from each side node into the central datacenter,
-       with an orange pulse flowing in (left) and out (right). Lines are built from the live
-       element positions and rebuilt on resize / when the section scrolls into view. */
+    /* Flow diagram: 3-segment connector lines from each label to the left/right edge of the
+       central datacenter image. Geometry per line:
+         anchor1 — just past the end of the label text, at the label's vertical centre;
+         anchor2 — a shared vertical "rail" x for the side, ~RAIL_T of the way toward the image;
+         anchor3 — the image bounding-box edge, fanned vertically around its centre.
+       Each line carries a smooth orange gradient "comet" that flows along it. The comet is a
+       repeating linear gradient (transparent -> bright -> transparent) painted as the stroke and
+       slid along X via an animated gradientTransform. X is monotonic along every path, so an
+       X-axis gradient tracks the path (incl. the bend) and the whole diagram sweeps L->R.
+       Rebuilt on resize / when the section scrolls into view. */
     (function () {
       var diagram = document.querySelector('.flow-diagram');
       if (!diagram) return;
       var svg = diagram.querySelector('.flow-diagram__lines');
       var img = diagram.querySelector('.flow-diagram__image');
       if (!svg || !img) return;
-      var leftDots = [].slice.call(diagram.querySelectorAll('.flow-diagram__side--left .flow-diagram__dot'));
-      var rightDots = [].slice.call(diagram.querySelectorAll('.flow-diagram__side--right .flow-diagram__dot'));
+      var leftLabels = [].slice.call(diagram.querySelectorAll('.flow-diagram__list--left .flow-diagram__label'));
+      var rightLabels = [].slice.call(diagram.querySelectorAll('.flow-diagram__list--right .flow-diagram__label'));
       var SVGNS = 'http://www.w3.org/2000/svg';
-      var EDGE_INSET = 0.16; // how far inside the image the lines converge (hidden behind the device)
 
-      function rel(el, base) {
-        var r = el.getBoundingClientRect();
-        return { x: r.left + r.width / 2 - base.left, y: r.top + r.height / 2 - base.top };
+      var RAIL_T = 0.70;       // rail x: fraction of the gap (label edge -> image edge) toward the image
+      var TEXT_GAP = 36;       // px between the end of the text and anchor1
+      var FAN_STEP = 18;       // px vertical spacing between the converging anchor3 endpoints
+      var STREAK_PERIOD = 560; // px between consecutive comets — larger => rarer/sparser
+      var STREAK_DUR = 3.4;    // seconds for a comet to travel one period
+      var STREAK_COLOR = '#f24622';
+      // fixed pseudo-random jitter so comets stay desynced ("вразнобой") yet stable across rebuilds
+      var JIT = [0.13, 0.67, 0.41, 0.88, 0.05, 0.52, 0.78, 0.29, 0.95, 0.60];
+      // comet shape across one period: long soft tail (low x) -> bright head -> quick soft front
+      var STOPS = [[0, 0], [0.30, 0], [0.46, 0.85], [0.50, 1], [0.55, 0], [1, 0]];
+      var defs, uid;
+
+      // join an ordered list of points into a sharp-cornered path
+      function pathD(pts) {
+        return 'M ' + pts.map(function (p) { return p.x.toFixed(1) + ' ' + p.y.toFixed(1); }).join(' L ');
       }
 
-      function d(a, b) {
-        var dx = (b.x - a.x) * 0.5;
-        return 'M ' + a.x.toFixed(1) + ' ' + a.y.toFixed(1) +
-               ' C ' + (a.x + dx).toFixed(1) + ' ' + a.y.toFixed(1) + ', ' +
-               (b.x - dx).toFixed(1) + ' ' + b.y.toFixed(1) + ', ' +
-               b.x.toFixed(1) + ' ' + b.y.toFixed(1);
+      // a repeating, animated X-axis gradient that scrolls +X (the comet flows left -> right)
+      function makeStreakGradient(jit) {
+        var id = 'flow-streak-' + (uid++);
+        var g = document.createElementNS(SVGNS, 'linearGradient');
+        g.setAttribute('id', id);
+        g.setAttribute('gradientUnits', 'userSpaceOnUse');
+        g.setAttribute('spreadMethod', 'repeat');
+        g.setAttribute('x1', '0'); g.setAttribute('y1', '0');
+        g.setAttribute('x2', STREAK_PERIOD); g.setAttribute('y2', '0');
+        STOPS.forEach(function (s) {
+          var stop = document.createElementNS(SVGNS, 'stop');
+          stop.setAttribute('offset', s[0]);
+          stop.setAttribute('stop-color', STREAK_COLOR);
+          stop.setAttribute('stop-opacity', s[1]);
+          g.appendChild(stop);
+        });
+        var dur = STREAK_DUR * (0.85 + 0.4 * jit); // slight per-line speed variance
+        var anim = document.createElementNS(SVGNS, 'animateTransform');
+        anim.setAttribute('attributeName', 'gradientTransform');
+        anim.setAttribute('type', 'translate');
+        anim.setAttribute('from', '0 0');
+        anim.setAttribute('to', STREAK_PERIOD + ' 0');
+        anim.setAttribute('dur', dur.toFixed(2) + 's');
+        anim.setAttribute('begin', (-dur * jit).toFixed(2) + 's'); // phase offset => staggered
+        anim.setAttribute('repeatCount', 'indefinite');
+        g.appendChild(anim);
+        defs.appendChild(g);
+        return id;
       }
 
-      function addLine(a, b, delay) {
-        var dd = d(a, b);
+      // textEnd -> rail -> imageEdge, sharp corner at the text-side y. The comet's flow direction
+      // is set purely by the (always +X) gradient scroll, so point order here is irrelevant.
+      function addLine(textEnd, railX, imageEdge, jit) {
+        var pts = [textEnd, { x: railX, y: textEnd.y }, imageEdge];
+        var d = pathD(pts);
         var base = document.createElementNS(SVGNS, 'path');
         base.setAttribute('class', 'flow-diagram__line');
-        base.setAttribute('d', dd);
+        base.setAttribute('d', d);
         svg.appendChild(base);
+
         var pulse = document.createElementNS(SVGNS, 'path');
         pulse.setAttribute('class', 'flow-diagram__pulse');
-        pulse.setAttribute('d', dd);
-        pulse.setAttribute('pathLength', '100');
-        pulse.style.animationDelay = delay.toFixed(2) + 's';
+        pulse.setAttribute('d', d);
+        pulse.setAttribute('stroke', 'url(#' + makeStreakGradient(jit) + ')');
         svg.appendChild(pulse);
+      }
+
+      // y offsets fanning n endpoints around the image centre, top item -> top offset
+      function fan(n) {
+        var ys = [];
+        for (var i = 0; i < n; i++) ys.push((i - (n - 1) / 2) * FAN_STEP);
+        return ys;
       }
 
       function build() {
@@ -2684,19 +2540,45 @@ margin: 0rem !important;
         var cr = diagram.getBoundingClientRect();
         if (cr.width < 2 || cr.height < 2) return;
         svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + cr.height);
+        svg.setAttribute('width', cr.width);
+        svg.setAttribute('height', cr.height);
         while (svg.firstChild) svg.removeChild(svg.firstChild);
+        defs = document.createElementNS(SVGNS, 'defs');
+        svg.appendChild(defs);
+        uid = 0;
 
         var ir = img.getBoundingClientRect();
+        var imgLeft = ir.left - cr.left;
+        var imgRight = ir.right - cr.left;
         var midY = ir.top + ir.height / 2 - cr.top;
-        var leftHub = { x: ir.left - cr.left + ir.width * EDGE_INSET, y: midY };
-        var rightHub = { x: ir.left - cr.left + ir.width * (1 - EDGE_INSET), y: midY };
 
-        leftDots.forEach(function (dot, i) {
-          addLine(rel(dot, cr), leftHub, -i * 0.45);          // node -> hub: flows in
-        });
-        rightDots.forEach(function (dot, i) {
-          addLine(rightHub, rel(dot, cr), -i * 0.45 - 0.22);  // hub -> node: flows out
-        });
+        // ---- left side: text end (right edge) -> rail -> image left edge ----
+        if (leftLabels.length) {
+          var lEdges = leftLabels.map(function (el) {
+            var r = el.getBoundingClientRect();
+            return { x: r.right - cr.left, y: r.top + r.height / 2 - cr.top };
+          });
+          var lMaxEnd = Math.max.apply(null, lEdges.map(function (p) { return p.x; }));
+          var lRail = lMaxEnd + (imgLeft - lMaxEnd) * RAIL_T;
+          var lFan = fan(lEdges.length);
+          lEdges.forEach(function (p, i) {
+            addLine({ x: p.x + TEXT_GAP, y: p.y }, lRail, { x: imgLeft, y: midY + lFan[i] }, JIT[i % JIT.length]);
+          });
+        }
+
+        // ---- right side (mirrored): text start (left edge) -> rail -> image right edge ----
+        if (rightLabels.length) {
+          var rEdges = rightLabels.map(function (el) {
+            var r = el.getBoundingClientRect();
+            return { x: r.left - cr.left, y: r.top + r.height / 2 - cr.top };
+          });
+          var rMinStart = Math.min.apply(null, rEdges.map(function (p) { return p.x; }));
+          var rRail = rMinStart - (rMinStart - imgRight) * RAIL_T;
+          var rFan = fan(rEdges.length);
+          rEdges.forEach(function (p, i) {
+            addLine({ x: p.x - TEXT_GAP, y: p.y }, rRail, { x: imgRight, y: midY + rFan[i] }, JIT[(i + 5) % JIT.length]);
+          });
+        }
       }
 
       var raf = 0;
