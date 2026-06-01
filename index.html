@@ -333,6 +333,10 @@
       margin-bottom: clamp(2rem, 4vw, 3.5rem);
     }
 
+    .section-flow .section-flow__heading {
+      margin-bottom: clamp(2rem, 4vw, 3.5rem);
+    }
+
     .section-numnber .header-number {
       color: #F24622;
       font-size: clamp(3.5rem, 8.5vw, 8rem);
@@ -752,6 +756,159 @@
       white-space: normal;
     }
 
+    /* ---- Connect -> datacenter -> Get flow diagram ---- */
+    .flow-diagram {
+      position: relative;
+      margin-top: 0;
+    }
+
+    .flow-diagram__heads {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 24px;
+    }
+
+    .flow-diagram__body {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      column-gap: clamp(24px, 6vw, 110px);
+      margin-top: 0;
+    }
+
+    .flow-diagram__lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .flow-diagram__side {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flow-diagram__side--left { align-items: flex-end; text-align: right; }
+    .flow-diagram__side--right { align-items: flex-start; text-align: left; }
+
+    .flow-diagram__title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(28px, 3.6vw, 52px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #0e0e0e;
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    .flow-diagram__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* right list mirrors the left: label then icon, pinned to the container's right edge */
+    .flow-diagram__list--right {
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .flow-diagram__item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .flow-diagram__icon {
+      flex: 0 0 auto;
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .flow-diagram__label {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(20px, 1.7vw, 26px);
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #0e0e0e;
+      white-space: nowrap;
+    }
+
+    .flow-diagram__dot {
+      flex: 0 0 auto;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #f24622;
+    }
+
+    .flow-diagram__center {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .flow-diagram__image {
+      width: clamp(140px, 18vw, 252px);
+      height: auto;
+      display: block;
+    }
+
+    .flow-diagram__line {
+      fill: none;
+      stroke: rgba(14, 14, 14, 0.14);
+      stroke-width: 1.5;
+    }
+
+    .flow-diagram__pulse {
+      fill: none;
+      stroke: #f24622;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 10 90;
+      animation: flow-pulse 2.6s linear infinite;
+    }
+
+    @keyframes flow-pulse {
+      from { stroke-dashoffset: 100; }
+      to   { stroke-dashoffset: 0; }
+    }
+
+    @media (max-width: 767px) {
+      .flow-diagram__heads {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        text-align: center;
+      }
+      .flow-diagram__body {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        row-gap: clamp(28px, 6vw, 44px);
+      }
+      .flow-diagram__list { align-items: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .flow-diagram__pulse { animation: none; opacity: 0; }
+    }
+
     .section-flow .padding-section-large {
       padding-bottom: clamp(10rem, 16vw, 16rem);
     }
@@ -990,12 +1147,12 @@
 
     .streaming-headline {
       font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: clamp(28px, 4.45vw, 64px);
+      font-weight: 400;
+      font-size: clamp(28px, 3.6vw, 52px);
       line-height: 1.4;
       letter-spacing: -0.03em;
       color: #0e0e0e;
-      margin: 0 0 clamp(64px, 8vw, 120px);
+      margin: 0 0 clamp(96px, 11vw, 168px);
       text-align: left;
     }
 
@@ -1520,66 +1677,26 @@ margin: 0rem !important;
                 <span class="streaming-headline__line">platform seamlessly drives insights</span>
                 <span class="streaming-headline__line"><span class="streaming-headline__shape streaming-headline__shape--circle streaming-headline__shape--gray" aria-hidden="true"><svg class="streaming-headline__circle-icon" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="32" y="18" width="6" height="22" rx="3" fill="#F24622"/><circle cx="35" cy="50" r="3.5" fill="#F24622"/></svg></span><span class="streaming-headline__shape streaming-headline__shape--circle streaming-headline__shape--orange" aria-hidden="true"><svg class="streaming-headline__circle-icon" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 35 16 C 28 16 22 21 22 28 C 22 35 26 40 30 41 L 30 45 L 40 45 L 40 41 C 44 40 48 35 48 28 C 48 21 42 16 35 16 Z" fill="#ffffff"/><rect x="29" y="47" width="12" height="3" rx="1.3" fill="#ffffff"/><rect x="31" y="52" width="8" height="3" rx="1.3" fill="#ffffff"/></svg></span><span class="streaming-headline__line-text">into business decision making</span></span>
               </h2>
-              <h5 class="section-flow__heading">Connect everything you have</h5>
-              <div class="flow-row">
-                <div class="flow-row__text-block">
-                  <div class="flow-row__icon flow-row__icon--1">
-                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
-                    <span class="flow-row__tag">ERP<br>systems</span>
+              <h5 class="section-flow__heading">Connect your data and get decisions</h5>
+              <div class="flow-diagram">
+                <div class="flow-diagram__body">
+                  <ul class="flow-diagram__list flow-diagram__list--left">
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/pr_pred.avif" width="300" height="300" alt="" loading="lazy"><span class="flow-diagram__label">Sensors</span></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/sensors.avif" width="300" height="300" alt="" loading="lazy"><span class="flow-diagram__label">Data Systems</span></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/automation.avif" width="300" height="300" alt="" loading="lazy"><span class="flow-diagram__label">ERP Systems</span></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/transactions.avif" width="300" height="300" alt="" loading="lazy"><span class="flow-diagram__label">Transactions</span></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/pr_pred.avif" width="300" height="300" alt="" loading="lazy"><span class="flow-diagram__label">Internet of things</span></li>
+                  </ul>
+                  <div class="flow-diagram__center">
+                    <img loading="lazy" src="images/stella_data.avif" width="720" height="477" alt="Stella data platform" class="flow-diagram__image">
                   </div>
-                  <div class="flow-row__icon flow-row__icon--2">
-                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
-                    <span class="flow-row__tag">IoT</span>
-                  </div>
-                  <div class="flow-row__icon flow-row__icon--3">
-                    <img loading="lazy" src="images/sensors.avif" width="300" height="300" alt="">
-                    <span class="flow-row__tag">Sensors</span>
-                  </div>
-                  <div class="flow-row__icon flow-row__icon--4">
-                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
-                    <span class="flow-row__tag">Data<br>systems</span>
-                  </div>
-                  <div class="flow-row__icon flow-row__icon--5">
-                    <img loading="lazy" src="images/transactions.avif" width="300" height="300" alt="">
-                    <span class="flow-row__tag">Transactions</span>
-                  </div>
-                  <h2 class="flow-row__text">Connect<br>your data</h2>
-                </div>
-                <div class="flow-row__center-group">
-                  <div class="flow-row__arrow" aria-hidden="true">
-                    <svg width="80" height="12" viewBox="0 0 80 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M0 6h76m0 0L71 1m5 5l-5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </div>
-                  <img loading="lazy" src="images/stella_data.avif" width="720" height="477" alt="Stella data platform" class="flow-row__image">
-                  <div class="flow-row__arrow" aria-hidden="true">
-                    <svg width="80" height="12" viewBox="0 0 80 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M0 6h76m0 0L71 1m5 5l-5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </div>
-                </div>
-                <div class="flow-row__text-block flow-row__text-block--right">
-                  <div class="flow-row__icon flow-row__icon--1">
-                    <img loading="lazy" src="images/automation.avif" width="300" height="300" alt="">
-                    <span class="flow-row__tag">Automation</span>
-                  </div>
-                  <div class="flow-row__icon flow-row__icon--2">
-                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
-                    <span class="flow-row__tag">Increased<br>efficiency</span>
-                  </div>
-                  <div class="flow-row__icon flow-row__icon--3">
-                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
-                    <span class="flow-row__tag">Fast<br>reactions</span>
-                  </div>
-                  <div class="flow-row__icon flow-row__icon--4">
-                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
-                    <span class="flow-row__tag">Problem<br>prediction</span>
-                  </div>
-                  <div class="flow-row__icon flow-row__icon--5">
-                    <img loading="lazy" src="images/pr_pred.avif" width="300" height="300" alt="">
-                    <span class="flow-row__tag">Better business<br>decisions</span>
-                  </div>
-                  <h2 class="flow-row__text">Get<br>decisions</h2>
+                  <ul class="flow-diagram__list flow-diagram__list--right">
+                    <li class="flow-diagram__item"><span class="flow-diagram__label">Increased efficiency</span><img class="flow-diagram__icon" src="images/pr_pred.avif" width="300" height="300" alt="" loading="lazy"></li>
+                    <li class="flow-diagram__item"><span class="flow-diagram__label">Automation</span><img class="flow-diagram__icon" src="images/automation.avif" width="300" height="300" alt="" loading="lazy"></li>
+                    <li class="flow-diagram__item"><span class="flow-diagram__label">Fast reactions</span><img class="flow-diagram__icon" src="images/transactions.avif" width="300" height="300" alt="" loading="lazy"></li>
+                    <li class="flow-diagram__item"><span class="flow-diagram__label">Better business decisions</span><img class="flow-diagram__icon" src="images/sensors.avif" width="300" height="300" alt="" loading="lazy"></li>
+                    <li class="flow-diagram__item"><span class="flow-diagram__label">Problem prediction</span><img class="flow-diagram__icon" src="images/pr_pred.avif" width="300" height="300" alt="" loading="lazy"></li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -2518,6 +2635,84 @@ margin: 0rem !important;
       });
 
       if (autoplay) restartFill();
+    })();
+  </script>
+  <script>
+    /* Flow diagram: curved connector lines from each side node into the central datacenter,
+       with an orange pulse flowing in (left) and out (right). Lines are built from the live
+       element positions and rebuilt on resize / when the section scrolls into view. */
+    (function () {
+      var diagram = document.querySelector('.flow-diagram');
+      if (!diagram) return;
+      var svg = diagram.querySelector('.flow-diagram__lines');
+      var img = diagram.querySelector('.flow-diagram__image');
+      if (!svg || !img) return;
+      var leftDots = [].slice.call(diagram.querySelectorAll('.flow-diagram__side--left .flow-diagram__dot'));
+      var rightDots = [].slice.call(diagram.querySelectorAll('.flow-diagram__side--right .flow-diagram__dot'));
+      var SVGNS = 'http://www.w3.org/2000/svg';
+      var EDGE_INSET = 0.16; // how far inside the image the lines converge (hidden behind the device)
+
+      function rel(el, base) {
+        var r = el.getBoundingClientRect();
+        return { x: r.left + r.width / 2 - base.left, y: r.top + r.height / 2 - base.top };
+      }
+
+      function d(a, b) {
+        var dx = (b.x - a.x) * 0.5;
+        return 'M ' + a.x.toFixed(1) + ' ' + a.y.toFixed(1) +
+               ' C ' + (a.x + dx).toFixed(1) + ' ' + a.y.toFixed(1) + ', ' +
+               (b.x - dx).toFixed(1) + ' ' + b.y.toFixed(1) + ', ' +
+               b.x.toFixed(1) + ' ' + b.y.toFixed(1);
+      }
+
+      function addLine(a, b, delay) {
+        var dd = d(a, b);
+        var base = document.createElementNS(SVGNS, 'path');
+        base.setAttribute('class', 'flow-diagram__line');
+        base.setAttribute('d', dd);
+        svg.appendChild(base);
+        var pulse = document.createElementNS(SVGNS, 'path');
+        pulse.setAttribute('class', 'flow-diagram__pulse');
+        pulse.setAttribute('d', dd);
+        pulse.setAttribute('pathLength', '100');
+        pulse.style.animationDelay = delay.toFixed(2) + 's';
+        svg.appendChild(pulse);
+      }
+
+      function build() {
+        if (getComputedStyle(svg).display === 'none') return; // stacked (mobile) layout
+        var cr = diagram.getBoundingClientRect();
+        if (cr.width < 2 || cr.height < 2) return;
+        svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + cr.height);
+        while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+        var ir = img.getBoundingClientRect();
+        var midY = ir.top + ir.height / 2 - cr.top;
+        var leftHub = { x: ir.left - cr.left + ir.width * EDGE_INSET, y: midY };
+        var rightHub = { x: ir.left - cr.left + ir.width * (1 - EDGE_INSET), y: midY };
+
+        leftDots.forEach(function (dot, i) {
+          addLine(rel(dot, cr), leftHub, -i * 0.45);          // node -> hub: flows in
+        });
+        rightDots.forEach(function (dot, i) {
+          addLine(rightHub, rel(dot, cr), -i * 0.45 - 0.22);  // hub -> node: flows out
+        });
+      }
+
+      var raf = 0;
+      function schedule() {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(build);
+      }
+
+      schedule();
+      window.addEventListener('load', schedule);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+      if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(diagram);
+      else window.addEventListener('resize', schedule);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (e) { if (e[0].isIntersecting) schedule(); }).observe(diagram);
+      }
     })();
   </script>
 </body>
