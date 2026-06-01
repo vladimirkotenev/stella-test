@@ -775,13 +775,16 @@
       justify-content: center;
       padding: 0;
       top: auto;
-      margin: 0 0 clamp(40px, 4.5vw, 64px);
+      margin: 0 0 clamp(32px, 3.4vw, 48px);
     }
 
     .scenarios-tabs__pill.w-tab-link {
+      position: relative;
+      overflow: hidden;
       display: inline-flex;
       align-items: center;
-      background: #1f1f1f;
+      background: transparent;
+      border: 1px solid rgba(250, 250, 250, 0.2);
       color: #fafafa;
       font-family: 'Poppins', sans-serif;
       font-size: clamp(14px, 1.1vw, 16px);
@@ -790,25 +793,104 @@
       border-radius: 999px;
       cursor: pointer;
       text-decoration: none;
-      transition: background-color 0.2s ease, color 0.2s ease;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
       white-space: nowrap;
       letter-spacing: 0;
     }
 
     .scenarios-tabs__pill.w-tab-link:hover {
-      background: #2e2e2e;
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(250, 250, 250, 0.2);
       border-radius: 999px;
     }
 
     .scenarios-tabs__pill.w-tab-link.w--current {
-      background: #ffffff;
-      color: #0e0e0e;
+      background: transparent;
+      color: #fafafa;
       border-radius: 999px;
     }
 
+    /* label sits above the orange fill */
+    .scenarios-tabs__pill-label {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* orange fill that sweeps the active pill left -> right over the cycle */
+    .scenarios-tabs__fill {
+      position: absolute;
+      inset: 0;
+      background: #f24622;
+      transform: scaleX(0);
+      transform-origin: left center;
+      pointer-events: none;
+    }
+
     .scenarios-tabs__content.w-tab-content {
+      position: relative;
       margin-top: 0;
       display: block;
+      overflow: visible;
+    }
+
+    /* prev/next arrows, vertically centred on the card, sitting in the dark gutter outside it */
+    .scenarios-tabs__arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      border: 1px solid rgba(250, 250, 250, 0.2);
+      border-radius: 999px;
+      background: transparent;
+      color: #fafafa;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .scenarios-tabs__arrow:hover,
+    .scenarios-tabs__arrow:focus-visible {
+      border-color: rgba(250, 250, 250, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      outline: none;
+    }
+
+    .scenarios-tabs__arrow svg {
+      width: 42%;
+      height: 42%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .scenarios-tabs__arrow--prev { left: calc(-22px - 2.5vw); }
+    .scenarios-tabs__arrow--next { right: calc(-22px - 2.5vw); }
+
+    /* narrow viewports: gutter is too small, so overlay the arrows just inside the card edges */
+    @media (max-width: 991px) {
+      .scenarios-tabs__arrow {
+        background: rgba(14, 14, 14, 0.55);
+        border-color: transparent;
+        color: #ffffff;
+      }
+      .scenarios-tabs__arrow:hover,
+      .scenarios-tabs__arrow:focus-visible { background: rgba(14, 14, 14, 0.78); border-color: transparent; }
+      .scenarios-tabs__arrow--prev { left: 10px; }
+      .scenarios-tabs__arrow--next { right: 10px; }
+    }
+
+    @media (max-width: 479px) {
+      .scenarios-tabs__arrow { width: 32px; height: 32px; }
     }
 
     .scenarios-card {
@@ -1523,8 +1605,8 @@ margin: 0rem !important;
                   <p class="paragraph is-capitalized is-center">Client triggers<br>per second</p>
                 </div>
                 <div class="number_container">
-                  <h2 class="header-number is-center"><span class="header-number__val" data-target="1">0</span><span class="header-number__suffix">BN</span></h2>
-                  <p class="paragraph is-capitalized is-center">Aggregated<br>events p/s</p>
+                  <h2 class="header-number is-center"><span class="header-number__val" data-target="6">0</span><span class="header-number__suffix">BN</span></h2>
+                  <p class="paragraph is-capitalized is-center">Aggregated<br>events per hour</p>
                 </div>
               </div>
             </div>
@@ -1546,12 +1628,12 @@ margin: 0rem !important;
               </div>
               <div data-current="Tab 2" data-easing="ease" data-duration-in="0" data-duration-out="0" class="scenarios-tabs tabs w-tabs">
                 <div class="scenarios-tabs__menu tabs-menu-2 w-tab-menu">
-                  <a data-w-tab="Tab 1" class="scenarios-tabs__pill w-inline-block w-tab-link">City</a>
-                  <a data-w-tab="Tab 2" class="scenarios-tabs__pill w-inline-block w-tab-link w--current">Agriculture</a>
-                  <a data-w-tab="Tab 3" class="scenarios-tabs__pill w-inline-block w-tab-link">Factory</a>
-                  <a data-w-tab="Tab 4" class="scenarios-tabs__pill w-inline-block w-tab-link">Banking</a>
-                  <a data-w-tab="Tab 5" class="scenarios-tabs__pill w-inline-block w-tab-link">Retail</a>
-                  <a data-w-tab="Tab 6" class="scenarios-tabs__pill w-inline-block w-tab-link">Energy</a>
+                  <a data-w-tab="Tab 1" class="scenarios-tabs__pill w-inline-block w-tab-link"><span class="scenarios-tabs__pill-label">City</span></a>
+                  <a data-w-tab="Tab 2" class="scenarios-tabs__pill w-inline-block w-tab-link w--current"><span class="scenarios-tabs__pill-label">Agriculture</span></a>
+                  <a data-w-tab="Tab 3" class="scenarios-tabs__pill w-inline-block w-tab-link"><span class="scenarios-tabs__pill-label">Factory</span></a>
+                  <a data-w-tab="Tab 4" class="scenarios-tabs__pill w-inline-block w-tab-link"><span class="scenarios-tabs__pill-label">Banking</span></a>
+                  <a data-w-tab="Tab 5" class="scenarios-tabs__pill w-inline-block w-tab-link"><span class="scenarios-tabs__pill-label">Retail</span></a>
+                  <a data-w-tab="Tab 6" class="scenarios-tabs__pill w-inline-block w-tab-link"><span class="scenarios-tabs__pill-label">Energy</span></a>
                 </div>
                 <div class="scenarios-tabs__content tabs-content w-tab-content">
                   <div data-w-tab="Tab 1" class="w-tab-pane">
@@ -2359,6 +2441,84 @@ margin: 0rem !important;
 
       svg.innerHTML = parts.join('');
     });
+  </script>
+  <script>
+    /* Business Scenarios slider: the active pill fills with brand orange left -> right
+       over 5s, then the slider advances to the next scenario and loops. Side arrows give
+       manual prev/next; any user click resets the timer but keeps autoplay running. Runs
+       continuously (no hover/off-screen pause). Under prefers-reduced-motion the fill /
+       autoplay are off but the arrows still work. */
+    (function () {
+      var tabs = document.querySelector('.scenarios-tabs');
+      if (!tabs) return;
+      var content = tabs.querySelector('.scenarios-tabs__content');
+      var pills = Array.prototype.slice.call(tabs.querySelectorAll('.scenarios-tabs__pill'));
+      var n = pills.length;
+      if (!content || n < 2) return;
+
+      var INTERVAL = 5000;
+      var hasWAAPI = typeof document.createElement('span').animate === 'function';
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var autoplay = hasWAAPI && !reduce;
+
+      var fill = null, anim = null;
+      if (autoplay) {
+        fill = document.createElement('span');
+        fill.className = 'scenarios-tabs__fill';
+        fill.setAttribute('aria-hidden', 'true');
+      }
+
+      function curIdx() {
+        for (var i = 0; i < n; i++) {
+          if (pills[i].classList.contains('w--current')) return i;
+        }
+        return 0;
+      }
+      var idx = curIdx();
+
+      function restartFill() {
+        if (!autoplay) return;
+        if (anim) { anim.cancel(); anim = null; }
+        pills[idx].appendChild(fill);
+        anim = fill.animate(
+          [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
+          { duration: INTERVAL, easing: 'linear', fill: 'forwards' }
+        );
+        anim.onfinish = function () { goTo(idx + 1); };
+      }
+
+      // programmatic navigation (arrows + auto-advance), wraps around at the ends
+      function goTo(i) {
+        i = (i % n + n) % n;
+        if (i !== curIdx()) pills[i].click(); // Webflow switches the pane + .w--current
+        idx = i;
+        restartFill();
+      }
+
+      // build the arrows (work even without autoplay)
+      function makeArrow(dir, label, path) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'scenarios-tabs__arrow scenarios-tabs__arrow--' + (dir < 0 ? 'prev' : 'next');
+        b.setAttribute('aria-label', label);
+        b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + path + '"/></svg>';
+        b.addEventListener('click', function () { goTo(idx + dir); });
+        return b;
+      }
+      content.appendChild(makeArrow(-1, 'Previous scenario', 'M15 4 L7 12 L15 20'));
+      content.appendChild(makeArrow(1, 'Next scenario', 'M9 4 L17 12 L9 20'));
+
+      // a direct click on a tab keeps autoplay going but restarts the timer on it
+      pills.forEach(function (p, i) {
+        p.addEventListener('click', function (e) {
+          if (!e.isTrusted) return; // ignore the programmatic clicks fired by goTo
+          idx = i;
+          restartFill();
+        });
+      });
+
+      if (autoplay) restartFill();
+    })();
   </script>
 </body>
 </html>
