@@ -30,7 +30,19 @@
       </a>
       <nav class="site-nav__menu" id="siteNavMenu">
         <a href="about-us.html" class="site-nav__link is-active">About us</a>
-        <a href="index.html" class="site-nav__link">Solutions</a>
+        <div class="site-nav__item site-nav__item--has-menu">
+          <a href="index.html#solutions" class="site-nav__link site-nav__link--menu">Business Scenarios<svg class="site-nav__caret" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <div class="site-nav__dropdown">
+            <div class="site-nav__dropdown-panel">
+              <a class="site-nav__dropdown-link" href="index.html#solutions"><img class="site-nav__dropdown-icon" src="images/smart_city_glass.avif" width="30" height="30" alt=""><span>Smart City</span></a>
+              <a class="site-nav__dropdown-link" href="index.html#solutions"><img class="site-nav__dropdown-icon" src="images/agro_glass.avif" width="30" height="30" alt=""><span>Agriculture</span></a>
+              <a class="site-nav__dropdown-link" href="index.html#solutions"><img class="site-nav__dropdown-icon" src="images/factory_glass.avif" width="30" height="30" alt=""><span>Factory</span></a>
+              <a class="site-nav__dropdown-link" href="index.html#solutions"><img class="site-nav__dropdown-icon" src="images/bank_glass.avif" width="30" height="30" alt=""><span>Banking</span></a>
+              <a class="site-nav__dropdown-link" href="index.html#solutions"><img class="site-nav__dropdown-icon" src="images/retail_glass.avif" width="30" height="30" alt=""><span>Retail</span></a>
+              <a class="site-nav__dropdown-link" href="index.html#solutions"><img class="site-nav__dropdown-icon" src="images/energy_glass.avif" width="30" height="30" alt=""><span>Energy</span></a>
+            </div>
+          </div>
+        </div>
         <a href="technology.html" class="site-nav__link">Technology</a>
         <a href="technology-hub.html" class="site-nav__link">Technology Hub</a>
         <a href="contact-us.html" class="site-nav__link">Contact</a>
@@ -456,7 +468,7 @@ margin: 0rem !important;
         <nav class="site-footer__nav" aria-label="Footer">
           <ul class="site-footer__nav-col">
             <li><a href="about-us.html" class="site-footer__nav-link">About us</a></li>
-            <li><a href="index.html" class="site-footer__nav-link">Solutions</a></li>
+            <li><a href="index.html" class="site-footer__nav-link">Business Scenarios</a></li>
             <li><a href="technology.html" class="site-footer__nav-link">Technology</a></li>
           </ul>
           <ul class="site-footer__nav-col">
@@ -486,5 +498,6 @@ margin: 0rem !important;
       });
     })();
   </script>
+  <script src="js/nav-menu.js" defer></script>
 </body>
 </html>

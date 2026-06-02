@@ -10056,7 +10056,7 @@ figcaption {
   position: relative;
   font-family: Poppins, sans-serif;
   color: #FAFAFA;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 400;
   text-decoration: none;
 }
@@ -10106,7 +10106,7 @@ figcaption {
   border-radius: 50rem;
   padding: 16px 24px;
   font-family: Poppins, sans-serif;
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1;
   text-decoration: none;
@@ -10161,6 +10161,145 @@ figcaption {
 /* Mobile CTA (inside menu) — hidden on desktop */
 .site-nav__cta--mobile {
   display: none;
+}
+
+/* ===== Business Scenarios dropdown ===== */
+.site-nav__item--has-menu {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-nav__link--menu {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+/* no wavy underline on the dropdown trigger — the wave marks the active page (index/logo) */
+.site-nav__link--menu::after {
+  display: none;
+}
+
+.site-nav__caret {
+  width: 11px;
+  height: 11px;
+  flex: 0 0 auto;
+  transition: transform 0.25s ease;
+}
+
+.site-nav__item--has-menu:hover .site-nav__caret {
+  transform: rotate(180deg);
+}
+
+.site-nav__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);   /* constant — no transform animation, so no layer-repaint flash */
+  padding-top: 14px;          /* transparent bridge so the hover doesn't break over the gap */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: auto;       /* visibility gates interactivity while closed */
+  transition: opacity 0.22s ease, visibility 0.22s;
+  transition-delay: 0.18s;    /* hover-intent: stay open through brief pointer slips */
+  z-index: 50;
+}
+
+.site-nav__item--has-menu:hover .site-nav__dropdown {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;       /* open immediately, fade in */
+}
+
+.site-nav__dropdown-panel {
+  background: #191919;
+  border: 1px solid rgba(250, 250, 250, 0.08);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 0;                /* contiguous items — no dead-zone between them to flicker the hover */
+  min-width: 232px;
+  /* pin to its own GPU layer so the page's constant repaints (hero canvas + comet SMIL)
+     don't re-rasterise the panel and make the hover highlight flicker */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  isolation: isolate;
+}
+
+.site-nav__dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  color: #9aa0a8;
+  font-family: Poppins, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+/* hover: gray -> white (no background layer, so nothing to flicker) */
+.site-nav__dropdown-link:hover {
+  color: #fafafa;
+}
+
+.site-nav__dropdown-icon {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* dropdown becomes an inline accordion inside the fullscreen mobile menu */
+@media (max-width: 767px) {
+  .site-nav__item--has-menu {
+    flex-direction: column;
+    width: 100%;
+  }
+  .site-nav__link--menu {
+    justify-content: center;
+    width: 100%;
+    padding: 14px 0;
+  }
+  .site-nav__item--has-menu.is-open .site-nav__caret {
+    transform: rotate(180deg);
+  }
+  .site-nav__dropdown,
+  .site-nav__item--has-menu:hover .site-nav__dropdown {
+    position: static;
+    transform: none;
+    padding-top: 0;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    max-height: 0;
+    overflow: hidden;
+    width: 100%;
+    transition: max-height 0.35s ease;
+  }
+  .site-nav__item--has-menu.is-open .site-nav__dropdown {
+    max-height: 70vh;
+  }
+  .site-nav__dropdown-panel {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 4px 0 12px;
+    min-width: 0;
+    align-items: center;
+  }
+  .site-nav__dropdown-link {
+    justify-content: center;
+    font-size: 1.125rem;
+  }
 }
 
 /* ===== HERO HEADING ANIMATION ===== */
