@@ -1013,6 +1013,15 @@
       transform: translateY(12px);
     }
 
+    /* flow diagram reveals via gsap.fromTo; resting state has no translate so the connector
+       lines can be measured against settled positions and fade in alongside the rows.
+       (opacity only — a translate here would shift the whole SVG overlay off its anchors) */
+    .w-mod-js .flow-diagram__item,
+    .w-mod-js .flow-diagram__image,
+    .w-mod-js .flow-diagram__lines {
+      opacity: 0;
+    }
+
     .streaming-headline__shape {
       display: inline-block;
       vertical-align: middle;
@@ -2086,69 +2095,25 @@ margin: 0rem !important;
         gsap.ticker.lagSmoothing(0);
       }
 
+      // ---- scroll reveals ----
+      // Each section is triggered by its own HEADING: once the heading slides in, the rest of
+      // the section cascades right behind it (after LEAD) — so the body starts revealing as soon
+      // as the user reaches the heading, without waiting to scroll onto the body elements.
+      const LEAD = 0.15; // delay between the heading and the body cascade
+
+      // section content collections
       const numberContainers = document.querySelectorAll('.section-numnber .number_container');
+      const flowDiagram = document.querySelector('.flow-diagram');
+      const flowLeftItems = flowDiagram ? flowDiagram.querySelectorAll('.flow-diagram__list--left .flow-diagram__item') : [];
+      const flowRightItems = flowDiagram ? flowDiagram.querySelectorAll('.flow-diagram__list--right .flow-diagram__item') : [];
+      const flowImage = flowDiagram ? flowDiagram.querySelector('.flow-diagram__image') : null;
+      const flowLines = flowDiagram ? flowDiagram.querySelector('.flow-diagram__lines') : null;
+      const scenariosMenu = document.querySelector('.scenarios-tabs__menu');
+      const keyFeatureItems = document.querySelectorAll('.key-features__item');
+      const locationsLayout = document.querySelector('.locations__layout');
+      const FLOW_ROW = 0.12; // per-row stagger in the flow diagram
 
-      ScrollTrigger.create({
-        trigger: '.section-numnber .number-grid_container',
-        start: 'top 80%',
-        once: true,
-        onEnter: () => {
-          numberContainers.forEach((container, i) => {
-            const delay = i * 0.12;
-            const valEl = container.querySelector('.header-number__val');
-            const target = parseInt(valEl.dataset.target, 10);
-
-            gsap.to(container, {
-              opacity: 1,
-              y: 0,
-              duration: 0.5,
-              ease: 'power2.out',
-              delay
-            });
-
-            const counter = { v: 0 };
-            gsap.to(counter, {
-              v: target,
-              duration: 1.7,
-              ease: 'power2.out',
-              delay: delay + 0.15,
-              onUpdate: () => {
-                valEl.textContent = Math.round(counter.v);
-              }
-            });
-          });
-        }
-      });
-
-      const headlineLines = document.querySelectorAll('.streaming-headline__line');
-
-      if (headlineLines.length) {
-        ScrollTrigger.create({
-          trigger: '.streaming-headline',
-          start: 'top 80%',
-          once: true,
-          onEnter: () => {
-            gsap.to(headlineLines, {
-              opacity: 1,
-              y: 0,
-              duration: 0.5,
-              ease: 'power2.out',
-              stagger: 0.12
-            });
-          }
-        });
-      }
-
-      const pillWave = document.querySelector('.streaming-headline__pill-wave-scroll');
-      if (pillWave) {
-        gsap.to(pillWave, {
-          x: -200,
-          duration: 4,
-          ease: 'none',
-          repeat: -1
-        });
-      }
-
+      // single-element reveal kept for the CTA (no heading of its own)
       function revealOnScroll(selector) {
         document.querySelectorAll(selector).forEach((el) => {
           ScrollTrigger.create({
@@ -2156,21 +2121,25 @@ margin: 0rem !important;
             start: 'top 85%',
             once: true,
             onEnter: () => {
-              gsap.to(el, {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                ease: 'power2.out'
-              });
+              gsap.to(el, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
             }
           });
         });
       }
 
-      revealOnScroll('.section-flow__heading');
-      revealOnScroll('.section-numnber__heading');
-      revealOnScroll('.section-tabs__heading');
-      revealOnScroll('.scenarios-tabs__menu');
+      // reveal a section as a cascade, triggered when its heading scrolls into view
+      function revealSection(heading, cascade) {
+        if (!heading) return;
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 85%',
+          once: true,
+          onEnter: () => {
+            gsap.to(heading, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+            if (cascade) cascade(LEAD);
+          }
+        });
+      }
 
       const animateActiveScenarioPane = () => {
         const activePane = document.querySelector('.scenarios-tabs .w-tab-pane.w--tab-active');
@@ -2182,50 +2151,85 @@ margin: 0rem !important;
         gsap.fromTo(
           targets,
           { opacity: 0, y: 12 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: 'power2.out',
-            stagger: 0.15,
-            overwrite: true
-          }
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.15, overwrite: true }
         );
       };
 
-      const scenariosTabs = document.querySelector('.scenarios-tabs');
-      if (scenariosTabs) {
+      // per-section body cascades (lead = delay after the heading)
+      function revealFlow(lead) {
+        if (!flowDiagram) return;
+        gsap.fromTo(flowLeftItems, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: FLOW_ROW, delay: lead });
+        gsap.fromTo(flowRightItems, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: FLOW_ROW, delay: lead });
+        if (flowImage) gsap.fromTo(flowImage, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: lead + FLOW_ROW * 1.5 });
+        if (flowLines) gsap.fromTo(flowLines, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'power2.out', delay: lead + FLOW_ROW });
+      }
+
+      function revealNumbers(lead) {
+        numberContainers.forEach((container, i) => {
+          const delay = lead + i * 0.12;
+          const valEl = container.querySelector('.header-number__val');
+          const target = parseInt(valEl.dataset.target, 10);
+          gsap.to(container, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay });
+          const counter = { v: 0 };
+          gsap.to(counter, {
+            v: target,
+            duration: 1.7,
+            ease: 'power2.out',
+            delay: delay + 0.15,
+            onUpdate: () => { valEl.textContent = Math.round(counter.v); }
+          });
+        });
+      }
+
+      function revealTabs(lead) {
+        if (scenariosMenu) gsap.to(scenariosMenu, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: lead });
+        gsap.delayedCall(lead + 0.1, animateActiveScenarioPane);
+      }
+
+      function revealKeyFeatures(lead) {
+        if (keyFeatureItems.length) gsap.to(keyFeatureItems, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08, delay: lead });
+      }
+
+      function revealLocations(lead) {
+        if (locationsLayout) gsap.to(locationsLayout, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: lead });
+      }
+
+      // streaming headline is the section-flow intro (above the heading) — keep its own trigger
+      const headlineLines = document.querySelectorAll('.streaming-headline__line');
+      if (headlineLines.length) {
         ScrollTrigger.create({
-          trigger: scenariosTabs,
+          trigger: '.streaming-headline',
           start: 'top 80%',
           once: true,
-          onEnter: animateActiveScenarioPane
+          onEnter: () => {
+            gsap.to(headlineLines, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.12 });
+          }
         });
+      }
+
+      const pillWave = document.querySelector('.streaming-headline__pill-wave-scroll');
+      if (pillWave) {
+        gsap.to(pillWave, { x: -200, duration: 4, ease: 'none', repeat: -1 });
+      }
+
+      // wire each section to its heading
+      revealSection(document.querySelector('.section-flow .section-flow__heading'), revealFlow);
+      revealSection(document.querySelector('.section-numnber__heading'), revealNumbers);
+      revealSection(document.querySelector('.section-tabs__heading'), revealTabs);
+      revealSection(document.querySelector('.section_layout1.is-light-section:not(.section-locations) .section-flow__heading'), revealKeyFeatures);
+      revealSection(document.querySelector('.section-locations .section-flow__heading'), revealLocations);
+
+      // re-run the scenario card cascade when a tab pill is clicked
+      const scenariosTabs = document.querySelector('.scenarios-tabs');
+      if (scenariosTabs) {
         scenariosTabs.querySelectorAll('.scenarios-tabs__pill').forEach((pill) => {
           pill.addEventListener('click', () => {
             requestAnimationFrame(animateActiveScenarioPane);
           });
         });
       }
-      const keyFeatureItems = document.querySelectorAll('.key-features__item');
-      if (keyFeatureItems.length) {
-        ScrollTrigger.create({
-          trigger: '.key-features__grid',
-          start: 'top 80%',
-          once: true,
-          onEnter: () => {
-            gsap.to(keyFeatureItems, {
-              opacity: 1,
-              y: 0,
-              duration: 0.5,
-              ease: 'power2.out',
-              stagger: 0.08
-            });
-          }
-        });
-      }
+
       revealOnScroll('.section_layout192.is-cta-light .cta-banner');
-      revealOnScroll('.locations__layout');
 
       const ctaSection = document.querySelector('.section_layout192.is-cta-light');
       if (ctaSection) {
