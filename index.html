@@ -991,6 +991,47 @@
       background: #f24622;
     }
 
+    .scenarios-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      align-self: flex-start; /* shrink to text width, hover target stays tight */
+      /* pull the CTA a touch closer to the bullets than the column's uniform gap */
+      margin-top: clamp(-8px, -0.4vw, -4px);
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(14px, 1vw, 16px);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      color: #f24622;
+      text-decoration: none;
+      /* only `gap` animates on hover — opacity is driven by the GSAP reveal,
+         a CSS opacity transition here fights it and makes the CTA flash/fade
+         out of sync with the rest of the card cascade on tab switch */
+      transition: gap 0.3s ease;
+    }
+
+    .scenarios-card__cta svg {
+      width: 1.05em;
+      height: 1.05em;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .scenarios-card__cta:hover {
+      gap: 0.7em;
+    }
+
+    .scenarios-card__cta:hover svg {
+      transform: translateX(3px);
+    }
+
+    .scenarios-card__cta:focus-visible {
+      outline: 2px solid #f24622;
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
     .scenarios-card__right {
       position: relative;
       width: 100%;
@@ -1035,6 +1076,7 @@
     .w-mod-js .scenarios-card__icon,
     .w-mod-js .scenarios-card__title,
     .w-mod-js .scenarios-card__text,
+    .w-mod-js .scenarios-card__cta,
     .w-mod-js .scenarios-card__right,
     .w-mod-js .key-features__item,
     .w-mod-js .locations__layout,
@@ -1642,7 +1684,7 @@ margin: 0rem !important;
               </div>
               <div data-current="Tab 2" data-easing="ease" data-duration-in="0" data-duration-out="0" class="scenarios-tabs tabs w-tabs">
                 <div class="scenarios-tabs__menu tabs-menu-2 w-tab-menu">
-                  <a data-w-tab="Tab 1" class="scenarios-tabs__pill w-inline-block w-tab-link"><span class="scenarios-tabs__pill-label">City</span></a>
+                  <a data-w-tab="Tab 1" class="scenarios-tabs__pill w-inline-block w-tab-link"><span class="scenarios-tabs__pill-label">Smart City</span></a>
                   <a data-w-tab="Tab 2" class="scenarios-tabs__pill w-inline-block w-tab-link w--current"><span class="scenarios-tabs__pill-label">Agriculture</span></a>
                   <a data-w-tab="Tab 3" class="scenarios-tabs__pill w-inline-block w-tab-link"><span class="scenarios-tabs__pill-label">Factory</span></a>
                   <a data-w-tab="Tab 4" class="scenarios-tabs__pill w-inline-block w-tab-link"><span class="scenarios-tabs__pill-label">Banking</span></a>
@@ -1657,10 +1699,8 @@ margin: 0rem !important;
                           <img src="images/smart_city_glass.avif" width="272" height="272" alt="" loading="lazy">
                         </div>
                         <h3 class="scenarios-card__title">Smart City</h3>
-                        <ul class="scenarios-card__text">
-                          <li>Air Quality Monitoring in the district.</li>
-                          <li>Reduce traffic jams, improve driver service and make efficient use of urban infrastructure.</li>
-                        </ul>
+                        <p class="scenarios-card__text">Stella enables cities to shift from reactive administration to real-time operational intelligence — improving efficiency, sustainability, and quality of life across the entire urban environment.</p>
+                        <a href="#" class="scenarios-card__cta">Explore Smart City<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                       </div>
                       <div class="scenarios-card__right">
                         <img loading="lazy" src="images/city_.avif" width="1250" height="782" alt="Smart City scenario" class="scenarios-card__image">
@@ -1674,10 +1714,8 @@ margin: 0rem !important;
                           <img src="images/agro_glass.avif" width="272" height="272" alt="" loading="lazy">
                         </div>
                         <h3 class="scenarios-card__title">Agriculture</h3>
-                        <ul class="scenarios-card__text">
-                          <li>Monitoring of environmental conditions in agriculture.</li>
-                          <li>Warning farmers in the event of impending adverse weather conditions.</li>
-                        </ul>
+                        <p class="scenarios-card__text">Stella enables agricultural operations to shift from reactive management to real-time operational intelligence — improving yield, resource efficiency, and sustainability across the entire operation.</p>
+                        <a href="#" class="scenarios-card__cta">Explore Agriculture<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                       </div>
                       <div class="scenarios-card__right">
                         <img loading="lazy" src="images/agronome.avif" width="1250" height="782" alt="Agriculture scenario" class="scenarios-card__image">
@@ -1691,10 +1729,8 @@ margin: 0rem !important;
                           <img src="images/factory_glass.avif" width="272" height="272" alt="" loading="lazy">
                         </div>
                         <h3 class="scenarios-card__title">Factory</h3>
-                        <ul class="scenarios-card__text">
-                          <li>Ongoing parameter control in CNC.</li>
-                          <li>Prevent damage to machinery, reduce repair costs and downtime.</li>
-                        </ul>
+                        <p class="scenarios-card__text">Stella enables factories to shift from reactive operations to real-time operational intelligence — improving productivity, uptime, and quality across the entire production environment.</p>
+                        <a href="#" class="scenarios-card__cta">Explore Factory<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                       </div>
                       <div class="scenarios-card__right">
                         <img loading="lazy" src="images/factory_.avif" width="1250" height="782" alt="Factory scenario" class="scenarios-card__image">
@@ -1708,10 +1744,8 @@ margin: 0rem !important;
                           <img src="images/bank_glass.avif" width="272" height="272" alt="" loading="lazy">
                         </div>
                         <h3 class="scenarios-card__title">Banking</h3>
-                        <ul class="scenarios-card__text">
-                          <li>Automatic installment planning.</li>
-                          <li>Link payment dates to balances, trigger reminders and collections escalation when deadlines pass.</li>
-                        </ul>
+                        <p class="scenarios-card__text">Stella enables banks to shift from reactive decision-making to real-time operational intelligence — improving efficiency, security, and customer experience across the entire organization.</p>
+                        <a href="#" class="scenarios-card__cta">Explore Banking<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                       </div>
                       <div class="scenarios-card__right">
                         <img loading="lazy" src="images/bank_.avif" width="1250" height="782" alt="Banking scenario" class="scenarios-card__image">
@@ -1725,10 +1759,8 @@ margin: 0rem !important;
                           <img src="images/retail_glass.avif" width="272" height="272" alt="" loading="lazy">
                         </div>
                         <h3 class="scenarios-card__title">Retail</h3>
-                        <ul class="scenarios-card__text">
-                          <li>Omnichannel assortment management.</li>
-                          <li>Avoid overstocking, improve availability and unify inventory across all sales channels.</li>
-                        </ul>
+                        <p class="scenarios-card__text">Stella enables retailers to shift from reactive decision-making to real-time operational intelligence — improving efficiency, margins, and customer experience across the entire organization.</p>
+                        <a href="#" class="scenarios-card__cta">Explore Retail<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                       </div>
                       <div class="scenarios-card__right">
                         <img loading="lazy" src="images/retail_.avif" width="1250" height="782" alt="Retail scenario" class="scenarios-card__image">
@@ -1742,10 +1774,8 @@ margin: 0rem !important;
                           <img src="images/energy_glass.avif" width="272" height="272" alt="" loading="lazy">
                         </div>
                         <h3 class="scenarios-card__title">Energy</h3>
-                        <ul class="scenarios-card__text">
-                          <li>Power grid monitoring in real-time.</li>
-                          <li>Prevent outages, optimize distribution and enhance reliability through automatic balancing or operator alerts.</li>
-                        </ul>
+                        <p class="scenarios-card__text">Stella enables energy providers to shift from reactive operations to real-time operational intelligence — improving reliability, efficiency, and sustainability across the entire grid.</p>
+                        <a href="#" class="scenarios-card__cta">Explore Energy<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                       </div>
                       <div class="scenarios-card__right">
                         <img loading="lazy" src="images/energy_.avif" width="1250" height="782" alt="Energy scenario" class="scenarios-card__image">
@@ -2218,7 +2248,7 @@ margin: 0rem !important;
         const activePane = document.querySelector('.scenarios-tabs .w-tab-pane.w--tab-active');
         if (!activePane) return;
         const targets = activePane.querySelectorAll(
-          '.scenarios-card__icon, .scenarios-card__title, .scenarios-card__text, .scenarios-card__right'
+          '.scenarios-card__icon, .scenarios-card__title, .scenarios-card__text, .scenarios-card__cta, .scenarios-card__right'
         );
         if (!targets.length) return;
         gsap.fromTo(
