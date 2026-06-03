@@ -21,7 +21,7 @@
   <link href="images/favicon_stella.svg?v=2" rel="icon" type="image/svg+xml">
   <link href="images/webclip.jpg" rel="apple-touch-icon">
   <style>
-    section.section_header26 { background-color: #fafafa; }
+    section.section_header26 { background-color: #f8f8f7; }
     .section_header26 { position: relative; overflow: hidden; }
     .section_header26 .header26_component { position: relative; }
     .section_header26 > .padding-global { position: relative; z-index: 1; }
@@ -40,7 +40,7 @@
     .hero-flow.is-visible { opacity: 1; }
 
     /* soft same-colour scrim so the floating dots don't compete with the hero text:
-       invisible as a shape (matches the #fafafa background) — it just mutes the dots
+       invisible as a shape (matches the #f8f8f7 background) — it just mutes the dots
        around the text and fades out, sitting above the dots but below the text */
     .section_header26 .header26_component .max-width-large {
       position: relative;
@@ -247,7 +247,7 @@
 
     .hero-console {
       box-sizing: content-box;
-      background: #fafafa;
+      background: #f8f8f7;
       border-radius: 12px;
       padding: 16px 22px;
       width: 0;
@@ -299,7 +299,7 @@
       box-sizing: content-box;
       width: 190px;
       height: 90px;
-      background: #fafafa;
+      background: #f8f8f7;
       border-radius: 12px;
       position: relative;
       overflow: hidden;
@@ -334,7 +334,7 @@
 
     .hero-subtitle {
       font-size: clamp(1rem, 4vw, 1.2rem);
-      color: #fafafa;
+      color: #f8f8f7;
       font-weight: 300;
     }
 
@@ -370,11 +370,11 @@
     .section-numnber .header-number__suffix {
       display: inline-block;
       text-transform: lowercase;
-      color: #fafafa;
+      color: #f8f8f7;
     }
 
     .section-numnber .paragraph {
-      color: #fafafa;
+      color: #f8f8f7;
       font-size: 1rem;
       font-weight: 400;
       text-transform: none;
@@ -406,7 +406,7 @@
       box-sizing: content-box;
       width: 90px;
       height: 277px;
-      background: #fafafa;
+      background: #f8f8f7;
       border-radius: 12px;
       position: relative;
       overflow: hidden;
@@ -485,9 +485,9 @@
       .hero-console, .hero-graph, .hero-actions { animation: none; }
     }
 
-    .section-flow { background-color: #fafafa; }
+    .section-flow { background-color: #f8f8f7; }
 
-    .is-light-section { background-color: #fafafa; }
+    .is-light-section { background-color: #f8f8f7; }
     .is-light-section .header-2,
     .is-light-section .paragraph,
     .is-light-section .text-style-tagline,
@@ -708,7 +708,10 @@
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 16px;
+      /* cards hug their own content instead of stretching the full column;
+         the right list overrides this to flex-end below */
+      align-items: flex-start;
     }
 
     /* right list mirrors the left: label then icon, pinned to the container's right edge */
@@ -722,20 +725,28 @@
       align-items: center;
       gap: 16px;
       margin: 0;
-      padding: 0;
+      /* each item is a white card: pure white, slightly rounded */
+      padding: 12px 22px;
+      background: #ffffff;
+      border-radius: 16px;
     }
+
+    /* a touch more breathing room on the centre-facing edge (where the text sits):
+       right side for the left list, left side for the right list */
+    .flow-diagram__list--left .flow-diagram__item { padding-right: 30px; }
+    .flow-diagram__list--right .flow-diagram__item { padding-left: 30px; }
 
     .flow-diagram__icon {
       flex: 0 0 auto;
-      width: 58px;
-      height: 58px;
+      width: 48px;
+      height: 48px;
       object-fit: contain;
       display: block;
     }
 
     .flow-diagram__label {
       font-family: 'Poppins', sans-serif;
-      font-size: clamp(20px, 1.7vw, 26px);
+      font-size: clamp(14px, 1.1vw, 16px);
       font-weight: 400;
       line-height: 1.2;
       letter-spacing: -0.02em;
@@ -758,18 +769,28 @@
 
     .flow-diagram__line {
       fill: none;
-      stroke: #fafafa;
-      stroke-width: 1.4;
+      stroke: #eeeeed;
+      stroke-width: 1.5;
       stroke-linejoin: round;
     }
 
-    /* smooth orange gradient streak flowing along each line (Vercel "lines_glow"-style).
-       The stroke is a repeating linear gradient animated via gradientTransform (see JS defs). */
+    /* travelling dots: a dotted overlay (near-zero dash + round cap = a circle) whose dots
+       flow source -> destination via an animated stroke-dashoffset. The dot diameter is the
+       stroke-width; the gap is the spacing between dots. Per-line phase offset set in JS. */
     .flow-diagram__pulse {
       fill: none;
-      stroke-width: 2;
+      stroke: #b0b0b0;
+      stroke-width: 5;
       stroke-linecap: round;
       stroke-linejoin: round;
+      stroke-dasharray: 0.01 140;    /* tiny dash + round cap => a dot; 140px between dots (~3 per line) */
+      animation: flow-dots-march 3.2s linear infinite;
+    }
+
+    /* march exactly one period (dash + gap = 140.01) so the loop is seamless; negative
+       offset => dots travel toward the path's end (the data's destination) */
+    @keyframes flow-dots-march {
+      to { stroke-dashoffset: -140.01; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -811,7 +832,7 @@
       align-items: center;
       background: #191919;
       border: none;
-      color: #fafafa;
+      color: #f8f8f7;
       font-family: 'Poppins', sans-serif;
       font-size: clamp(14px, 1.1vw, 16px);
       font-weight: 400;
@@ -831,7 +852,7 @@
 
     .scenarios-tabs__pill.w-tab-link.w--current {
       background: #191919;
-      color: #fafafa;
+      color: #f8f8f7;
       border-radius: 999px;
     }
 
@@ -874,7 +895,7 @@
       border: none;
       border-radius: 999px;
       background: #191919;
-      color: #fafafa;
+      color: #f8f8f7;
       cursor: pointer;
       -webkit-appearance: none;
       appearance: none;
@@ -918,7 +939,7 @@
     }
 
     .scenarios-card {
-      background: #fafafa;
+      background: #f8f8f7;
       border-radius: clamp(16px, 1.8vw, 28px);
       padding: clamp(32px, 4.5vw, 72px);
       display: grid;
@@ -1171,7 +1192,7 @@
     .section_header26 .hero-line:nth-child(2) { animation-delay: 0.3s, 0s; }
     .section_header26 .hero-line:nth-child(3) { animation-delay: 0.4s, 0s; }
 
-    .section_layout192.is-cta-light { background-color: #fafafa; background-image: none; }
+    .section_layout192.is-cta-light { background-color: #f8f8f7; background-image: none; }
     .section_layout192.is-cta-light .header-1 {
       background-image: none;
       -webkit-text-fill-color: #f24622;
@@ -2594,63 +2615,47 @@ margin: 0rem !important;
       var svg = diagram.querySelector('.flow-diagram__lines');
       var img = diagram.querySelector('.flow-diagram__image');
       if (!svg || !img) return;
-      var leftLabels = [].slice.call(diagram.querySelectorAll('.flow-diagram__list--left .flow-diagram__label'));
-      var rightLabels = [].slice.call(diagram.querySelectorAll('.flow-diagram__list--right .flow-diagram__label'));
+      // anchor the connector lines to each item's white card edge (not the inner
+      // label) so a line starts flush with the box rather than inside its padding
+      var leftLabels = [].slice.call(diagram.querySelectorAll('.flow-diagram__list--left .flow-diagram__item'));
+      var rightLabels = [].slice.call(diagram.querySelectorAll('.flow-diagram__list--right .flow-diagram__item'));
       var SVGNS = 'http://www.w3.org/2000/svg';
 
-      var RAIL_T = 0.70;       // rail x: fraction of the gap (label edge -> image edge) toward the image
+      var RAIL_T = 0.35;       // 1st bend x: fraction of the gap (card edge -> image edge), near the cards
+      var RAIL2_T = 0.72;      // 2nd bend x: fraction toward the image -> together they make a Z (horiz/diag/horiz)
       var TEXT_GAP = 36;       // px between the end of the text and anchor1
       var FAN_STEP = 18;       // px vertical spacing between the converging anchor3 endpoints
-      var STREAK_PERIOD = 560; // px between consecutive comets — larger => rarer/sparser
-      var STREAK_DUR = 2.0;    // seconds for a comet to travel one period — smaller => faster
-      var STREAK_EASE = '0.4 0.2 0.6 0.8'; // cubic-bezier control points for the comet motion (vs linear)
-      // each line gets its own light tone for variety
-      var STREAK_COLORS = ['#a9ece4', '#a9c9f5', '#f5a9a9', '#c3aef0'];
-      // fixed pseudo-random jitter so comets stay desynced ("вразнобой") yet stable across rebuilds
+      var CORNER_R = 28;       // px radius for the rounded bends (symmetric on both sides of each corner)
+      // fixed pseudo-random jitter so the travelling dots stay desynced ("вразнобой") across lines
       var JIT = [0.13, 0.67, 0.41, 0.88, 0.05, 0.52, 0.78, 0.29, 0.95, 0.60];
-      // comet shape across one period: long soft tail (low x) -> bright head -> quick soft front.
-      // The width of the lit band (here ~0.08..0.64 of the period) is the comet's length.
-      var STOPS = [[0, 0], [0.08, 0], [0.50, 0.9], [0.58, 1], [0.64, 0], [1, 0]];
-      var defs, uid;
-      // DOM is created once; later rebuilds only update path `d` so the comet gradients/animations
-      // are never recreated (recreating them restarts SMIL and makes the streaks jump)
+      // DOM is created once; later rebuilds only update each path's `d` (and the dot CSS animation
+      // keeps running) so the dots never jump on resize / reveal
       var built = false, basePaths = [], pulsePaths = [];
 
-      // join an ordered list of points into a sharp-cornered path
+      // join an ordered list of points into a path with rounded bends. Each interior
+      // corner is trimmed by the same radius on BOTH segments and bridged with a quadratic
+      // curve whose control point is the original corner -> the round stays symmetric, and
+      // since the left/right geometry is mirrored the whole diagram stays symmetric too.
       function pathD(pts) {
-        return 'M ' + pts.map(function (p) { return p.x.toFixed(1) + ' ' + p.y.toFixed(1); }).join(' L ');
-      }
-
-      // a repeating, animated X-axis gradient that scrolls +X (the comet flows left -> right)
-      function makeStreakGradient(jit, color) {
-        var id = 'flow-streak-' + (uid++);
-        var g = document.createElementNS(SVGNS, 'linearGradient');
-        g.setAttribute('id', id);
-        g.setAttribute('gradientUnits', 'userSpaceOnUse');
-        g.setAttribute('spreadMethod', 'repeat');
-        g.setAttribute('x1', '0'); g.setAttribute('y1', '0');
-        g.setAttribute('x2', STREAK_PERIOD); g.setAttribute('y2', '0');
-        STOPS.forEach(function (s) {
-          var stop = document.createElementNS(SVGNS, 'stop');
-          stop.setAttribute('offset', s[0]);
-          stop.setAttribute('stop-color', color);
-          stop.setAttribute('stop-opacity', s[1]);
-          g.appendChild(stop);
-        });
-        var dur = STREAK_DUR * (0.85 + 0.4 * jit); // slight per-line speed variance
-        var anim = document.createElementNS(SVGNS, 'animateTransform');
-        anim.setAttribute('attributeName', 'gradientTransform');
-        anim.setAttribute('type', 'translate');
-        anim.setAttribute('calcMode', 'spline'); // cubic-bezier easing instead of linear
-        anim.setAttribute('values', '0 0;' + STREAK_PERIOD + ' 0');
-        anim.setAttribute('keyTimes', '0;1');
-        anim.setAttribute('keySplines', STREAK_EASE);
-        anim.setAttribute('dur', dur.toFixed(2) + 's');
-        anim.setAttribute('begin', (-dur * jit).toFixed(2) + 's'); // phase offset => staggered
-        anim.setAttribute('repeatCount', 'indefinite');
-        g.appendChild(anim);
-        defs.appendChild(g);
-        return id;
+        var f = function (n) { return n.toFixed(1); };
+        if (pts.length < 3) {
+          return 'M ' + pts.map(function (p) { return f(p.x) + ' ' + f(p.y); }).join(' L ');
+        }
+        var d = 'M ' + f(pts[0].x) + ' ' + f(pts[0].y);
+        for (var i = 1; i < pts.length - 1; i++) {
+          var p0 = pts[i - 1], p1 = pts[i], p2 = pts[i + 1];
+          var v1x = p0.x - p1.x, v1y = p0.y - p1.y;
+          var v2x = p2.x - p1.x, v2y = p2.y - p1.y;
+          var l1 = Math.hypot(v1x, v1y) || 1, l2 = Math.hypot(v2x, v2y) || 1;
+          // cap the radius so it never eats more than half of the shorter adjacent segment
+          var r = Math.min(CORNER_R, l1 / 2, l2 / 2);
+          var ax = p1.x + (v1x / l1) * r, ay = p1.y + (v1y / l1) * r; // start of the round (toward prev pt)
+          var bx = p1.x + (v2x / l2) * r, by = p1.y + (v2y / l2) * r; // end of the round (toward next pt)
+          d += ' L ' + f(ax) + ' ' + f(ay) + ' Q ' + f(p1.x) + ' ' + f(p1.y) + ' ' + f(bx) + ' ' + f(by);
+        }
+        var last = pts[pts.length - 1];
+        d += ' L ' + f(last.x) + ' ' + f(last.y);
+        return d;
       }
 
       // y offsets fanning n endpoints around the image centre, top item -> top offset
@@ -2661,14 +2666,14 @@ margin: 0rem !important;
       }
 
       // compute the ordered line geometry (left lines then right lines): each item is
-      // { d: <path string>, jit: <phase> }. textEnd -> rail -> imageEdge, sharp corner at text y.
+      // { d: <path string>, jit: <phase> }. Z-shaped: cardEdge -> rail1 (@card y) ->
+      // rail2 (@target y) -> imageEdge, with both bends rounded by pathD.
       function computeGeom(cr) {
         var ir = img.getBoundingClientRect();
         var imgLeft = ir.left - cr.left;
         var imgRight = ir.right - cr.left;
         var midY = ir.top + ir.height / 2 - cr.top;
         var items = [];
-        var idx = 0; // running line index -> picks the colour tone
 
         if (leftLabels.length) {
           var lEdges = leftLabels.map(function (el) {
@@ -2676,11 +2681,14 @@ margin: 0rem !important;
             return { x: r.right - cr.left, y: r.top + r.height / 2 - cr.top };
           });
           var lMaxEnd = Math.max.apply(null, lEdges.map(function (p) { return p.x; }));
-          var lRail = lMaxEnd + (imgLeft - lMaxEnd) * RAIL_T;
+          var lRail1 = lMaxEnd + (imgLeft - lMaxEnd) * RAIL_T;  // 1st bend, near the cards
+          var lRail2 = lMaxEnd + (imgLeft - lMaxEnd) * RAIL2_T; // 2nd bend, near the image
           var lFan = fan(lEdges.length);
           lEdges.forEach(function (p, i) {
-            var pts = [{ x: p.x + TEXT_GAP, y: p.y }, { x: lRail, y: p.y }, { x: imgLeft, y: midY + lFan[i] }];
-            items.push({ d: pathD(pts), jit: JIT[i % JIT.length], color: STREAK_COLORS[idx++ % STREAK_COLORS.length] });
+            var ty = midY + lFan[i];
+            // Z: horizontal out @card y -> diagonal across the two rails -> horizontal into the image @target y
+            var pts = [{ x: p.x + TEXT_GAP, y: p.y }, { x: lRail1, y: p.y }, { x: lRail2, y: ty }, { x: imgLeft, y: ty }];
+            items.push({ d: pathD(pts), jit: JIT[i % JIT.length] });
           });
         }
 
@@ -2690,11 +2698,15 @@ margin: 0rem !important;
             return { x: r.left - cr.left, y: r.top + r.height / 2 - cr.top };
           });
           var rMinStart = Math.min.apply(null, rEdges.map(function (p) { return p.x; }));
-          var rRail = rMinStart - (rMinStart - imgRight) * RAIL_T;
+          var rRail1 = rMinStart - (rMinStart - imgRight) * RAIL_T;  // mirror of lRail1
+          var rRail2 = rMinStart - (rMinStart - imgRight) * RAIL2_T; // mirror of lRail2
           var rFan = fan(rEdges.length);
           rEdges.forEach(function (p, i) {
-            var pts = [{ x: p.x - TEXT_GAP, y: p.y }, { x: rRail, y: p.y }, { x: imgRight, y: midY + rFan[i] }];
-            items.push({ d: pathD(pts), jit: JIT[(i + 5) % JIT.length], color: STREAK_COLORS[idx++ % STREAK_COLORS.length] });
+            var ty = midY + rFan[i];
+            // built image-first (mirror of the left) so every path runs source -> destination
+            // (here image -> card, the output direction); keeps the dot travel consistent
+            var pts = [{ x: imgRight, y: ty }, { x: rRail2, y: ty }, { x: rRail1, y: p.y }, { x: p.x - TEXT_GAP, y: p.y }];
+            items.push({ d: pathD(pts), jit: JIT[(i + 5) % JIT.length] });
           });
         }
         return items;
@@ -2724,9 +2736,7 @@ margin: 0rem !important;
 
         // first build (or line count changed): create the DOM once
         while (svg.firstChild) svg.removeChild(svg.firstChild);
-        defs = document.createElementNS(SVGNS, 'defs');
-        svg.appendChild(defs);
-        uid = 0;
+
         basePaths = [];
         pulsePaths = [];
         items.forEach(function (it) {
@@ -2737,7 +2747,8 @@ margin: 0rem !important;
           var pulse = document.createElementNS(SVGNS, 'path');
           pulse.setAttribute('class', 'flow-diagram__pulse');
           pulse.setAttribute('d', it.d);
-          pulse.setAttribute('stroke', 'url(#' + makeStreakGradient(it.jit, it.color) + ')');
+          // desync the dots per line by offsetting into the 3.2s cycle
+          pulse.style.animationDelay = (-it.jit * 3.2).toFixed(2) + 's';
           svg.appendChild(pulse);
           basePaths.push(base);
           pulsePaths.push(pulse);
