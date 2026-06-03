@@ -262,8 +262,6 @@
       text-align: left;
       pointer-events: none;
       overflow: hidden;
-      will-change: transform, opacity;
-      transform: translateZ(0);
     }
 
     .hero-console__bar {
@@ -350,7 +348,6 @@
       right: calc(max(10px, (100vw - 80rem) / 2 + 10px - 5vw) + 90px);
       z-index: 5;
       pointer-events: none;
-      will-change: transform;
     }
 
     .hero-graph {
@@ -362,7 +359,6 @@
       position: relative;
       overflow: hidden;
       visibility: hidden;
-      will-change: transform, opacity;
       transform: translateZ(0);
     }
 
@@ -399,7 +395,7 @@
     /* tighter hero stack so heading + console + subtitle + button fit above the fold on desktop */
     .section_header26 .header-1 { font-size: 4rem; }
     .section_header26 .hero-subtitle { display: none; }
-    .section_header26 .hero-title-gap  { margin-bottom: 10px !important; }
+    .section_header26 .hero-title-gap  { margin-bottom: 20px !important; }
     .section_header26 .hero-button-gap { margin-top: 64px !important; }
     /* lift the whole group up toward the navbar, but keep the first heading line clear of it
        (was 10rem + 8rem stacked = far too low; 6rem + 1rem clipped "Real-time" behind the navbar) */
@@ -464,7 +460,6 @@
       right: max(10px, (100vw - 80rem) / 2 + 10px - 5vw);
       z-index: 5;
       pointer-events: none;
-      will-change: transform;
     }
 
     .hero-actions {
@@ -476,8 +471,6 @@
       position: relative;
       overflow: hidden;
       visibility: hidden;
-      will-change: transform, opacity;
-      transform: translateZ(0);
       font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'Courier New', monospace;
     }
 
@@ -764,6 +757,10 @@
       overflow: visible;
       pointer-events: none;
       z-index: 0;
+      /* промоут на свой compositor-слой: непрерывный stroke-dashoffset repaint остаётся
+         внутри этого слоя и не инвалидирует соседний контент при скролле */
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .flow-diagram__list {
@@ -833,7 +830,7 @@
 
     .flow-diagram__line {
       fill: none;
-      stroke: #eeeeed;
+      stroke: #e1e0de;
       stroke-width: 1.5;
       stroke-linejoin: round;
     }
@@ -849,6 +846,12 @@
       stroke-linejoin: round;
       stroke-dasharray: 0.01 140;    /* tiny dash + round cap => a dot; 140px between dots (~3 per line) */
       animation: flow-dots-march 3.2s linear infinite;
+      /* idle, пока секция за экраном — IntersectionObserver включает .is-animating */
+      animation-play-state: paused;
+    }
+
+    .flow-diagram__lines.is-animating .flow-diagram__pulse {
+      animation-play-state: running;
     }
 
     /* march exactly one period (dash + gap = 140.01) so the loop is seamless; negative
@@ -1331,13 +1334,13 @@
           <a href="index.html#solutions" class="site-nav__link site-nav__link--menu">Business Scenarios<svg class="site-nav__caret" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <div class="site-nav__dropdown">
             <div class="site-nav__dropdown-panel">
-              <a class="site-nav__dropdown-link" href="index.html#solutions"><img class="site-nav__dropdown-icon" src="images/smart_city_glass.avif" width="30" height="30" alt=""><span>Smart City</span></a>
-              <a class="site-nav__dropdown-link" href="index.html#solutions"><img class="site-nav__dropdown-icon" src="images/agro_glass.avif" width="30" height="30" alt=""><span>Agriculture</span></a>
-              <a class="site-nav__dropdown-link" href="index.html#solutions"><img class="site-nav__dropdown-icon" src="images/factory_glass.avif" width="30" height="30" alt=""><span>Factory</span></a>
-              <a class="site-nav__dropdown-link" href="index.html#solutions"><img class="site-nav__dropdown-icon" src="images/bank_glass.avif" width="30" height="30" alt=""><span>Banking</span></a>
-              <a class="site-nav__dropdown-link" href="index.html#solutions"><img class="site-nav__dropdown-icon" src="images/hospital_glass.avif" width="30" height="30" alt=""><span>Hospitals</span></a>
-              <a class="site-nav__dropdown-link" href="index.html#solutions"><img class="site-nav__dropdown-icon" src="images/retail_glass.avif" width="30" height="30" alt=""><span>Retail</span></a>
-              <a class="site-nav__dropdown-link" href="index.html#solutions"><img class="site-nav__dropdown-icon" src="images/energy_glass.avif" width="30" height="30" alt=""><span>Energy</span></a>
+              <a class="site-nav__dropdown-link" href="smart-city.html"><img class="site-nav__dropdown-icon" src="images/smart_city_glass.avif" width="30" height="30" alt=""><span>Smart City</span></a>
+              <a class="site-nav__dropdown-link" href="agriculture.html"><img class="site-nav__dropdown-icon" src="images/agro_glass.avif" width="30" height="30" alt=""><span>Agriculture</span></a>
+              <a class="site-nav__dropdown-link" href="factory.html"><img class="site-nav__dropdown-icon" src="images/factory_glass.avif" width="30" height="30" alt=""><span>Factory</span></a>
+              <a class="site-nav__dropdown-link" href="banking.html"><img class="site-nav__dropdown-icon" src="images/bank_glass.avif" width="30" height="30" alt=""><span>Banking</span></a>
+              <a class="site-nav__dropdown-link" href="hospitals.html"><img class="site-nav__dropdown-icon" src="images/hospital_glass.avif" width="30" height="30" alt=""><span>Hospitals</span></a>
+              <a class="site-nav__dropdown-link" href="retail.html"><img class="site-nav__dropdown-icon" src="images/retail_glass.avif" width="30" height="30" alt=""><span>Retail</span></a>
+              <a class="site-nav__dropdown-link" href="energy.html"><img class="site-nav__dropdown-icon" src="images/energy_glass.avif" width="30" height="30" alt=""><span>Energy</span></a>
             </div>
           </div>
         </div>
@@ -1835,7 +1838,7 @@ margin: 0rem !important;
                         </div>
                         <h3 class="scenarios-card__title">Smart City</h3>
                         <p class="scenarios-card__text">Stella enables cities to shift from reactive administration to real-time operational intelligence — improving efficiency, sustainability, and quality of life across the entire urban environment.</p>
-                        <a href="#" class="scenarios-card__cta">Explore Smart City<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        <a href="smart-city.html" class="scenarios-card__cta">Explore Smart City<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                       </div>
                       <div class="scenarios-card__right">
                         <img loading="lazy" src="images/city_.avif" width="1250" height="782" alt="Smart City scenario" class="scenarios-card__image">
@@ -1850,7 +1853,7 @@ margin: 0rem !important;
                         </div>
                         <h3 class="scenarios-card__title">Agriculture</h3>
                         <p class="scenarios-card__text">Stella enables agricultural operations to shift from reactive management to real-time operational intelligence — improving yield, resource efficiency, and sustainability across the entire operation.</p>
-                        <a href="#" class="scenarios-card__cta">Explore Agriculture<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        <a href="agriculture.html" class="scenarios-card__cta">Explore Agriculture<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                       </div>
                       <div class="scenarios-card__right">
                         <img loading="lazy" src="images/agronome.avif" width="1250" height="782" alt="Agriculture scenario" class="scenarios-card__image">
@@ -1865,7 +1868,7 @@ margin: 0rem !important;
                         </div>
                         <h3 class="scenarios-card__title">Factory</h3>
                         <p class="scenarios-card__text">Stella enables factories to shift from reactive operations to real-time operational intelligence — improving productivity, uptime, and quality across the entire production environment.</p>
-                        <a href="#" class="scenarios-card__cta">Explore Factory<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        <a href="factory.html" class="scenarios-card__cta">Explore Factory<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                       </div>
                       <div class="scenarios-card__right">
                         <img loading="lazy" src="images/factory_.avif" width="1250" height="782" alt="Factory scenario" class="scenarios-card__image">
@@ -1880,7 +1883,7 @@ margin: 0rem !important;
                         </div>
                         <h3 class="scenarios-card__title">Banking</h3>
                         <p class="scenarios-card__text">Stella enables banks to shift from reactive decision-making to real-time operational intelligence — improving efficiency, security, and customer experience across the entire organization.</p>
-                        <a href="#" class="scenarios-card__cta">Explore Banking<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        <a href="banking.html" class="scenarios-card__cta">Explore Banking<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                       </div>
                       <div class="scenarios-card__right">
                         <img loading="lazy" src="images/bank_.avif" width="1250" height="782" alt="Banking scenario" class="scenarios-card__image">
@@ -1895,7 +1898,7 @@ margin: 0rem !important;
                         </div>
                         <h3 class="scenarios-card__title">Hospitals</h3>
                         <p class="scenarios-card__text">Stella enables hospitals to shift from reactive care to real-time operational intelligence — improving patient safety, resource efficiency, and care quality across the entire organization.</p>
-                        <a href="#" class="scenarios-card__cta">Explore Hospitals<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        <a href="hospitals.html" class="scenarios-card__cta">Explore Hospitals<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                       </div>
                       <div class="scenarios-card__right">
                         <img loading="lazy" src="images/hospital_.avif" width="1250" height="782" alt="Hospitals scenario" class="scenarios-card__image">
@@ -1910,7 +1913,7 @@ margin: 0rem !important;
                         </div>
                         <h3 class="scenarios-card__title">Retail</h3>
                         <p class="scenarios-card__text">Stella enables retailers to shift from reactive decision-making to real-time operational intelligence — improving efficiency, margins, and customer experience across the entire organization.</p>
-                        <a href="#" class="scenarios-card__cta">Explore Retail<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        <a href="retail.html" class="scenarios-card__cta">Explore Retail<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                       </div>
                       <div class="scenarios-card__right">
                         <img loading="lazy" src="images/retail_.avif" width="1250" height="782" alt="Retail scenario" class="scenarios-card__image">
@@ -1925,7 +1928,7 @@ margin: 0rem !important;
                         </div>
                         <h3 class="scenarios-card__title">Energy</h3>
                         <p class="scenarios-card__text">Stella enables energy providers to shift from reactive operations to real-time operational intelligence — improving reliability, efficiency, and sustainability across the entire grid.</p>
-                        <a href="#" class="scenarios-card__cta">Explore Energy<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        <a href="energy.html" class="scenarios-card__cta">Explore Energy<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                       </div>
                       <div class="scenarios-card__right">
                         <img loading="lazy" src="images/energy_.avif" width="1250" height="782" alt="Energy scenario" class="scenarios-card__image">
@@ -2336,8 +2339,7 @@ margin: 0rem !important;
       const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
       if (!isTouchDevice && typeof Lenis !== 'undefined') {
         const lenis = new Lenis({
-          duration: 1.2,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          lerp: 0.1,            // кадрово-независимое сглаживание; меньше = плавнее/«летучее», больше = снаппернее
           smoothWheel: true,
           smoothTouch: false
         });
@@ -2884,6 +2886,17 @@ margin: 0rem !important;
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
       if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(diagram);
       else window.addEventListener('resize', schedule);
+
+      // run the travelling-dots animation only while the diagram is on screen, so the SVG
+      // layer isn't re-rastered 60fps while the user is in other sections (and isn't already
+      // burning the main thread during a fast scroll-in)
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          svg.classList.toggle('is-animating', entries[0].isIntersecting);
+        }, { rootMargin: '100px' }).observe(diagram);
+      } else {
+        svg.classList.add('is-animating');
+      }
     })();
   </script>
   <script src="js/nav-menu.js" defer></script>
