@@ -44,9 +44,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // the console's overall size comes naturally from the chrome + toolbar around it.
   innerEl.style.width = maxW + 'px';
 
-  // The box itself reveals via the shared hero `heroLineIn` cascade (CSS, on .hero-console-wrap).
-  // JS only drives the text, starting once that slide-in has settled (0.5s delay + 0.9s anim).
-  var loop = gsap.timeline({ repeat: -1, delay: 1.4, defaults: { ease: 'none' } });
+  // The box reveals via the hero `heroLineIn` cascade (CSS, on .hero-console-wrap) — now a quick
+  // 0.55s slide starting at 0.35s. Start typing in sync so text reads in as the box appears,
+  // instead of the box sitting empty through the fly-in.
+  var loop = gsap.timeline({ repeat: -1, delay: 0.35, defaults: { ease: 'none' } });
 
   lineData.forEach(function (p) {
     // start each phrase from a blank line
