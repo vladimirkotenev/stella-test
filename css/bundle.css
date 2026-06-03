@@ -10335,12 +10335,12 @@ figcaption {
 
 .hero-subtitle {
   opacity: 0;
-  animation: heroLineIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+  animation: heroLineIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
 }
 
 .hero-button-gap .button {
   opacity: 0;
-  animation: heroLineIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+  animation: heroLineIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards;
 }
 
 /* ===== HERO SPACING ===== */
