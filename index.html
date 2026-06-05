@@ -769,13 +769,13 @@
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 24px;
       /* cards hug their own content instead of stretching the full column;
          the right list overrides this to flex-end below */
       align-items: flex-start;
     }
 
-    /* right list mirrors the left: label then icon, pinned to the container's right edge */
+    /* right list: same icon-then-label order as the left, pinned to the container's right edge */
     .flow-diagram__list--right {
       align-items: flex-end;
       text-align: right;
@@ -787,20 +787,20 @@
       gap: 16px;
       margin: 0;
       /* each item is a white card: pure white, slightly rounded */
-      padding: 12px 22px;
+      padding: 16px 22px;
       background: #ffffff;
-      border-radius: 16px;
+      border-radius: 12px;
     }
 
-    /* a touch more breathing room on the centre-facing edge (where the text sits):
-       right side for the left list, left side for the right list */
+    /* both lists read icon -> label, so the text sits on the right edge in each:
+       a touch more breathing room there */
     .flow-diagram__list--left .flow-diagram__item { padding-right: 30px; }
-    .flow-diagram__list--right .flow-diagram__item { padding-left: 30px; }
+    .flow-diagram__list--right .flow-diagram__item { padding-right: 30px; }
 
     .flow-diagram__icon {
       flex: 0 0 auto;
-      width: 48px;
-      height: 48px;
+      width: 24px;
+      height: 24px;
       object-fit: contain;
       display: block;
     }
@@ -1757,21 +1757,21 @@ margin: 0rem !important;
                 <svg class="flow-diagram__lines" aria-hidden="true" preserveAspectRatio="none"></svg>
                 <div class="flow-diagram__body">
                   <ul class="flow-diagram__list flow-diagram__list--left">
-                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/pr_pred.avif" width="300" height="300" alt="" loading="lazy"><span class="flow-diagram__label">Sensors</span></li>
-                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/sensors.avif" width="300" height="300" alt="" loading="lazy"><span class="flow-diagram__label">Data Systems</span></li>
-                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/automation.avif" width="300" height="300" alt="" loading="lazy"><span class="flow-diagram__label">ERP Systems</span></li>
-                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/transactions.avif" width="300" height="300" alt="" loading="lazy"><span class="flow-diagram__label">Transactions</span></li>
-                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/pr_pred.avif" width="300" height="300" alt="" loading="lazy"><span class="flow-diagram__label">Internet of things</span></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/diagram_icons/sensors.svg" width="28" height="28" alt="" loading="lazy"><span class="flow-diagram__label">Sensors</span></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/diagram_icons/data_systems.svg" width="28" height="28" alt="" loading="lazy"><span class="flow-diagram__label">Data Systems</span></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/diagram_icons/ERP.svg" width="28" height="28" alt="" loading="lazy"><span class="flow-diagram__label">ERP Systems</span></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/diagram_icons/transactions.svg" width="28" height="28" alt="" loading="lazy"><span class="flow-diagram__label">Transactions</span></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/diagram_icons/internet_of_things.svg" width="28" height="28" alt="" loading="lazy"><span class="flow-diagram__label">Internet of things</span></li>
                   </ul>
                   <div class="flow-diagram__center">
                     <img loading="lazy" src="images/new_data.avif" width="720" height="477" alt="Stella data platform" class="flow-diagram__image">
                   </div>
                   <ul class="flow-diagram__list flow-diagram__list--right">
-                    <li class="flow-diagram__item"><span class="flow-diagram__label">Increased efficiency</span><img class="flow-diagram__icon" src="images/pr_pred.avif" width="300" height="300" alt="" loading="lazy"></li>
-                    <li class="flow-diagram__item"><span class="flow-diagram__label">Automation</span><img class="flow-diagram__icon" src="images/automation.avif" width="300" height="300" alt="" loading="lazy"></li>
-                    <li class="flow-diagram__item"><span class="flow-diagram__label">Fast reactions</span><img class="flow-diagram__icon" src="images/transactions.avif" width="300" height="300" alt="" loading="lazy"></li>
-                    <li class="flow-diagram__item"><span class="flow-diagram__label">Better business decisions</span><img class="flow-diagram__icon" src="images/sensors.avif" width="300" height="300" alt="" loading="lazy"></li>
-                    <li class="flow-diagram__item"><span class="flow-diagram__label">Problem prediction</span><img class="flow-diagram__icon" src="images/pr_pred.avif" width="300" height="300" alt="" loading="lazy"></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/diagram_icons/increased_efficiency.svg" width="28" height="28" alt="" loading="lazy"><span class="flow-diagram__label">Increased efficiency</span></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/diagram_icons/automation.svg" width="28" height="28" alt="" loading="lazy"><span class="flow-diagram__label">Automation</span></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/diagram_icons/fast_reactions.svg" width="28" height="28" alt="" loading="lazy"><span class="flow-diagram__label">Fast reactions</span></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/diagram_icons/better_business_decisions.svg" width="28" height="28" alt="" loading="lazy"><span class="flow-diagram__label">Better business decisions</span></li>
+                    <li class="flow-diagram__item"><img class="flow-diagram__icon" src="images/diagram_icons/problem%20prediction.svg" width="28" height="28" alt="" loading="lazy"><span class="flow-diagram__label">Problem prediction</span></li>
                   </ul>
                 </div>
               </div>
