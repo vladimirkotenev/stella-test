@@ -1316,6 +1316,11 @@
     .section_layout192.is-cta-light .hero-button-gap .button {
       animation: none;
       opacity: 1;
+      transition: background-color 0.4s, color 0.4s, box-shadow 0.4s;
+    }
+    /* on hover the bg turns near-white and blends into the light section — add a thin inner orange outline */
+    .section_layout192.is-cta-light .hero-button-gap .button:hover {
+      box-shadow: inset 0 0 0 1px #f24622;
     }
 
     @keyframes hero-title-shimmer {
