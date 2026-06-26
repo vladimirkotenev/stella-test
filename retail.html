@@ -20,50 +20,157 @@
       background: #0e0e0e;
       font-family: 'Poppins', sans-serif;
     }
-    .uc-main { flex: 1 0 auto; display: flex; }
-    /* content sits at roughly the hero heading height (mirrors index hero padding-top) and
-       clears the fixed navbar */
-    .uc {
+    /* content lives inside one big rounded white card floating on the black page;
+       top margin clears the fixed navbar, side/bottom margins are the black gutters */
+    .bk-main {
+      flex: 1 0 auto;
+      display: block;
+      background: #fafafa;
+      margin: 8rem clamp(16px, 5vw, 80px) clamp(24px, 5vw, 80px);
+      border-radius: clamp(16px, 1.8vw, 28px);
+      overflow: hidden;
+    }
+    /* hero mirrors the index landing hero: outer 5% gutter + 80rem centred container,
+       heading top at 15.5625rem (padding-global.is-hero) + 2rem (padding-section-large) */
+    .bk-hero {
+      width: 100%;
+      padding: 0 5%;
+    }
+    .bk-hero__inner {
       width: 100%;
       max-width: 80rem;
       margin: 0 auto;
-      padding: 15.5625rem 24px 8rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 32px;
+      padding-top: clamp(4rem, 7vw, 7rem);
+      padding-bottom: 14rem;
+      padding-left: clamp(40px, 5vw, 100px);
     }
-    .uc__icon {
-      width: 88px;
-      height: 88px;
-      color: #f24622;        /* traffic-cone orange, on brand */
-      flex: 0 0 auto;
-    }
-    .uc__text {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      align-items: center;
-    }
-    .uc__eyebrow {
+    /* matches index .scenarios-card__title */
+    .bk-hero__title {
       margin: 0;
-      font-size: 0.8125rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #8a8f98;
-    }
-    .uc__title {
-      margin: 0;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 500;
-      line-height: 1.1;
+      font-size: clamp(24px, 2.8vw, 40px);
+      font-weight: 400;
+      line-height: 1.15;
       letter-spacing: -0.02em;
-      color: #f1f2f4;
+      text-align: left;
+      color: #f24622;
     }
     @media (max-width: 767px) {
-      .uc { padding-top: 9rem; }
+      .bk-main { margin: 6rem 12px 16px; border-radius: 16px; }
+      .bk-hero__inner { padding-top: 4rem; padding-left: 0; }
+    }
+
+    /* copy section: small title on the left, large paragraph on the right —
+       mirrors index .streaming-headline-row exactly (centred row, flex), one row per paragraph */
+    .bk-copy {
+      width: 100%;
+      padding: 0 5%;
+    }
+    .bk-copy__inner {
+      width: 100%;
+      max-width: 80rem;
+      margin: 0 auto;
+      padding-bottom: clamp(96px, 11vw, 168px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(40px, 5vw, 80px);
+    }
+    .bk-copy__row {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      /* left indent shifts the titles right toward the paragraphs; gap is reduced by the same
+         amount so the paragraph column stays put (indent + gap ≈ the old gap) */
+      padding-left: clamp(40px, 5vw, 100px);
+      gap: clamp(120px, 12vw, 220px);
+    }
+    .bk-copy__title {
+      flex: 0 0 240px;
+      max-width: 240px;
+      margin: 0;
+      margin-top: clamp(10px, 1.2vw, 18px);
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(14px, 1vw, 16px);
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      color: #0e0e0e;
+      text-align: left;
+    }
+    /* matches the CTA subtitle (.header-3.is-center.hero-subtitle) */
+    .bk-copy__body {
+      margin: 0;
+      width: min(44ch, 100%);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 4vw, 1.2rem);
+      line-height: 1.4;
+      letter-spacing: 0;
+      color: #0e0e0e;
+      text-align: left;
+    }
+    @media (max-width: 767px) {
+      .bk-copy__row { flex-direction: column; gap: 14px; padding-left: 0; }
+      .bk-copy__title { max-width: none; margin-top: 0; }
+      .bk-copy__body { width: 100%; }
+    }
+
+    /* scrollytelling: resting (pre-reveal) state — GSAP animates these to opacity 1 / y 0.
+       only applied when JS is on (.w-mod-js); no-JS users see everything. */
+    .w-mod-js .bk-hero__title,
+    .w-mod-js .bk-copy__title,
+    .w-mod-js .bk-copy__body {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .w-mod-js .bk-hero__title,
+      .w-mod-js .bk-copy__title,
+      .w-mod-js .bk-copy__body {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    /* ---- CTA section (ported from index.html: section_layout192 is-cta-light) ---- */
+    .section_layout192.is-cta-light { background-color: #fafafa; background-image: none; }
+    .section_layout192.is-cta-light .padding-section-large { padding-top: clamp(3rem, 6vw, 5rem); }
+    .section_layout192.is-cta-light .header-1 {
+      background-image: none;
+      -webkit-text-fill-color: #f24622;
+      color: #f24622;
+    }
+    .section_layout192.is-cta-light .hero-line {
+      background-image: none;
+      -webkit-text-fill-color: #f24622;
+      color: #f24622;
+      animation: none;
+      opacity: 1;
+    }
+    .hero-subtitle { font-size: clamp(1rem, 4vw, 1.2rem); font-weight: 300; }
+    .section_layout192.is-cta-light .hero-subtitle { color: #0e0e0e; animation: none; }
+    .section_layout192.is-cta-light .hero-button-gap .button {
+      animation: none;
+      opacity: 1;
+      transition: background-color 0.4s, color 0.4s, box-shadow 0.4s;
+    }
+    /* on hover the bg turns near-white and blends into the light section — add a thin inner orange outline */
+    .section_layout192.is-cta-light .hero-button-gap .button:hover {
+      box-shadow: inset 0 0 0 1px #f24622;
+    }
+
+    .w-mod-js .section_layout192.is-cta-light .hero-line,
+    .w-mod-js .section_layout192.is-cta-light .hero-subtitle,
+    .w-mod-js .section_layout192.is-cta-light .hero-button-gap .button {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .w-mod-js .section_layout192.is-cta-light .hero-line,
+      .w-mod-js .section_layout192.is-cta-light .hero-subtitle,
+      .w-mod-js .section_layout192.is-cta-light .hero-button-gap .button {
+        opacity: 1 !important;
+        transform: none !important;
+      }
     }
   </style>
 </head>
@@ -106,17 +213,61 @@
     </div>
   </header>
 
-  <main class="uc-main">
-    <section class="uc">
-      <svg class="uc__icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M32 13 L44 49 H20 Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
-        <path d="M27.5 29 H36.5" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-        <path d="M24 40 H40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-        <rect x="15" y="49" width="34" height="7" rx="3.5" stroke="currentColor" stroke-width="3"/>
-      </svg>
-      <div class="uc__text">
-        <p class="uc__eyebrow">Retail</p>
-        <h1 class="uc__title">The page is under construction</h1>
+  <main class="bk-main">
+    <header class="bk-hero">
+      <div class="bk-hero__inner">
+        <h1 class="bk-hero__title">Retail</h1>
+      </div>
+    </header>
+
+    <section class="bk-copy">
+      <div class="bk-copy__inner">
+        <div class="bk-copy__row">
+          <h3 class="bk-copy__title">Platform Power</h3>
+          <p class="bk-copy__body">Stella is a real-time platform built by an experienced team of engineers. Its distinguishing strength is the ability to process billions of operations in real time, drawn from any single source or a mix of disparate data sources.</p>
+        </div>
+        <div class="bk-copy__row">
+          <h3 class="bk-copy__title">Unified Commerce</h3>
+          <p class="bk-copy__body">For retailers, the core value is a centralized, enterprise-wide view of all sales, inventory, customer interactions, and store operations through a single, consistent source of truth. Stella processes and correlates data in real time across point-of-sale systems, e-commerce platforms, inventory and warehouse management, CRM and loyalty programs, supply-chain systems, and external data sources.</p>
+        </div>
+        <div class="bk-copy__row">
+          <h3 class="bk-copy__title">Sales Management</h3>
+          <p class="bk-copy__body">By providing instant visibility into customer activity and operational processes, the platform supports real-time inventory and stock optimization, demand forecasting, dynamic pricing, omnichannel order management, fraud and loss prevention, and personalized customer engagement.</p>
+        </div>
+        <div class="bk-copy__row">
+          <h3 class="bk-copy__title">Smart Retail</h3>
+          <p class="bk-copy__body">Stella enables retailers to shift from reactive decision-making to real-time operational intelligence — improving efficiency, margins, and customer experience across the entire organization.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section_layout192 is-cta-light">
+      <div class="padding-global">
+        <div class="container-large">
+          <div class="padding-section-large">
+            <div class="header26_component">
+              <div class="margin-bottom margin-xxlarge no-padding">
+                <div class="text-align-center">
+                  <div class="max-width-large align-center">
+                    <div class="margin-bottom margin-small hero-title-gap">
+                      <h1 class="header-1">
+                        <span class="hero-line">Endless Data &amp; AI</span>
+                        <span class="hero-line">Possibilities For The</span>
+                        <span class="hero-line">Right Decisions</span>
+                      </h1>
+                    </div>
+                    <p class="header-3 is-center hero-subtitle">Stella offers a flexible and open architecture that supports stream<br>processing and analysis of large volumes of events in real-time.</p>
+                    <div class="margin-top margin-medium hero-button-gap">
+                      <div class="button-group is-center">
+                        <a href="schedule-a-demo.html" class="button site-nav__cta w-button">Schedule a Demo</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -143,6 +294,95 @@
     </div>
   </footer>
 
+  <!-- smooth scroll + scrollytelling reveals (mirrors index.html) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script defer src="https://unpkg.com/split-type"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var hidden = document.querySelectorAll('.bk-hero__title, .bk-copy__title, .bk-copy__body, .section_layout192.is-cta-light .hero-line, .section_layout192.is-cta-light .hero-subtitle, .section_layout192.is-cta-light .hero-button-gap .button');
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // fallback: if the CDN libs didn't load or reduced motion is on, just show everything
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || reduced) {
+        hidden.forEach(function (el) { el.style.opacity = '1'; el.style.transform = 'none'; });
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // smooth scroll — same Lenis config as index (lerp 0.1), desktop only
+      var isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+      if (!isTouchDevice && typeof Lenis !== 'undefined') {
+        var lenis = new Lenis({ lerp: 0.1, smoothWheel: true, smoothTouch: false });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+      }
+
+      var LEAD = 0.15; // delay between the heading and the body of each row
+      var useSplit = typeof SplitType !== 'undefined';
+
+      // hero reveals on load (it sits above the fold)
+      gsap.to('.bk-hero__title', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+
+      // each copy row cascades in when its top reaches 85% of the viewport: the small title first,
+      // then the paragraph reveals LINE BY LINE (split via SplitType) with a stagger — like index's
+      // headline cascade, so it eases in smoothly instead of the whole block popping at once
+      function setupCopyReveals() {
+        document.querySelectorAll('.bk-copy__row').forEach(function (row) {
+          var title = row.querySelector('.bk-copy__title');
+          var body = row.querySelector('.bk-copy__body');
+          var lines = null;
+          if (useSplit && body) {
+            lines = new SplitType(body, { types: 'lines' }).lines;
+            body.style.opacity = '1';            // reveal the container; the lines stay hidden until enter
+            gsap.set(lines, { opacity: 0, y: 12 });
+          }
+          ScrollTrigger.create({
+            trigger: row,
+            start: 'top 85%',
+            once: true,
+            onEnter: function () {
+              if (title) gsap.to(title, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+              if (lines) {
+                gsap.to(lines, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.09, delay: LEAD });
+              } else if (body) {
+                gsap.to(body, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: LEAD });
+              }
+            }
+          });
+        });
+        ScrollTrigger.refresh();
+      }
+      // split only once Poppins is loaded, so line breaks are measured against the real font
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(setupCopyReveals);
+      } else {
+        setupCopyReveals();
+      }
+
+      // CTA section cascade (heading lines → subtitle → button), mirrors index.html
+      var ctaSection = document.querySelector('.section_layout192.is-cta-light');
+      if (ctaSection) {
+        ScrollTrigger.create({
+          trigger: ctaSection,
+          start: 'top 75%',
+          once: true,
+          onEnter: function () {
+            var lines = ctaSection.querySelectorAll('.hero-line');
+            var subtitle = ctaSection.querySelector('.hero-subtitle');
+            var button = ctaSection.querySelector('.hero-button-gap .button');
+            var tl = gsap.timeline({ defaults: { duration: 0.6, ease: 'power3.out' } });
+            lines.forEach(function (line, i) { tl.to(line, { opacity: 1, y: 0 }, 0.2 + i * 0.1); });
+            if (subtitle) tl.to(subtitle, { opacity: 1, y: 0 }, 0.5);
+            if (button) tl.to(button, { opacity: 1, y: 0 }, 0.6);
+          }
+        });
+      }
+    });
+  </script>
   <script>
     (function () {
       var burger = document.getElementById('siteNavBurger');
