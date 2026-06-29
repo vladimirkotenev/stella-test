@@ -10038,6 +10038,7 @@ figcaption {
   justify-content: flex-start;
   max-width: 80rem;
   margin: 0 auto;
+  position: relative;
 }
 
 .site-nav__logo img {
@@ -10049,7 +10050,11 @@ figcaption {
   display: flex;
   align-items: center;
   gap: 2.5rem;
-  margin-left: auto;
+  /* centred across the whole bar, independent of logo/CTA widths */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .site-nav__link {
@@ -10095,7 +10100,7 @@ figcaption {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  margin-left: 2.5rem;
+  margin-left: auto;
 }
 
 /* CTA button */
@@ -10366,6 +10371,7 @@ figcaption {
     left: 0;
     right: 0;
     bottom: 0;
+    transform: none;
     z-index: 100;
     flex-direction: column;
     align-items: center;
