@@ -1356,7 +1356,7 @@
             </div>
           </div>
         </div>
-        <a href="about-us.html" class="site-nav__link">About</a>
+        <a href="about.html" class="site-nav__link">About</a>
         <a href="mailto:michal.laskowski@stella.systems" class="site-nav__cta site-nav__cta--mobile">Contact us</a>
       </nav>
       <div class="site-nav__right">
@@ -2069,7 +2069,7 @@ margin: 0rem !important;
         </a>
         <nav class="site-footer__nav" aria-label="Footer">
           <ul class="site-footer__nav-col">
-            <li><a href="about-us.html" class="site-footer__nav-link">About us</a></li>
+            <li><a href="about.html" class="site-footer__nav-link">About us</a></li>
             <li><a href="index.html" class="site-footer__nav-link">Business Scenarios</a></li>
             <li><a href="technology.html" class="site-footer__nav-link">Technology</a></li>
           </ul>
@@ -2101,80 +2101,7 @@ margin: 0rem !important;
       });
     })();
 
-    (function () {
-      var nav = document.querySelector('.site-nav');
-      var hero = document.querySelector('.section_header26');
-      if (!nav) return;
-
-      var lastY = window.pageYOffset || 0;
-      var ticking = false;
-      var isAnimating = false;
-      var unlockTimer = 0;
-
-      function unlock() {
-        clearTimeout(unlockTimer);
-        isAnimating = false;
-      }
-
-      function lock() {
-        isAnimating = true;
-        clearTimeout(unlockTimer);
-        unlockTimer = setTimeout(unlock, 400);
-      }
-
-      nav.addEventListener('transitionend', function (e) {
-        if (e.propertyName === 'transform') unlock();
-      });
-
-      function getThreshold() {
-        if (!hero) return nav.offsetHeight;
-        return hero.offsetTop + hero.offsetHeight - nav.offsetHeight;
-      }
-
-      // Ignore sub-pixel jitter and the easing "tail" of smooth scroll — those
-      // near-zero deltas otherwise read as a direction flip and make the nav twitch.
-      var DEADZONE = 6;
-
-      function update() {
-        var y = window.pageYOffset || 0;
-
-        if (isAnimating) {
-          lastY = y;
-          ticking = false;
-          return;
-        }
-
-        var delta = y - lastY;
-
-        // Movement too small to be intentional: keep lastY as the reference so a
-        // slow scroll still accumulates past the deadzone instead of being lost.
-        if (delta > -DEADZONE && delta < DEADZONE) {
-          ticking = false;
-          return;
-        }
-
-        var threshold = getThreshold();
-        var hidden = nav.classList.contains('is-hidden');
-
-        if (delta > 0 && y > threshold && !hidden) {
-          nav.classList.add('is-hidden');   // scroll down → hide
-          lock();
-        } else if (delta < 0 && hidden) {
-          nav.classList.remove('is-hidden'); // scroll up → show
-          lock();
-        }
-
-        lastY = y;
-        ticking = false;
-      }
-
-      window.addEventListener('scroll', function () {
-        if (!ticking) {
-          window.requestAnimationFrame(update);
-          ticking = true;
-        }
-      }, { passive: true });
-    })();
+    // navbar hide/show on scroll — shared logic in js/nav-scroll.js
 
     (function () {
       var canvas = document.getElementById('heroFlow');
@@ -2909,5 +2836,6 @@ margin: 0rem !important;
     })();
   </script>
   <script src="js/nav-menu.js" defer></script>
+  <script src="js/nav-scroll.js" defer></script>
 </body>
 </html>

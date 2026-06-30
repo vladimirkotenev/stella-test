@@ -10530,3 +10530,155 @@ figcaption {
 @media (max-width: 479px) {
   .site-footer__nav { gap: 40px; }
 }
+
+/* ===== ABOUT — section heading (matches index orange eyebrow) ===== */
+.about-board-heading {
+  display: block;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(13px, 1.4vw, 17px);
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  font-weight: 300;
+  color: #f24622;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* heading block was capped at 48rem & left-aligned — let it span full width so the centered heading sits mid-page */
+.section_team4 .max-width-large-5 {
+  max-width: none;
+}
+
+/* unify page background with the CTA / index light theme (#f8f8f7) */
+.section_team4 {
+  background-color: #f8f8f7;
+}
+
+/* photos hidden — show light-gray placeholder blocks instead (images kept in /images) */
+.section_team4 .team4_image-wrapper {
+  aspect-ratio: 1;
+  background-color: #e8e8e8;
+}
+.section_team4 .team4_image {
+  display: none;
+}
+
+/* team member name — bolder & brand orange */
+.section_team4 .team4_title-wrapper .text-size-large {
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 600;
+  line-height: 1.3;
+  color: #f24622;
+}
+
+/* tighten the gap between name and role under each photo */
+.section_team4 .team4_title-wrapper {
+  grid-row-gap: 2px;
+  gap: 2px;
+}
+
+/* team member role — matches "Co-Founder AHG Group USA" under the quote */
+.section_team4 .team4_title-wrapper .text-size-medium-3 {
+  font-size: clamp(14px, 1.2vw, 16px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: #0e0e0e;
+}
+
+/* ===== CTA (Endless Data) — light variant, ported from index.html ===== */
+.section_layout192.is-cta-light { background-color: #f8f8f7; background-image: none; }
+.section_layout192.is-cta-light .header-1 {
+  background-image: none;
+  -webkit-text-fill-color: #f24622;
+  color: #f24622;
+}
+.section_layout192.is-cta-light .hero-line {
+  background-image: none;
+  -webkit-text-fill-color: #f24622;
+  color: #f24622;
+  animation: none;
+  opacity: 1;
+}
+.section_layout192.is-cta-light .hero-subtitle {
+  color: #0e0e0e;
+  animation: none;
+}
+.section_layout192.is-cta-light .hero-button-gap .button {
+  animation: none;
+  opacity: 1;
+  transition: background-color 0.4s, color 0.4s, box-shadow 0.4s;
+}
+/* on hover the bg turns near-white and blends into the light section — add a thin inner orange outline */
+.section_layout192.is-cta-light .hero-button-gap .button:hover {
+  box-shadow: inset 0 0 0 1px #f24622;
+}
+/* initial state for the scroll-triggered reveal */
+.w-mod-js .section_layout192.is-cta-light .hero-line,
+.w-mod-js .section_layout192.is-cta-light .hero-subtitle,
+.w-mod-js .section_layout192.is-cta-light .hero-button-gap .button {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+/* ===== ABOUT QUOTE ===== */
+.about-quote {
+  background-color: #f8f8f7;
+  padding: 18rem clamp(20px, 5vw, 40px) clamp(80px, 12vw, 180px);
+  font-family: 'Poppins', sans-serif;
+}
+
+.about-quote__inner {
+  max-width: 60rem;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(32px, 4vw, 56px);
+}
+
+.about-quote__line {
+  display: block;
+}
+
+/* cascade reveal — matches index.html streaming headline (translateY 12px, power2.out) */
+.w-mod-js .about-quote__line,
+.w-mod-js .about-quote__sign,
+.w-mod-js .about-board-heading,
+.w-mod-js .section_team4 .team4_item {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.about-quote__text {
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: #0e0e0e;
+  font-size: clamp(20px, 2.4vw, 34px);
+  font-weight: 300;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+}
+
+.about-quote__sign {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.about-quote__name {
+  color: #f24622;
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.about-quote__role {
+  color: #0e0e0e;
+  font-size: clamp(14px, 1.2vw, 16px);
+  font-weight: 400;
+  line-height: 1.4;
+}
