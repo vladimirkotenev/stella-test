@@ -26,7 +26,7 @@
     .bk-main {
       flex: 1 0 auto;
       display: block;
-      background: #fafafa;
+      background: #f8f8f7;
       margin: 8rem clamp(16px, 5vw, 80px) clamp(24px, 5vw, 80px);
       border-radius: clamp(16px, 1.8vw, 28px);
       overflow: hidden;
@@ -42,7 +42,7 @@
       max-width: 80rem;
       margin: 0 auto;
       padding-top: clamp(4rem, 7vw, 7rem);
-      padding-bottom: 14rem;
+      padding-bottom: 5rem;
       padding-left: clamp(40px, 5vw, 100px);
     }
     /* matches index .scenarios-card__title */
@@ -54,6 +54,39 @@
       letter-spacing: -0.02em;
       text-align: left;
       color: #f24622;
+    }
+    /* hero composition: glass icon stacked above the title (left), scenario photo to the right */
+    .bk-hero__lead {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(120px, 12vw, 220px);
+    }
+    .bk-hero__head {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1vw, 12px);
+      flex: 0 0 240px;
+      max-width: 240px;
+    }
+    .bk-hero__icon {
+      display: block;
+      width: clamp(64px, 5.6vw, 82px);
+      height: auto;
+      /* pull left to cancel the icon's transparent left padding (14.7% of its width) */
+      margin-left: calc(clamp(64px, 5.6vw, 82px) * -0.147);
+    }
+    .bk-hero__photo {
+      flex: 0 0 auto;
+      width: clamp(300px, 40vw, 520px);
+      aspect-ratio: 16 / 10;
+      border-radius: clamp(12px, 1.2vw, 18px);
+      overflow: hidden;
+    }
+    .bk-hero__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @media (max-width: 767px) {
+      .bk-hero__lead { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .bk-hero__head { flex: 0 0 auto; max-width: none; }
+      .bk-hero__photo { width: 100%; max-width: none; }
     }
     @media (max-width: 767px) {
       .bk-main { margin: 6rem 12px 16px; border-radius: 16px; }
@@ -117,14 +150,18 @@
 
     /* scrollytelling: resting (pre-reveal) state — GSAP animates these to opacity 1 / y 0.
        only applied when JS is on (.w-mod-js); no-JS users see everything. */
+    .w-mod-js .bk-hero__icon,
     .w-mod-js .bk-hero__title,
+    .w-mod-js .bk-hero__photo,
     .w-mod-js .bk-copy__title,
     .w-mod-js .bk-copy__body {
       opacity: 0;
       transform: translateY(12px);
     }
     @media (prefers-reduced-motion: reduce) {
+      .w-mod-js .bk-hero__icon,
       .w-mod-js .bk-hero__title,
+      .w-mod-js .bk-hero__photo,
       .w-mod-js .bk-copy__title,
       .w-mod-js .bk-copy__body {
         opacity: 1 !important;
@@ -133,7 +170,7 @@
     }
 
     /* ---- CTA section (ported from index.html: section_layout192 is-cta-light) ---- */
-    .section_layout192.is-cta-light { background-color: #fafafa; background-image: none; }
+    .section_layout192.is-cta-light { background-color: #f8f8f7; background-image: none; }
     .section_layout192.is-cta-light .padding-section-large { padding-top: clamp(3rem, 6vw, 5rem); }
     .section_layout192.is-cta-light .header-1 {
       background-image: none;
@@ -215,7 +252,15 @@
   <main class="bk-main">
     <header class="bk-hero">
       <div class="bk-hero__inner">
-        <h1 class="bk-hero__title">Factory</h1>
+        <div class="bk-hero__lead">
+          <div class="bk-hero__head">
+            <img class="bk-hero__icon" src="images/factory_glass.avif" width="272" height="272" alt="" loading="eager">
+            <h1 class="bk-hero__title">Factory</h1>
+          </div>
+          <div class="bk-hero__photo">
+            <img src="images/factory_.avif" width="1250" height="782" alt="Factory scenario" loading="lazy">
+          </div>
+        </div>
       </div>
     </header>
 
@@ -299,7 +344,7 @@
   <script defer src="https://unpkg.com/split-type"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      var hidden = document.querySelectorAll('.bk-hero__title, .bk-copy__title, .bk-copy__body, .section_layout192.is-cta-light .hero-line, .section_layout192.is-cta-light .hero-subtitle, .section_layout192.is-cta-light .hero-button-gap .button');
+      var hidden = document.querySelectorAll('.bk-hero__icon, .bk-hero__title, .bk-hero__photo, .bk-copy__title, .bk-copy__body, .section_layout192.is-cta-light .hero-line, .section_layout192.is-cta-light .hero-subtitle, .section_layout192.is-cta-light .hero-button-gap .button');
       var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       // fallback: if the CDN libs didn't load or reduced motion is on, just show everything
@@ -322,8 +367,10 @@
       var LEAD = 0.15; // delay between the heading and the body of each row
       var useSplit = typeof SplitType !== 'undefined';
 
-      // hero reveals on load (it sits above the fold)
-      gsap.to('.bk-hero__title', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+      // hero cascade on load (above the fold): icon -> title -> photo
+      gsap.to('.bk-hero__icon',  { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+      gsap.to('.bk-hero__title', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.12 });
+      gsap.to('.bk-hero__photo', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.24 });
 
       // each copy row cascades in when its top reaches 85% of the viewport: the small title first,
       // then the paragraph reveals LINE BY LINE (split via SplitType) with a stagger — like index's

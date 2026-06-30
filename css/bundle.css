@@ -794,7 +794,7 @@ textarea.w-select {
   margin: 0;
   padding: 8px 12px;
   border: 1px solid #cccccc;
-  background-color: #fafafa;
+  background-color: #f8f8f7;
 }
 .w-file-upload-file {
   display: flex;
@@ -803,7 +803,7 @@ textarea.w-select {
   margin: 0;
   padding: 8px 9px 8px 11px;
   border: 1px solid #cccccc;
-  background-color: #fafafa;
+  background-color: #f8f8f7;
 }
 .w-file-upload-file-name {
   font-size: 14px;
@@ -841,7 +841,7 @@ textarea.w-select {
   margin: 0;
   padding: 8px 12px;
   border: 1px solid #cccccc;
-  background-color: #fafafa;
+  background-color: #f8f8f7;
 }
 .w-icon-file-upload-icon,
 .w-icon-file-upload-uploading {
@@ -10060,7 +10060,7 @@ figcaption {
 .site-nav__link {
   position: relative;
   font-family: Poppins, sans-serif;
-  color: #FAFAFA;
+  color: #ffffff;
   font-size: 0.875rem;
   font-weight: 400;
   text-decoration: none;
@@ -10123,7 +10123,7 @@ figcaption {
 }
 
 .site-nav__cta:hover {
-  background-color: #fafafa;
+  background-color: #f8f8f7;
   color: #F24622;
   opacity: 1;
 }
@@ -10252,7 +10252,7 @@ figcaption {
 
 /* hover: gray -> white (no background layer, so nothing to flicker) */
 .site-nav__dropdown-link:hover {
-  color: #fafafa;
+  color: #ffffff;
 }
 
 .site-nav__dropdown-icon {
@@ -10451,7 +10451,7 @@ figcaption {
 /* ===== SITE FOOTER ===== */
 .site-footer {
   background-color: #0e0e0e;
-  color: #fafafa;
+  color: #ffffff;
   padding: clamp(40px, 4vw, 56px) clamp(20px, 3vw, 40px) clamp(20px, 2vw, 28px);
   font-family: 'Poppins', sans-serif;
 }
@@ -10498,7 +10498,7 @@ figcaption {
 }
 
 .site-footer__nav-link {
-  color: #fafafa;
+  color: #ffffff;
   text-decoration: none;
   font-size: 15px;
   font-weight: 400;
